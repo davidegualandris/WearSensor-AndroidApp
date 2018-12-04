@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">WearSensor</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="list_sensor_text_wear">Lista sensori disponibili</string>
+    <string name="accelerometer_button_text">Accelerometro</string>
+    <string name="x_text">on x: %1$.2f</string>
+    <string name="y_text">on y: %1$.2f</string>
+    <string name="z_text">on z: %1$.2f</string>
+    <string name="onedimension_text">value: %1$.2f</string>
+    <string name="error_string">Il device non possiede questo sensore</string>
+    <string name="magnetometer_text">Magnetometer</string>
+    <string name="gravity_text">GRAVITY</string>
+    <string name="gyroscope_button_text">gyroscope</string>
+    <string name="linear_acceleration_button_text">LINEAR ACCELERATION</string>
+    <string name="light_button_text">Light</string>
+    <string name="promixity_text_button">Promixity</string>
+    <string name="ambient_temperature_button_text">AMBIENT TEMPERATURE</string>
+    <string name="pressure_button_text">PRESSURE</string>
+    <string name="relative_humidity_button_text">RELATIVE HUMIDITY</string>
+    <string name="temperature_button_text">Temperature</string>
+</resources>

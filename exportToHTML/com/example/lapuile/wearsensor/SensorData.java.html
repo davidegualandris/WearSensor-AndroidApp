@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>SensorData.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(106,135,89); }
+.s3 { color: rgb(128,128,128); }
+.s4 { color: rgb(104,151,187); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+SensorData.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">com.example.lapuile.wearsensor</span><span class="s0">;</span><span class="s1"> 
+<a name="l2"><span class="ln">2    </span></a> 
+<a name="l3"><span class="ln">3    </span></a></span><span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span><span class="s1"> 
+<a name="l4"><span class="ln">4    </span></a></span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span><span class="s1"> 
+<a name="l5"><span class="ln">5    </span></a></span><span class="s0">import </span><span class="s1">android.hardware.Sensor</span><span class="s0">;</span><span class="s1"> 
+<a name="l6"><span class="ln">6    </span></a></span><span class="s0">import </span><span class="s1">android.hardware.SensorEvent</span><span class="s0">;</span><span class="s1"> 
+<a name="l7"><span class="ln">7    </span></a></span><span class="s0">import </span><span class="s1">android.hardware.SensorEventListener</span><span class="s0">;</span><span class="s1"> 
+<a name="l8"><span class="ln">8    </span></a></span><span class="s0">import </span><span class="s1">android.hardware.SensorManager</span><span class="s0">;</span><span class="s1"> 
+<a name="l9"><span class="ln">9    </span></a></span><span class="s0">import </span><span class="s1">android.support.v7.app.AppCompatActivity</span><span class="s0">;</span><span class="s1"> 
+<a name="l10"><span class="ln">10   </span></a></span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+<a name="l11"><span class="ln">11   </span></a></span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+<a name="l12"><span class="ln">12   </span></a> 
+<a name="l13"><span class="ln">13   </span></a></span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span><span class="s1"> 
+<a name="l14"><span class="ln">14   </span></a> 
+<a name="l15"><span class="ln">15   </span></a></span><span class="s0">public class </span><span class="s1">SensorData </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s0">implements </span><span class="s1">SensorEventListener { 
+<a name="l16"><span class="ln">16   </span></a> 
+<a name="l17"><span class="ln">17   </span></a>    </span><span class="s0">private </span><span class="s1">SensorManager mSensorManager</span><span class="s0">;</span><span class="s1"> 
+<a name="l18"><span class="ln">18   </span></a>    </span><span class="s0">private </span><span class="s1">Sensor mAccelerometer</span><span class="s0">;</span><span class="s1"> 
+<a name="l19"><span class="ln">19   </span></a> 
+<a name="l20"><span class="ln">20   </span></a>    @Override 
+<a name="l21"><span class="ln">21   </span></a>    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+<a name="l22"><span class="ln">22   </span></a>        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+<a name="l23"><span class="ln">23   </span></a>        setContentView(R.layout.activity_sensor_data)</span><span class="s0">;</span><span class="s1"> 
+<a name="l24"><span class="ln">24   </span></a> 
+<a name="l25"><span class="ln">25   </span></a>        mSensorManager= (SensorManager)getSystemService(Context.SENSOR_SERVICE)</span><span class="s0">;</span><span class="s1"> 
+<a name="l26"><span class="ln">26   </span></a> 
+<a name="l27"><span class="ln">27   </span></a>        Intent choice=getIntent()</span><span class="s0">;</span><span class="s1"> 
+<a name="l28"><span class="ln">28   </span></a>        String type = choice.getStringExtra(</span><span class="s2">&quot;Type&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l29"><span class="ln">29   </span></a> 
+<a name="l30"><span class="ln">30   </span></a>        </span><span class="s0">switch </span><span class="s1">(type){ 
+<a name="l31"><span class="ln">31   </span></a>            </span><span class="s0">case </span><span class="s2">&quot;sensor&quot;</span><span class="s1">: 
+<a name="l32"><span class="ln">32   </span></a>                getList()</span><span class="s0">;</span><span class="s1"> 
+<a name="l33"><span class="ln">33   </span></a>                </span><span class="s0">break;</span><span class="s1"> 
+<a name="l34"><span class="ln">34   </span></a>            </span><span class="s0">case </span><span class="s2">&quot;Accelerometer&quot;</span><span class="s1">: 
+<a name="l35"><span class="ln">35   </span></a>                mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)</span><span class="s0">;</span><span class="s1"> 
+<a name="l36"><span class="ln">36   </span></a>            </span><span class="s0">default</span><span class="s1">: 
+<a name="l37"><span class="ln">37   </span></a>                </span><span class="s0">break;</span><span class="s1"> 
+<a name="l38"><span class="ln">38   </span></a>        } 
+<a name="l39"><span class="ln">39   </span></a> 
+<a name="l40"><span class="ln">40   </span></a> 
+<a name="l41"><span class="ln">41   </span></a> 
+<a name="l42"><span class="ln">42   </span></a>    } 
+<a name="l43"><span class="ln">43   </span></a>    </span><span class="s0">private void </span><span class="s1">getList(){ 
+<a name="l44"><span class="ln">44   </span></a>        List&lt;Sensor&gt; sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL)</span><span class="s0">;</span><span class="s1"> 
+<a name="l45"><span class="ln">45   </span></a> 
+<a name="l46"><span class="ln">46   </span></a>        StringBuilder sensorText = </span><span class="s0">new </span><span class="s1">StringBuilder()</span><span class="s0">;</span><span class="s1"> 
+<a name="l47"><span class="ln">47   </span></a> 
+<a name="l48"><span class="ln">48   </span></a>        </span><span class="s0">for </span><span class="s1">(Sensor currentSensor : sensorList ) { 
+<a name="l49"><span class="ln">49   </span></a>            sensorText.append(currentSensor.getName()).append( 
+<a name="l50"><span class="ln">50   </span></a>                    System.getProperty(</span><span class="s2">&quot;line.separator&quot;</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+<a name="l51"><span class="ln">51   </span></a>        } 
+<a name="l52"><span class="ln">52   </span></a> 
+<a name="l53"><span class="ln">53   </span></a> 
+<a name="l54"><span class="ln">54   </span></a>        TextView sensorTextView = (TextView) findViewById(R.id.sensor_list)</span><span class="s0">;</span><span class="s1"> 
+<a name="l55"><span class="ln">55   </span></a>        sensorTextView.setText(sensorText)</span><span class="s0">;</span><span class="s1"> 
+<a name="l56"><span class="ln">56   </span></a>    } 
+<a name="l57"><span class="ln">57   </span></a></span><span class="s3">/* 
+<a name="l58"><span class="ln">58   </span></a>    private void getAccelerometerData(){ 
+<a name="l59"><span class="ln">59   </span></a> 
+<a name="l60"><span class="ln">60   </span></a>        mSensorManager= (SensorManager)getSystemService(SENSOR_SERVICE); 
+<a name="l61"><span class="ln">61   </span></a>        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); 
+<a name="l62"><span class="ln">62   </span></a> 
+<a name="l63"><span class="ln">63   </span></a> 
+<a name="l64"><span class="ln">64   </span></a>    } 
+<a name="l65"><span class="ln">65   </span></a>*/</span><span class="s1"> 
+<a name="l66"><span class="ln">66   </span></a>    </span><span class="s0">protected void </span><span class="s1">onResume() { 
+<a name="l67"><span class="ln">67   </span></a>        </span><span class="s0">super</span><span class="s1">.onResume()</span><span class="s0">;</span><span class="s1"> 
+<a name="l68"><span class="ln">68   </span></a>        </span><span class="s0">if </span><span class="s1">(mAccelerometer != </span><span class="s0">null</span><span class="s1">) 
+<a name="l69"><span class="ln">69   </span></a>            mSensorManager.registerListener(</span><span class="s0">this, </span><span class="s1">mAccelerometer</span><span class="s0">, </span><span class="s1">SensorManager.SENSOR_DELAY_NORMAL)</span><span class="s0">;</span><span class="s1"> 
+<a name="l70"><span class="ln">70   </span></a>    } 
+<a name="l71"><span class="ln">71   </span></a> 
+<a name="l72"><span class="ln">72   </span></a>    @Override 
+<a name="l73"><span class="ln">73   </span></a>    </span><span class="s0">protected void </span><span class="s1">onStart() { 
+<a name="l74"><span class="ln">74   </span></a>        </span><span class="s0">super</span><span class="s1">.onStart()</span><span class="s0">;</span><span class="s1"> 
+<a name="l75"><span class="ln">75   </span></a>    } 
+<a name="l76"><span class="ln">76   </span></a> 
+<a name="l77"><span class="ln">77   </span></a>    @Override 
+<a name="l78"><span class="ln">78   </span></a>    </span><span class="s0">protected void </span><span class="s1">onStop() { 
+<a name="l79"><span class="ln">79   </span></a>        </span><span class="s0">super</span><span class="s1">.onStop()</span><span class="s0">;</span><span class="s1"> 
+<a name="l80"><span class="ln">80   </span></a>    } 
+<a name="l81"><span class="ln">81   </span></a> 
+<a name="l82"><span class="ln">82   </span></a>    </span><span class="s0">protected void </span><span class="s1">onPause() { 
+<a name="l83"><span class="ln">83   </span></a>        </span><span class="s0">super</span><span class="s1">.onPause()</span><span class="s0">;</span><span class="s1"> 
+<a name="l84"><span class="ln">84   </span></a>        mSensorManager.unregisterListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+<a name="l85"><span class="ln">85   </span></a>    } 
+<a name="l86"><span class="ln">86   </span></a> 
+<a name="l87"><span class="ln">87   </span></a> 
+<a name="l88"><span class="ln">88   </span></a>    @Override 
+<a name="l89"><span class="ln">89   </span></a>    </span><span class="s0">public void </span><span class="s1">onSensorChanged(SensorEvent event) { 
+<a name="l90"><span class="ln">90   </span></a> 
+<a name="l91"><span class="ln">91   </span></a>        </span><span class="s0">int </span><span class="s1">sensorType = event.sensor.getType()</span><span class="s0">;</span><span class="s1"> 
+<a name="l92"><span class="ln">92   </span></a> 
+<a name="l93"><span class="ln">93   </span></a>        </span><span class="s0">switch </span><span class="s1">(sensorType){ 
+<a name="l94"><span class="ln">94   </span></a>            </span><span class="s0">case </span><span class="s1">Sensor.TYPE_ACCELEROMETER: 
+<a name="l95"><span class="ln">95   </span></a>                </span><span class="s3">// In this example, alpha is calculated as t / (t + dT),</span><span class="s1"> 
+<a name="l96"><span class="ln">96   </span></a>                </span><span class="s3">// where t is the low-pass filter's time-constant and</span><span class="s1"> 
+<a name="l97"><span class="ln">97   </span></a>                </span><span class="s3">// dT is the event delivery rate.</span><span class="s1"> 
+<a name="l98"><span class="ln">98   </span></a> 
+<a name="l99"><span class="ln">99   </span></a>                </span><span class="s0">final float </span><span class="s1">alpha = (</span><span class="s0">float</span><span class="s1">)</span><span class="s4">0.8</span><span class="s0">;</span><span class="s1"> 
+<a name="l100"><span class="ln">100  </span></a>                </span><span class="s0">float</span><span class="s1">[] gravity=</span><span class="s0">new float</span><span class="s1">[</span><span class="s4">3</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l101"><span class="ln">101  </span></a>                </span><span class="s0">float</span><span class="s1">[] linear_acceleration = </span><span class="s0">new float</span><span class="s1">[</span><span class="s4">3</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l102"><span class="ln">102  </span></a> 
+<a name="l103"><span class="ln">103  </span></a>                </span><span class="s3">// Isolate the force of gravity with the low-pass filter.</span><span class="s1"> 
+<a name="l104"><span class="ln">104  </span></a>                gravity[</span><span class="s4">0</span><span class="s1">] = alpha * gravity[</span><span class="s4">0</span><span class="s1">] + (</span><span class="s4">1 </span><span class="s1">- alpha) * event.values[</span><span class="s4">0</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l105"><span class="ln">105  </span></a>                gravity[</span><span class="s4">1</span><span class="s1">] = alpha * gravity[</span><span class="s4">1</span><span class="s1">] + (</span><span class="s4">1 </span><span class="s1">- alpha) * event.values[</span><span class="s4">1</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l106"><span class="ln">106  </span></a>                gravity[</span><span class="s4">2</span><span class="s1">] = alpha * gravity[</span><span class="s4">2</span><span class="s1">] + (</span><span class="s4">1 </span><span class="s1">- alpha) * event.values[</span><span class="s4">2</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l107"><span class="ln">107  </span></a> 
+<a name="l108"><span class="ln">108  </span></a>                </span><span class="s3">// Remove the gravity contribution with the high-pass filter.</span><span class="s1"> 
+<a name="l109"><span class="ln">109  </span></a>                linear_acceleration[</span><span class="s4">0</span><span class="s1">] = event.values[</span><span class="s4">0</span><span class="s1">] - gravity[</span><span class="s4">0</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l110"><span class="ln">110  </span></a>                linear_acceleration[</span><span class="s4">1</span><span class="s1">] = event.values[</span><span class="s4">1</span><span class="s1">] - gravity[</span><span class="s4">1</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l111"><span class="ln">111  </span></a>                linear_acceleration[</span><span class="s4">2</span><span class="s1">] = event.values[</span><span class="s4">2</span><span class="s1">] - gravity[</span><span class="s4">2</span><span class="s1">]</span><span class="s0">;</span><span class="s1"> 
+<a name="l112"><span class="ln">112  </span></a> 
+<a name="l113"><span class="ln">113  </span></a>                TextView acceleration_text = findViewById(R.id.sensor_list)</span><span class="s0">;</span><span class="s1"> 
+<a name="l114"><span class="ln">114  </span></a>                StringBuilder acc_text = </span><span class="s0">new </span><span class="s1">StringBuilder()</span><span class="s0">;</span><span class="s1"> 
+<a name="l115"><span class="ln">115  </span></a>                acc_text.append(getResources().getString(R.string.accelerometerx_text</span><span class="s0">, </span><span class="s1">linear_acceleration[</span><span class="s4">0</span><span class="s1">])).append( 
+<a name="l116"><span class="ln">116  </span></a>                        System.getProperty(</span><span class="s2">&quot;line.separator&quot;</span><span class="s1">)) 
+<a name="l117"><span class="ln">117  </span></a>                        .append(getResources().getString(R.string.accelerometery_text</span><span class="s0">, </span><span class="s1">linear_acceleration[</span><span class="s4">1</span><span class="s1">])).append( 
+<a name="l118"><span class="ln">118  </span></a>                    System.getProperty(</span><span class="s2">&quot;line.separator&quot;</span><span class="s1">)).append( 
+<a name="l119"><span class="ln">119  </span></a>               getResources().getString(R.string.accelerometerz_text</span><span class="s0">, </span><span class="s1">linear_acceleration[</span><span class="s4">2</span><span class="s1">]))</span><span class="s0">;</span><span class="s1"> 
+<a name="l120"><span class="ln">120  </span></a> 
+<a name="l121"><span class="ln">121  </span></a>                acceleration_text.setText(acc_text)</span><span class="s0">;</span><span class="s1"> 
+<a name="l122"><span class="ln">122  </span></a>        } 
+<a name="l123"><span class="ln">123  </span></a> 
+<a name="l124"><span class="ln">124  </span></a>    } 
+<a name="l125"><span class="ln">125  </span></a> 
+<a name="l126"><span class="ln">126  </span></a>    @Override 
+<a name="l127"><span class="ln">127  </span></a>    </span><span class="s0">public void </span><span class="s1">onAccuracyChanged(Sensor sensor</span><span class="s0">, int </span><span class="s1">accuracy) { 
+<a name="l128"><span class="ln">128  </span></a> 
+<a name="l129"><span class="ln">129  </span></a>    } 
+<a name="l130"><span class="ln">130  </span></a>}</span></pre>
+</body>
+</html>

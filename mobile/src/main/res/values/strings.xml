@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">WearSensor</string>
+    <string name="sensor_button_text">Lista sensori disponibili</string>
+    <string name="accelerometer_button_text">Accelerometer</string>
+
+    <string name="x_text">on x: %1$.2f</string>
+    <string name="y_text">on y: %1$.2f</string>
+    <string name="z_text">on z: %1$.2f</string>
+    <string name="onedimension_text">value: %1$.2f</string>
+    <string name="error_string">Il device non possiede questo sensore</string>
+
+    <string name="magnetometer_text">Magnetometer</string>
+    <string name="gravity_text">GRAVITY</string>
+    <string name="gyroscope_button_text">gyroscope</string>
+    <string name="linear_acceleration_button_text">LINEAR ACCELERATION</string>
+    <string name="light_button_text">Light</string>
+    <string name="proximity_text_button">Proximity</string>
+    <string name="ambient_temperature_button_text">AMBIENT TEMPERATURE</string>
+    <string name="pressure_button_text">PRESSURE</string>
+    <string name="relative_humidity_button_text">RELATIVE HUMIDITY</string>
+    <string name="motion_button_text">motion sensors</string>
+    <string name="environmental_button_text">environmental sensors</string>
+    <string name="position_button_text">position sensors</string>
+    <string name="accelerometer_uncalibrated_text">accelerometer \n uncalibrated</string>
+    <string name="gyroscope_uncalibrated_text">gyroscope \n uncalibrated</string>
+
+    <string name="acc_unc_x">on x with estimated bias compensation :%1$.2f </string>
+    <string name="acc_unc_y">on y with estimated bias compensation :%1$.2f </string>
+    <string name="acc_unc_z">on z with estimated bias compensation :%1$.2f </string>
+
+    <string name="gyrosc_unc_x">Estimated drift around the x axis :%1$.2f </string>
+    <string name="gyrosc_unc_y">Estimated drift around the y axis :%1$.2f </string>
+    <string name="gyrosc_unc_z">Estimated drift around the z axis :%1$.2f </string>
+
+    <string name="step_counter_button_text">step counter</string>
+
+    <string name="magnet_unc_x">Iron bias estimation along x axis :%1$.2f </string>
+    <string name="magnet_unc_y">Iron bias estimation along y axis :%1$.2f </string>
+    <string name="magnet_unc_z">Iron bias estimation along z axis :%1$.2f </string>
+    <string name="sensor_list_button_text">sensor avaiable</string>
+
+</resources>
