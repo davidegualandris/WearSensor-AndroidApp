@@ -274,6 +274,19 @@ public class SelectActivity extends AppCompatActivity {
             }
         });
 
+        Button poseSix = (Button) findViewById(R.id.pose_6_dof_button);
+        poseSix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent =
+                        new Intent(SelectActivity.this, SensorData.class);
+                intent.putExtra("Type", "Pose6Dof");
+                startActivity(intent);
+
+            }
+        });
+
 
 
 //        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
@@ -358,7 +371,7 @@ public class SelectActivity extends AppCompatActivity {
                     linear_acceleration.setVisibility(View.VISIBLE);
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null)
                     rotation_vector.setVisibility(View.VISIBLE);
-                //if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) != null)
                     accelerometerUncalibrated.setVisibility(View.VISIBLE);
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED) != null)
                     gyroscopeUncalibrated.setVisibility(View.VISIBLE);
@@ -392,6 +405,8 @@ public class SelectActivity extends AppCompatActivity {
                     geoMagneticVector.setVisibility(View.VISIBLE);
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null)
                     orientation.setVisibility(View.VISIBLE);
+                if(mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF) != null)
+                    poseSix.setVisibility(View.VISIBLE);
 
                 break;
             default:

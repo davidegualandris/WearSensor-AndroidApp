@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,17 +9,19 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
+
+
     <Button
         android:id="@+id/sensor_list_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
+        android:layout_weight="1"
         android:background="#006064"
         android:paddingTop="8dp"
         android:text="@string/sensor_list_button_text"
@@ -30,7 +33,6 @@
 
     <Button
         android:id="@+id/motion_button"
-
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -52,13 +54,13 @@
         android:id="@+id/environmental_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
+        android:layout_weight="1"
         android:background="#006064"
         android:text="@string/environmental_button_text"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
@@ -71,13 +73,13 @@
         android:id="@+id/position_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
+        android:layout_weight="1"
         android:background="#006064"
         android:paddingTop="8dp"
         android:text="@string/position_button_text"
@@ -86,7 +88,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/environmental_button" />
-
-
-
 </LinearLayout>
+

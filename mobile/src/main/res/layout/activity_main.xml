@@ -300,6 +300,20 @@
                 android:background="#006064"
                 android:text="geomagnetic vector"
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+            <Button
+                android:id="@+id/pose_6_dof_button"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:visibility="gone"
+                android:background="#006064"
+                android:text="@string/pose_6_dof_text_button"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
         </LinearLayout>
 
     </ScrollView>
