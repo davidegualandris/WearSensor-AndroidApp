@@ -25,11 +25,7 @@
         android:background="#006064"
         android:paddingTop="8dp"
         android:text="@string/sensor_list_button_text"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/environmental_button" />
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <Button
         android:id="@+id/motion_button"
@@ -44,11 +40,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:text="@string/motion_button_text"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        app:layout_constraintBottom_toTopOf="@+id/environmental_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <Button
         android:id="@+id/environmental_button"
@@ -63,11 +55,7 @@
         android:layout_weight="1"
         android:background="#006064"
         android:text="@string/environmental_button_text"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        app:layout_constraintBottom_toTopOf="@+id/position_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/motion_button" />
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <Button
         android:id="@+id/position_button"
@@ -83,10 +71,22 @@
         android:background="#006064"
         android:paddingTop="8dp"
         android:text="@string/position_button_text"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/environmental_button" />
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+    <Button
+        android:id="@+id/watch_sensor_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_weight="1"
+        android:background="#006064"
+        android:paddingTop="8dp"
+        android:text="watch sensors"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 </LinearLayout>
 
