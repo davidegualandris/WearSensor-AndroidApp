@@ -6,10 +6,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +28,10 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     ListView sensor_list;
 
+
+    final ArrayList<String> exceList = new ArrayList<String>();
+    private float[] copyValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         sensor_list = (findViewById(R.id.sensor_list));
+
 
 
 
@@ -194,6 +201,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         }
 
 
+
+
     }
 
     private String getStringIntent() {
@@ -244,15 +253,37 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             listp.add(getResources().getString(R.string.delta_transl_z, sensorData[13]));
             listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
 
+
+            exceList.add(getResources().getString(R.string.excel_x_text));
+            exceList.add(getResources().getString(R.string.excel_y_text));
+            exceList.add(getResources().getString(R.string.excel_z_text));
+            exceList.add(getResources().getString(R.string.excel_pose_6_dof_cos));
+            exceList.add(getResources().getString(R.string.excel_translation_along_x));
+            exceList.add(getResources().getString(R.string.excel_translation_along_y));
+            exceList.add(getResources().getString(R.string.excel_translation_along_z));
+            exceList.add(getResources().getString(R.string.excel_delta_quat_x));
+            exceList.add(getResources().getString(R.string.excel_delta_quat_y));
+            exceList.add(getResources().getString(R.string.excel_delta_quat_z));
+            exceList.add(getResources().getString(R.string.excel_delta_quat_rot_cos));
+            exceList.add(getResources().getString(R.string.excel_delta_transl_x));
+            exceList.add(getResources().getString(R.string.excel_delta_transl_y));
+            exceList.add(getResources().getString(R.string.excel_delta_transl_z));
+            exceList.add(getResources().getString(R.string.excel_sequence_number));
+
         }
 
 
-        if (single)
+        if (single) {
             listp.add(getResources().getString(R.string.onedimension_text, sensorData[0]));
+            exceList.add(getResources().getString(R.string.excel_onedimension_text));
+        }
         else {
             listp.add(getResources().getString(R.string.x_text, sensorData[0]));
             listp.add(getResources().getString(R.string.y_text, sensorData[1]));
             listp.add(getResources().getString(R.string.z_text, sensorData[2]));
+            exceList.add(getResources().getString(R.string.excel_x_text));
+            exceList.add(getResources().getString(R.string.excel_y_text));
+            exceList.add(getResources().getString(R.string.excel_z_text));
 
         }
 
@@ -260,36 +291,40 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     private void printDataUncalibrated(float[] sensorData, final ArrayList<String> listp) {
 
+
         listp.add(getResources().getString(R.string.x_text, sensorData[0]));
         listp.add(getResources().getString(R.string.y_text, sensorData[1]));
         listp.add(getResources().getString(R.string.z_text, sensorData[2]));
+        exceList.add(getResources().getString(R.string.excel_x_text));
+        exceList.add(getResources().getString(R.string.excel_y_text));
+        exceList.add(getResources().getString(R.string.excel_z_text));
         if (getStringIntent().equals("AccelerometerUncalibrated")) {
             listp.add(getResources().getString(R.string.acc_unc_x, sensorData[3]));
             listp.add(getResources().getString(R.string.acc_unc_y, sensorData[4]));
             listp.add(getResources().getString(R.string.acc_unc_x, sensorData[5]));
+            exceList.add(getResources().getString(R.string.excel_acc_unc_x));
+            exceList.add(getResources().getString(R.string.excel_acc_unc_y));
+            exceList.add(getResources().getString(R.string.excel_acc_unc_x));
         } else if (getStringIntent().equals("GyroscopeUncalibrated")) {
             listp.add(getResources().getString(R.string.gyrosc_unc_x, sensorData[3]));
             listp.add(getResources().getString(R.string.gyrosc_unc_y, sensorData[4]));
             listp.add(getResources().getString(R.string.gyrosc_unc_z, sensorData[5]));
+            exceList.add(getResources().getString(R.string.excel_gyrosc_unc_x));
+            exceList.add(getResources().getString(R.string.excel_gyrosc_unc_y));
+            exceList.add(getResources().getString(R.string.excel_gyrosc_unc_z));
 
         } else {
             listp.add(getResources().getString(R.string.magnet_unc_x, sensorData[3]));
             listp.add(getResources().getString(R.string.magnet_unc_y, sensorData[4]));
             listp.add(getResources().getString(R.string.magnet_unc_z, sensorData[5]));
+            exceList.add(getResources().getString(R.string.excel_magnet_unc_x));
+            exceList.add(getResources().getString(R.string.excel_magnet_unc_y));
+            exceList.add(getResources().getString(R.string.excel_magnet_unc_z));
 
         }
     }
 
 
-    /*
-        private void getAccelerometerData(){
-
-            mSensorManager= (SensorManager)getSystemService(SENSOR_SERVICE);
-            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-
-        }
-    */
     protected void onResume() {
         super.onResume();
 
@@ -313,6 +348,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
         //sensor_list= findViewById(R.id.sensor_list);
         final ArrayList<String> listp = new ArrayList<String>();
         boolean single = false;
@@ -332,6 +368,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
                 listp.add(mSensor.getName());
                 printData(event.values, listp, single);
+                copyValue = event.values;
                 break;
 
             case "Light":
@@ -344,6 +381,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 single = true;
                 listp.add(mSensor.getName());
                 printData(event.values, listp, single);
+                copyValue = event.values;
                 break;
 
             case "AccelerometerUncalibrated":
@@ -351,6 +389,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "MagnetometerUncalibrated":
                 listp.add(mSensor.getName());
                 printDataUncalibrated(event.values, listp);
+                copyValue = event.values;
                 break;
 
 
@@ -370,11 +409,43 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     }
 
-    public void playSensorData(View view) {
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-    }
+
+    public void playSensorData(View view) {
+            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        }
+
+
+
+
     public void pauseSensorData(View view) {
         mSensorManager.unregisterListener(this);
+    }
+
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void saveSensorData(View view) {
+
+        if(isExternalStorageWritable()) {
+
+
+            if (copyValue != null) {
+                ExcelSheet Sheet = new ExcelSheet(mSensor.getName(), copyValue, exceList);
+                Sheet.exportToExcel();
+            } else
+                Toast.makeText(this, "Play sensor data before!",
+                        Toast.LENGTH_LONG).show();
+        }
+        else
+            Toast.makeText(this, "External Storage isn't writable",
+                    Toast.LENGTH_LONG).show();
+
     }
 }

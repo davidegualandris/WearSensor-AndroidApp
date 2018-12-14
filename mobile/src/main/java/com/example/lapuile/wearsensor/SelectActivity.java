@@ -308,47 +308,9 @@ public class SelectActivity extends AppCompatActivity {
                 final ArrayList<String> listp = new ArrayList<String>();
 
                 for (Sensor currentSensor : sensorList) {
-                    if ((currentSensor.getType() == Sensor.TYPE_ACCELEROMETER ||
-                            currentSensor.getType() == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED ||
-                            currentSensor.getType() == Sensor.TYPE_GRAVITY ||
-                            currentSensor.getType() == Sensor.TYPE_GYROSCOPE ||
-                            currentSensor.getType() == Sensor.TYPE_GYROSCOPE_UNCALIBRATED ||
-                            currentSensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION ||
-                            currentSensor.getType() == Sensor.TYPE_ROTATION_VECTOR ||
-                            currentSensor.getType() == Sensor.TYPE_STEP_COUNTER)) {
-                        if (!(listp.contains("MOTION: ")))
-                            listp.add("MOTION: ");
+
                         listp.add(currentSensor.getName());
                     }
-                }
-                for(Sensor currentSensor : sensorList) {
-
-                    if (currentSensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE ||
-                            currentSensor.getType() == Sensor.TYPE_LIGHT ||
-                            currentSensor.getType() == Sensor.TYPE_PRESSURE ||
-                            currentSensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY ||
-                            currentSensor.getType() == Sensor.TYPE_TEMPERATURE) {
-                        if (!(listp.contains("ENVIRONMENTAL: ")))
-                            listp.add("ENVIRONMENTAL: ");
-                        listp.add(currentSensor.getName());
-                    }
-                }
-                for(Sensor currentSensor : sensorList){
-
-                    if((currentSensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR ||
-                            currentSensor.getType() == Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR ||
-                            currentSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD ||
-                            currentSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED ||
-                            currentSensor.getType() == Sensor.TYPE_PROXIMITY ||
-                            currentSensor.getType() == Sensor.TYPE_ORIENTATION )) {
-                        if (!(listp.contains("POSITION: ")))
-                            listp.add("POSITION: ");
-                        listp.add(currentSensor.getName());
-                    }
-                    }
-
-
-
 
 
 
@@ -357,6 +319,19 @@ public class SelectActivity extends AppCompatActivity {
                         (this, R.layout.my_layout, listp);
 
                 sensorText.setAdapter(adapter);
+
+                Button save = (Button) findViewById(R.id.save_button);
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    ExcelSheet listSheet = new ExcelSheet(listp);
+                    listSheet.exportListToExcel();
+
+
+
+                    }
+                });
+
 
                 break;
 
@@ -417,5 +392,7 @@ public class SelectActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }

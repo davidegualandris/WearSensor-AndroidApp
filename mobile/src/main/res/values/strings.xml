@@ -6,7 +6,11 @@
     <string name="x_text">on x: %1$.2f</string>
     <string name="y_text">on y: %1$.2f</string>
     <string name="z_text">on z: %1$.2f</string>
+    <string name="excel_x_text">on x</string>
+    <string name="excel_y_text">on y</string>
+    <string name="excel_z_text">on z</string>
     <string name="onedimension_text">value: %1$.2f</string>
+    <string name="excel_onedimension_text">value</string>
     <string name="error_string">Il device non possiede questo sensore</string>
 
     <string name="magnetometer_text">Magnetometer</string>
@@ -28,18 +32,51 @@
     <string name="acc_unc_y">on y with estimated bias compensation :%1$.2f </string>
     <string name="acc_unc_z">on z with estimated bias compensation :%1$.2f </string>
 
+    <string name="excel_acc_unc_x">on x with estimated bias compensation </string>
+    <string name="excel_acc_unc_y">on y with estimated bias compensation </string>
+    <string name="excel_acc_unc_z">on z with estimated bias compensation </string>
+
     <string name="gyrosc_unc_x">Estimated drift around the x axis :%1$.2f </string>
     <string name="gyrosc_unc_y">Estimated drift around the y axis :%1$.2f </string>
     <string name="gyrosc_unc_z">Estimated drift around the z axis :%1$.2f </string>
+
+    <string name="excel_gyrosc_unc_x">Estimated drift around the x axis </string>
+    <string name="excel_gyrosc_unc_y">Estimated drift around the y axis </string>
+    <string name="excel_gyrosc_unc_z">Estimated drift around the z axis </string>
 
     <string name="step_counter_button_text">step counter</string>
 
     <string name="magnet_unc_x">Iron bias estimation along x axis :%1$.2f </string>
     <string name="magnet_unc_y">Iron bias estimation along y axis :%1$.2f </string>
     <string name="magnet_unc_z">Iron bias estimation along z axis :%1$.2f </string>
+
+    <string name="excel_magnet_unc_x">Iron bias estimation along x axis </string>
+    <string name="excel_magnet_unc_y">Iron bias estimation along y axis </string>
+    <string name="excel_magnet_unc_z">Iron bias estimation along z axis </string>
+
+
     <string name="sensor_list_button_text">sensor avaiable</string>
 
     <string name="pose_6_dof_text_button">pose 6 dof</string>
+
+    <string name="excel_pose_6_dof_cos">cos(θ/2)</string>
+    <string name="excel_translation_along_x">Translation along x axis from an arbitrary origin </string>
+    <string name="excel_translation_along_y">Translation along y axis from an arbitrary origin </string>
+    <string name="excel_translation_along_z">Translation along z axis from an arbitrary origin </string>
+
+    <string name="excel_delta_quat_x">Delta quaternion rotation x*sin(θ/2) </string>
+    <string name="excel_delta_quat_y">Delta quaternion rotation y*sin(θ/2) </string>
+    <string name="excel_delta_quat_z">Delta quaternion rotation z*sin(θ/2) </string>
+
+    <string name="excel_delta_quat_rot_cos">Delta quaternion rotation cos(θ/2) </string>
+
+
+    <string name="excel_delta_transl_x">Delta translation along x axis </string>
+    <string name="excel_delta_transl_y">Delta translation along y axis </string>
+    <string name="excel_delta_transl_z">Delta translation along z axis </string>
+
+    <string name="excel_sequence_number">Sequence number </string>
+
 
     <string name="pose_6_dof_cos">cos(θ/2) : %1$.2f</string>
     <string name="translation_along_x">Translation along x axis from an arbitrary origin : %1$.2f</string>

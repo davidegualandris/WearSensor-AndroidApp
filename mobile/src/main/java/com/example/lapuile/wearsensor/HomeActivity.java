@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
         Button position = (Button) findViewById(R.id.position_button);
         position.setOnClickListener(new View.OnClickListener() {
             @Override
