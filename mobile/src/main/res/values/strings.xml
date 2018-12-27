@@ -3,6 +3,8 @@
     <string name="sensor_button_text">Lista sensori disponibili</string>
     <string name="accelerometer_button_text">Accelerometer</string>
 
+
+
     <string name="x_text">on x: %1$.2f</string>
     <string name="y_text">on y: %1$.2f</string>
     <string name="z_text">on z: %1$.2f</string>
@@ -95,4 +97,11 @@
     <string name="delta_transl_z">Delta translation along z axis : %1$.2f</string>
 
     <string name="sequence_number">Sequence number : %1$.2f </string>
+
+    <string name="connected_nodes">Nodes: %1$s</string>
+
+    <string name="no_device">No device provides the requested capabilities</string>
+    <string name="watch_sensors_list">Watch sensors list</string>
+    <string name="query_watch_sensors">query watch sensors</string>
+    <string name="query_sensors">query watch sensors</string>
 </resources>

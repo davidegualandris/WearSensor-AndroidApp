@@ -289,6 +289,36 @@ public class SelectActivity extends AppCompatActivity {
 
 
 
+        Button watchList = (Button) findViewById(R.id.watch_sensor_list_button);
+        watchList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent =
+                        new Intent(SelectActivity.this, WatchDataActivity.class);
+                intent.putExtra("Type", "WatchList");
+                startActivity(intent);
+
+            }
+        });
+
+
+        Button watchSensor = (Button) findViewById(R.id.watch_query);
+        watchSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent =
+                        new Intent(SelectActivity.this, WatchDataActivity.class);
+                intent.putExtra("Type", "WatchSensor");
+                startActivity(intent);
+
+            }
+        });
+
+
+
+
 //        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -384,6 +414,11 @@ public class SelectActivity extends AppCompatActivity {
                     poseSix.setVisibility(View.VISIBLE);
 
                 break;
+
+            case "WatchSensor":
+                watchList.setVisibility(View.VISIBLE);
+                watchSensor.setVisibility(View.VISIBLE);
+
             default:
                 break;
         }

@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent =
-                        new Intent(HomeActivity.this, WatchDataActivity.class);
+                        new Intent(HomeActivity.this, SelectActivity.class);
                 intent.putExtra("Type", "WatchSensor");
                 startActivity(intent);
 

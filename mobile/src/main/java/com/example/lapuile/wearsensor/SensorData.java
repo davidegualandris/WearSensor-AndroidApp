@@ -447,5 +447,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             Toast.makeText(this, "External Storage isn't writable",
                     Toast.LENGTH_LONG).show();
 
+
     }
+
 }

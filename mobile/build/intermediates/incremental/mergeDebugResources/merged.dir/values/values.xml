@@ -1666,6 +1666,7 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="connected_nodes">Nodes: %1$s</string>
     <string name="delta_quat_rot_cos">Delta quaternion rotation cos(θ/2)  : %1$.2f</string>
     <string name="delta_quat_x">Delta quaternion rotation x*sin(θ/2) : %1$.2f</string>
     <string name="delta_quat_y">Delta quaternion rotation y*sin(θ/2) : %1$.2f</string>
@@ -1713,12 +1714,15 @@
     <string name="magnet_unc_z">Iron bias estimation along z axis :%1$.2f </string>
     <string name="magnetometer_text">Magnetometer</string>
     <string name="motion_button_text">motion sensors</string>
+    <string name="no_device">No device provides the requested capabilities</string>
     <string name="onedimension_text">value: %1$.2f</string>
     <string name="pose_6_dof_cos">cos(θ/2) : %1$.2f</string>
     <string name="pose_6_dof_text_button">pose 6 dof</string>
     <string name="position_button_text">position sensors</string>
     <string name="pressure_button_text">PRESSURE</string>
     <string name="proximity_text_button">Proximity</string>
+    <string name="query_sensors">query watch sensors</string>
+    <string name="query_watch_sensors">query watch sensors</string>
     <string name="relative_humidity_button_text">RELATIVE HUMIDITY</string>
     <string name="search_menu_title">Search</string>
     <string name="sensor_button_text">Lista sensori disponibili</string>
@@ -1729,6 +1733,7 @@
     <string name="translation_along_x">Translation along x axis from an arbitrary origin : %1$.2f</string>
     <string name="translation_along_y">Translation along y axis from an arbitrary origin : %1$.2f</string>
     <string name="translation_along_z">Translation along z axis from an arbitrary origin : %1$.2f</string>
+    <string name="watch_sensors_list">Watch sensors list</string>
     <string name="x_text">on x: %1$.2f</string>
     <string name="y_text">on y: %1$.2f</string>
     <string name="z_text">on z: %1$.2f</string>

@@ -872,7 +872,9 @@ id uniform
 id up
 id useLogo
 id watch_action
+id watch_query
 id watch_sensor_button
+id watch_sensor_list_button
 id wide
 id withText
 id wrap
@@ -1003,6 +1005,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string connected_nodes
 string delta_quat_rot_cos
 string delta_quat_x
 string delta_quat_y
@@ -1050,12 +1053,15 @@ string magnet_unc_y
 string magnet_unc_z
 string magnetometer_text
 string motion_button_text
+string no_device
 string onedimension_text
 string pose_6_dof_cos
 string pose_6_dof_text_button
 string position_button_text
 string pressure_button_text
 string proximity_text_button
+string query_sensors
+string query_watch_sensors
 string relative_humidity_button_text
 string search_menu_title
 string sensor_button_text
@@ -1066,6 +1072,7 @@ string step_counter_button_text
 string translation_along_x
 string translation_along_y
 string translation_along_z
+string watch_sensors_list
 string x_text
 string y_text
 string z_text
