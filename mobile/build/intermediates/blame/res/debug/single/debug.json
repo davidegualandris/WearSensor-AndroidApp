@@ -236,6 +236,10 @@
         "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
     {
+        "merged": "/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/res/merged/debug/layout_activity_main2.xml.flat",
+        "source": "/home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/res/layout/activity_main2.xml"
+    },
+    {
         "merged": "/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/res/merged/debug/color_common_google_signin_btn_text_light.xml.flat",
         "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/daa6a0976d3d3f914d70b57e95ba7148/res/color/common_google_signin_btn_text_light.xml"
     },

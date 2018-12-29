@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.renderscript.Element;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -85,22 +86,25 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         CapabilityClient.OnCapabilityChangedListener {
 
     public static final String TAG = "BasicSensorsApi";
-    
+
     private static final String SENSOR_KEY = "sensor";
 
     private static final String LIST_PATH = "/list";
     private static final String LIST_KEY = "list";
 
-    private static final String CAPABILITY_NAME =   "watch_server";
+    private static final String CAPABILITY_NAME = "watch_server";
     public static final String SENSOR_REQUEST_MESSAGE_PATH = "/sensor";
+    private static final String NAME_KEY = "name";
     private String transcriptionNodeId = null;
 
     String intentChoice;
 
+    float [] copyValue;
 
+    String sensorName;
+    final ArrayList<String> listExcel = new ArrayList<String>();
 
-
-
+    ArrayList<String> listGlobal;
 
     ListView sensor_list;
 
@@ -110,12 +114,24 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         setContentView(R.layout.activity_watch_data);
 
 
-
         sensor_list = findViewById(R.id.sensor_list_wear);
 
+        intentChoice = getIntent().getStringExtra("Type");
 
+        if (intentChoice.equals("WatchList")) {
+
+            ImageButton play = (findViewById(R.id.play_button));
+            play.setVisibility(View.INVISIBLE);
+            ImageButton pause = (findViewById(R.id.pause_button));
+            pause.setVisibility(View.INVISIBLE);
+
+            new StartWearableActivityTask().execute();
+
+
+        }
 
     }
+
 
     @Override
     protected void onResume() {
@@ -138,65 +154,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     }
 
 
-        // capabilityInfo has the reachable nodes with the transcription capability
-       // updateTranscriptionCapability(capabilityInfo);
-
-        // capabilityInfo has the reachable nodes with the transcription capability
-
-
-
-
-
-
-
-
-/*
-
-    private void showNodes(final String... capabilityNames) {
-        Task<Map<String, CapabilityInfo>> capabilitiesTask =
-                Wearable.getCapabilityClient(this)
-                        .getAllCapabilities(CapabilityClient.FILTER_REACHABLE);
-        capabilitiesTask.addOnSuccessListener(new OnSuccessListener<Map<String, CapabilityInfo>>() {
-            @Override
-            public void onSuccess(Map<String, CapabilityInfo> capabilityInfoMap) {
-                Set<Node> nodes = new HashSet<>();
-                if (capabilityInfoMap.isEmpty()) {
-                    showDiscoveredNodes(nodes);
-                    return;
-                }
-                for (String capabilityName : capabilityNames) {
-                    CapabilityInfo capabilityInfo = capabilityInfoMap.get(capabilityName);
-                    if (capabilityInfo != null) {
-                        nodes.addAll(capabilityInfo.getNodes());
-                    }
-                }
-                showDiscoveredNodes(nodes);
-            }
-        });
-    }
-
-    /*
-    private void showDiscoveredNodes(Set<Node> nodes) {
-        List<String> nodesList = new ArrayList<>();
-        for (Node node : nodes) {
-            nodesList.add(node.getDisplayName());
-        }
-        Log.d(
-                TAG,
-                "Connected Nodes: "
-                        + (nodesList.isEmpty()
-                        ? "No connected device was found for the given capabilities"
-                        : TextUtils.join(",", nodesList)));
-        String msg;
-        if (!nodesList.isEmpty()) {
-            msg = getString(R.string.connected_nodes, TextUtils.join(", ", nodesList));
-        } else {
-            msg = getString(R.string.no_device);
-        }
-        Toast.makeText(WatchDataActivity.this, msg, Toast.LENGTH_LONG).show();
-    }
-
-*/
     @Override
     public void onCapabilityChanged(@NonNull CapabilityInfo capabilityInfo) {
         Log.i(TAG, "onCapabilityChanged: " + capabilityInfo);
@@ -205,7 +162,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
     @Override
     public void onDataChanged(@NonNull DataEventBuffer dataEventBuffer) {
-        Log.i(TAG, "DATACHAGED");
+        Log.i(TAG, "DATACHANGED");
 
         for (DataEvent event : dataEventBuffer) {
             if (event.getType() == DataEvent.TYPE_CHANGED) {
@@ -215,34 +172,40 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                     DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
                     item.getData();
                     updateSensorWear(dataMap.getFloatArray(SENSOR_KEY));
+                    sensorName = dataMap.getString(NAME_KEY);
                 }
-/*
+
                 if (item.getUri().getPath().equals(LIST_PATH)) {
                     DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
                     item.getData();
-                    updateListWear(dataMap.getStringArrayList(LIST_KEY));
+                    listGlobal = dataMap.getStringArrayList(LIST_KEY);
+                    updateListWear(listGlobal);
+
                 }
-*/
+
             } else if (event.getType() == DataEvent.TYPE_DELETED) {
                 // DataItem deleted
             }
         }
     }
-/*
-    private void updateListWear(ArrayList<String> lista){
+
+
+    private void updateListWear(ArrayList<String> lista) {
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, R.layout.my_layout, lista);
 
         sensor_list.setAdapter(adapter);
     }
-    */
+
 
     private void updateSensorWear(float[] values) {
+        copyValue = values;
         final ArrayList<String> listp = new ArrayList<String>();
         listp.add(getResources().getString(R.string.onedimension_text, values[0]));
+        listExcel.add(getResources().getString(R.string.excel_onedimension_text));
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this,R.layout.my_layout, listp);
+                (this, R.layout.my_layout, listp);
 
         sensor_list.setAdapter(adapter);
     }
@@ -260,7 +223,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     }
 
     public void playSensorDataWear(View view) {
-       // mDataClient = Wearable.getDataClient(this);
+        // mDataClient = Wearable.getDataClient(this);
         new StartWearableActivityTask().execute();
 
     }
@@ -269,18 +232,21 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     @WorkerThread
     private void sendStartActivityMessage(String node) {
 
-        Task<Integer> sendMessageTask =
-                    Wearable.getMessageClient(this).sendMessage(node, SENSOR_REQUEST_MESSAGE_PATH, new byte[0]);
+
+        Task<Integer> sendMessageTask;
+        if (intentChoice.equals("WatchList"))
+            sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, LIST_PATH, new byte[0]);
 
 
-
+        else
+            sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, SENSOR_REQUEST_MESSAGE_PATH, new byte[0]);
 
 
         try {
             // Block on a task and get the result synchronously (because this is on a background
             // thread). sendMessage(START_PHONE_ACTIVITY, "");
             Integer result = Tasks.await(sendMessageTask);
-            Log.i(TAG, "Message sent: " + result+ " to "+ LIST_PATH + node);
+            Log.i(TAG, "Message sent: " + result + " to " + LIST_PATH + node);
 
         } catch (ExecutionException exception) {
             Log.e(TAG, "Task failed: " + exception);
@@ -290,9 +256,36 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         }
     }
 
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
 
+    public void saveSensorData(View view) {
+        if (intentChoice.equals("WatchList")) {
 
+            if (isExternalStorageWritable()) {
+                ExcelSheet listSheet = new ExcelSheet(listGlobal);
+                listSheet.exportListWearToExcel();
 
+            } else
+                Toast.makeText(this, "External Storage isn't writable",
+                        Toast.LENGTH_LONG).show();
+        }
+        else
+            if (isExternalStorageWritable()){
+                ExcelSheet dataSheet = new ExcelSheet(sensorName, copyValue, listExcel);
+                dataSheet.exportWearToExcel();
+            }
+
+            else
+                Toast.makeText(this, "External Storage isn't writable",
+                        Toast.LENGTH_LONG).show();
+
+    }
 
 
     private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
@@ -307,6 +300,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             return null;
         }
     }
+
     @WorkerThread
     private Collection<String> getNodes() {
         HashSet<String> results = new HashSet<>();

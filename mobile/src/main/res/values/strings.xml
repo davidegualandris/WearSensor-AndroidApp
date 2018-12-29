@@ -4,7 +4,6 @@
     <string name="accelerometer_button_text">Accelerometer</string>
 
 
-
     <string name="x_text">on x: %1$.2f</string>
     <string name="y_text">on y: %1$.2f</string>
     <string name="z_text">on z: %1$.2f</string>

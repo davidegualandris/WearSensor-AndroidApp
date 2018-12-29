@@ -2,20 +2,14 @@ package com.example.lapuile.wearsensor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SelectActivity extends AppCompatActivity {
 
@@ -23,12 +17,14 @@ public class SelectActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE =
             "com.example.android.wearsensor.extra.MESSAGE";
     private SensorManager mSensorManager;
+    private static final int PERMISSION_REQUEST_CODE = 200;
+
+    final ArrayList<String> listp = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_select);
 
 
         Button accelerometer = (Button) findViewById(R.id.accelerometer_button);
@@ -247,7 +243,7 @@ public class SelectActivity extends AppCompatActivity {
             }
         });
 
-    //DEPRECATED
+        //DEPRECATED
         Button orientation = (Button) findViewById(R.id.orientation_button);
         orientation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -288,7 +284,6 @@ public class SelectActivity extends AppCompatActivity {
         });
 
 
-
         Button watchList = (Button) findViewById(R.id.watch_sensor_list_button);
         watchList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -317,53 +312,15 @@ public class SelectActivity extends AppCompatActivity {
         });
 
 
-
-
 //        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         Intent choice = getIntent();
         String type = choice.getStringExtra("Type");
-        switch (type){
-
-            case "SensorList":
-                setContentView(R.layout.activity_sensor_data);
-                ImageButton play = (findViewById(R.id.play_button));
-                play.setVisibility(View.INVISIBLE);
-                ImageButton pause = (findViewById(R.id.pause_button));
-                pause.setVisibility(View.INVISIBLE);
-                List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-                ListView sensorText = findViewById(R.id.sensor_list);
-                final ArrayList<String> listp = new ArrayList<String>();
-
-                for (Sensor currentSensor : sensorList) {
-
-                        listp.add(currentSensor.getName());
-                    }
+        switch (type) {
 
 
-
-
-                final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                        (this, R.layout.my_layout, listp);
-
-                sensorText.setAdapter(adapter);
-
-                Button save = (Button) findViewById(R.id.save_button);
-                save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    ExcelSheet listSheet = new ExcelSheet(listp);
-                    listSheet.exportListToExcel();
-
-
-
-                    }
-                });
-
-
-                break;
 
             case "Motion":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
@@ -410,7 +367,7 @@ public class SelectActivity extends AppCompatActivity {
                     geoMagneticVector.setVisibility(View.VISIBLE);
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null)
                     orientation.setVisibility(View.VISIBLE);
-                if(mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF) != null)
                     poseSix.setVisibility(View.VISIBLE);
 
                 break;
@@ -424,9 +381,9 @@ public class SelectActivity extends AppCompatActivity {
         }
 
 
-
-
     }
+
+
 
 
 

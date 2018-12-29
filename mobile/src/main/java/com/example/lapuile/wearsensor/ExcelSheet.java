@@ -107,6 +107,70 @@ public class ExcelSheet {
     }
 
 
+
+    public void exportListWearToExcel(){
+
+        File sensorDir = new File(Environment.getExternalStorageDirectory(),"WearSensor");
+
+        if(!sensorDir.exists())
+            sensorDir.mkdirs();
+
+
+        final String dirName = "List of Wear sensors";
+
+
+
+        //file path
+        File directory = new File(sensorDir, dirName);
+
+        if(!directory.exists())
+            directory.mkdirs();
+
+        String fileName = "ListWear.xls";
+
+        File file = new File(directory, fileName);
+
+        if (!directory.mkdirs()) {
+            Log.e(TAG, "Directory not created");
+
+            WorkbookSettings wbSettings = new WorkbookSettings();
+            wbSettings.setLocale(new Locale("en", "EN"));
+            WritableWorkbook workbook;
+
+            try {
+                workbook = Workbook.createWorkbook(file, wbSettings);
+                //Excel sheet name. 0 represents first sheet
+                WritableSheet sheet = workbook.createSheet("SensorList", 0);
+
+                try {
+                    int row = 0;
+                    for (int i = 0; i < dataSensorList.size(); i++) {
+
+                        sheet.addCell(new Label(0, row, dataSensorList.get(i))); // column and row
+
+                        row++;
+
+                    }
+
+                } catch (RowsExceededException e) {
+                    e.printStackTrace();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
+                workbook.write();
+                try {
+                    workbook.close();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
     public void exportToExcel() {
 
         File sensorDir = new File(Environment.getExternalStorageDirectory(),"WearSensor");
@@ -172,5 +236,73 @@ public class ExcelSheet {
 
     }
 
+    public void exportWearToExcel() {
+
+        File sensorDir = new File(Environment.getExternalStorageDirectory(),"WearSensor");
+
+        if(!sensorDir.exists())
+            sensorDir.mkdirs();
+
+        File watchDir = new File(sensorDir, "WatchSensor");
+
+        if(!watchDir.exists())
+            watchDir.mkdirs();
+
+        final String dirName = sensorName;
+
+
+
+        //file path
+        File directory = new File(watchDir, dirName);
+
+        if(!directory.exists())
+            directory.mkdirs();
+
+        String fileName = "Data.xls";
+
+        File file = new File(directory, fileName);
+
+        if (!directory.mkdirs()) {
+            Log.e(TAG, "Directory not created");
+
+            WorkbookSettings wbSettings = new WorkbookSettings();
+            wbSettings.setLocale(new Locale("en", "EN"));
+            WritableWorkbook workbook;
+
+            try {
+                workbook = Workbook.createWorkbook(file, wbSettings);
+                //Excel sheet name. 0 represents first sheet
+                WritableSheet sheet = workbook.createSheet(sensorName, 0);
+
+                try {
+                    int row = 0;
+                    for (int i = 0; i < sensorValue.length && i < dataSensorList.size(); i++) {
+
+
+
+                        sheet.addCell(new Label(0, row, dataSensorList.get(i))); // column and row
+
+                        sheet.addCell(new Number(1, row, sensorValue[i]));
+                        row++;
+
+                    }
+
+                } catch (RowsExceededException e) {
+                    e.printStackTrace();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
+                workbook.write();
+                try {
+                    workbook.close();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
 

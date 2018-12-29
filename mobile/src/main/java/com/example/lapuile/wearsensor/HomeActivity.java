@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent =
-                        new Intent(HomeActivity.this, SelectActivity.class);
+                        new Intent(HomeActivity.this, SensorData.class);
                 intent.putExtra("Type", "SensorList");
                 startActivity(intent);
 

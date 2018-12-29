@@ -915,6 +915,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_home
 layout activity_main
+layout activity_main2
 layout activity_sensor_data
 layout activity_watch_data
 layout my_layout
