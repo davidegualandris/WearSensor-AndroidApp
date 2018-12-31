@@ -28,16 +28,17 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.example.lapuile.wearsensor.HomeActivity" >
+        <activity android:name="com.example.lapuile.wearsensor.HomeActivity" />
+        <activity android:name="com.example.lapuile.wearsensor.SelectActivity" />
+        <activity android:name="com.example.lapuile.wearsensor.SensorData" />
+        <activity android:name="com.example.lapuile.wearsensor.WatchDataActivity" />
+        <activity android:name="com.example.lapuile.wearsensor.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.lapuile.wearsensor.SelectActivity" />
-        <activity android:name="com.example.lapuile.wearsensor.SensorData" />
-        <activity android:name="com.example.lapuile.wearsensor.WatchDataActivity" />
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
             android:excludeFromRecents="true"

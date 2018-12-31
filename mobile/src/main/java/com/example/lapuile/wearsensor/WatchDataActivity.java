@@ -4,6 +4,7 @@ package com.example.lapuile.wearsensor;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -95,14 +96,17 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     private static final String CAPABILITY_NAME = "watch_server";
     public static final String SENSOR_REQUEST_MESSAGE_PATH = "/sensor";
     private static final String NAME_KEY = "name";
+    private static final String TYPE_KEY = "type";
     private String transcriptionNodeId = null;
 
-    String intentChoice;
+    private String intentChoice;
 
-    float [] copyValue;
+    private float [] copyValue;
 
-    String sensorName;
-    final ArrayList<String> listExcel = new ArrayList<String>();
+    private String sensorName;
+    private int sensorType;
+
+    final ArrayList<String> exceList = new ArrayList<String>();
 
     ArrayList<String> listGlobal;
 
@@ -173,6 +177,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                     item.getData();
                     updateSensorWear(dataMap.getFloatArray(SENSOR_KEY));
                     sensorName = dataMap.getString(NAME_KEY);
+                    sensorType = dataMap.getInt(TYPE_KEY);
+
                 }
 
                 if (item.getUri().getPath().equals(LIST_PATH)) {
@@ -202,8 +208,122 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     private void updateSensorWear(float[] values) {
         copyValue = values;
         final ArrayList<String> listp = new ArrayList<String>();
-        listp.add(getResources().getString(R.string.onedimension_text, values[0]));
-        listExcel.add(getResources().getString(R.string.excel_onedimension_text));
+
+        switch (sensorType) {
+
+            case Sensor.TYPE_ACCELEROMETER:
+            case Sensor.TYPE_MAGNETIC_FIELD:
+            case Sensor.TYPE_GRAVITY:
+            case Sensor.TYPE_GYROSCOPE:
+            case Sensor.TYPE_LINEAR_ACCELERATION:
+            case Sensor.TYPE_ROTATION_VECTOR:
+            case Sensor.TYPE_GAME_ROTATION_VECTOR:
+            case Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR:
+            case Sensor.TYPE_ORIENTATION:
+                listp.add(getResources().getString(R.string.x_text, values[0]));
+                listp.add(getResources().getString(R.string.y_text, values[1]));
+                listp.add(getResources().getString(R.string.z_text, values[2]));
+                exceList.add(getResources().getString(R.string.excel_x_text));
+                exceList.add(getResources().getString(R.string.excel_y_text));
+                exceList.add(getResources().getString(R.string.excel_z_text));
+                break;
+
+            case Sensor.TYPE_LIGHT:
+            case Sensor.TYPE_PROXIMITY:
+            case Sensor.TYPE_AMBIENT_TEMPERATURE:
+            case Sensor.TYPE_PRESSURE:
+            case Sensor.TYPE_RELATIVE_HUMIDITY:
+            case Sensor.TYPE_STEP_COUNTER:
+            case Sensor.TYPE_TEMPERATURE:
+                listp.add(getResources().getString(R.string.onedimension_text, values[0]));
+                exceList.add(getResources().getString(R.string.excel_onedimension_text));
+                break;
+
+            case Sensor.TYPE_ACCELEROMETER_UNCALIBRATED:
+                listp.add(getResources().getString(R.string.x_text, values[0]));
+                listp.add(getResources().getString(R.string.y_text, values[1]));
+                listp.add(getResources().getString(R.string.z_text, values[2]));
+                exceList.add(getResources().getString(R.string.excel_x_text));
+                exceList.add(getResources().getString(R.string.excel_y_text));
+                exceList.add(getResources().getString(R.string.excel_z_text));
+                listp.add(getResources().getString(R.string.acc_unc_x, values[3]));
+                listp.add(getResources().getString(R.string.acc_unc_y, values[4]));
+                listp.add(getResources().getString(R.string.acc_unc_x, values[5]));
+                exceList.add(getResources().getString(R.string.excel_acc_unc_x));
+                exceList.add(getResources().getString(R.string.excel_acc_unc_y));
+                exceList.add(getResources().getString(R.string.excel_acc_unc_x));
+
+            case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
+                listp.add(getResources().getString(R.string.x_text, values[0]));
+                listp.add(getResources().getString(R.string.y_text, values[1]));
+                listp.add(getResources().getString(R.string.z_text, values[2]));
+                exceList.add(getResources().getString(R.string.excel_x_text));
+                exceList.add(getResources().getString(R.string.excel_y_text));
+                exceList.add(getResources().getString(R.string.excel_z_text));
+                listp.add(getResources().getString(R.string.gyrosc_unc_x, values[3]));
+                listp.add(getResources().getString(R.string.gyrosc_unc_y, values[4]));
+                listp.add(getResources().getString(R.string.gyrosc_unc_z, values[5]));
+                exceList.add(getResources().getString(R.string.excel_gyrosc_unc_x));
+                exceList.add(getResources().getString(R.string.excel_gyrosc_unc_y));
+                exceList.add(getResources().getString(R.string.excel_gyrosc_unc_z));
+            case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
+                listp.add(getResources().getString(R.string.x_text, values[0]));
+                listp.add(getResources().getString(R.string.y_text, values[1]));
+                listp.add(getResources().getString(R.string.z_text, values[2]));
+                exceList.add(getResources().getString(R.string.excel_x_text));
+                exceList.add(getResources().getString(R.string.excel_y_text));
+                exceList.add(getResources().getString(R.string.excel_z_text));
+                listp.add(getResources().getString(R.string.magnet_unc_x, values[3]));
+                listp.add(getResources().getString(R.string.magnet_unc_y, values[4]));
+                listp.add(getResources().getString(R.string.magnet_unc_z, values[5]));
+                exceList.add(getResources().getString(R.string.excel_magnet_unc_x));
+                exceList.add(getResources().getString(R.string.excel_magnet_unc_y));
+                exceList.add(getResources().getString(R.string.excel_magnet_unc_z));
+
+                break;
+
+            case Sensor.TYPE_POSE_6DOF:
+                listp.add(getResources().getString(R.string.x_text, values[0]));
+                listp.add(getResources().getString(R.string.y_text, values[1]));
+                listp.add(getResources().getString(R.string.z_text, values[2]));
+                listp.add(getResources().getString(R.string.pose_6_dof_cos, values[3]));
+                listp.add(getResources().getString(R.string.translation_along_x, values[4]));
+                listp.add(getResources().getString(R.string.translation_along_y, values[5]));
+                listp.add(getResources().getString(R.string.translation_along_z, values[6]));
+                listp.add(getResources().getString(R.string.delta_quat_x, values[7]));
+                listp.add(getResources().getString(R.string.delta_quat_y, values[8]));
+                listp.add(getResources().getString(R.string.delta_quat_z, values[9]));
+                listp.add(getResources().getString(R.string.delta_quat_rot_cos, values[10]));
+                listp.add(getResources().getString(R.string.delta_transl_x, values[11]));
+                listp.add(getResources().getString(R.string.delta_transl_y, values[12]));
+                listp.add(getResources().getString(R.string.delta_transl_z, values[13]));
+                listp.add(getResources().getString(R.string.sequence_number, values[14]));
+
+
+                exceList.add(getResources().getString(R.string.excel_x_text));
+                exceList.add(getResources().getString(R.string.excel_y_text));
+                exceList.add(getResources().getString(R.string.excel_z_text));
+                exceList.add(getResources().getString(R.string.excel_pose_6_dof_cos));
+                exceList.add(getResources().getString(R.string.excel_translation_along_x));
+                exceList.add(getResources().getString(R.string.excel_translation_along_y));
+                exceList.add(getResources().getString(R.string.excel_translation_along_z));
+                exceList.add(getResources().getString(R.string.excel_delta_quat_x));
+                exceList.add(getResources().getString(R.string.excel_delta_quat_y));
+                exceList.add(getResources().getString(R.string.excel_delta_quat_z));
+                exceList.add(getResources().getString(R.string.excel_delta_quat_rot_cos));
+                exceList.add(getResources().getString(R.string.excel_delta_transl_x));
+                exceList.add(getResources().getString(R.string.excel_delta_transl_y));
+                exceList.add(getResources().getString(R.string.excel_delta_transl_z));
+                exceList.add(getResources().getString(R.string.excel_sequence_number));
+                break;
+
+            default:
+                break;
+        }
+
+
+
+
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, R.layout.my_layout, listp);
 
@@ -233,13 +353,15 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     private void sendStartActivityMessage(String node) {
 
 
+        String msg = intentChoice;
+        byte[] msgByte = msg.getBytes();
         Task<Integer> sendMessageTask;
-        if (intentChoice.equals("WatchList"))
-            sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, LIST_PATH, new byte[0]);
 
+           if(intentChoice.equals("WearSensorList"))
+               sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, LIST_PATH, msgByte);
+           else
+               sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, SENSOR_REQUEST_MESSAGE_PATH, msgByte);
 
-        else
-            sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, SENSOR_REQUEST_MESSAGE_PATH, new byte[0]);
 
 
         try {
@@ -256,36 +378,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         }
     }
 
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
-    }
 
-    public void saveSensorData(View view) {
-        if (intentChoice.equals("WatchList")) {
-
-            if (isExternalStorageWritable()) {
-                ExcelSheet listSheet = new ExcelSheet(listGlobal);
-                listSheet.exportListWearToExcel();
-
-            } else
-                Toast.makeText(this, "External Storage isn't writable",
-                        Toast.LENGTH_LONG).show();
-        }
-        else
-            if (isExternalStorageWritable()){
-                ExcelSheet dataSheet = new ExcelSheet(sensorName, copyValue, listExcel);
-                dataSheet.exportWearToExcel();
-            }
-
-            else
-                Toast.makeText(this, "External Storage isn't writable",
-                        Toast.LENGTH_LONG).show();
-
-    }
 
 
     private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
@@ -325,6 +418,38 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         }
 
         return results;
+    }
+
+
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void saveSensorData(View view) {
+        if (intentChoice.equals("WatchList")) {
+
+            if (isExternalStorageWritable() && listGlobal != null) {
+                ExcelSheet listSheet = new ExcelSheet(listGlobal);
+                listSheet.exportListWearToExcel();
+
+            } else
+                Toast.makeText(this, "External Storage isn't writable",
+                        Toast.LENGTH_LONG).show();
+        }
+        else
+        if (isExternalStorageWritable()){
+            ExcelSheet dataSheet = new ExcelSheet(sensorName, copyValue, exceList);
+            dataSheet.exportWearToExcel();
+        }
+
+        else
+            Toast.makeText(this, "External Storage isn't writable",
+                    Toast.LENGTH_LONG).show();
+
     }
 }
 

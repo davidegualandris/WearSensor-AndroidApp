@@ -12,10 +12,14 @@ import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private String choice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        choice = getIntent().getStringExtra("Type");
 
 
         Button motion = (Button) findViewById(R.id.motion_button);
@@ -25,7 +29,10 @@ public class HomeActivity extends AppCompatActivity {
 
                 Intent intent =
                         new Intent(HomeActivity.this, SelectActivity.class);
-                intent.putExtra("Type", "Motion");
+                if(choice.equals("Phone"))
+                    intent.putExtra("Type", "Motion");
+                else if(choice.equals("Wear"))
+                    intent.putExtra("Type", "WearMotion");
                 startActivity(intent);
 
             }
@@ -38,7 +45,10 @@ public class HomeActivity extends AppCompatActivity {
 
                 Intent intent =
                         new Intent(HomeActivity.this, SelectActivity.class);
-                intent.putExtra("Type", "Environmental");
+                if(choice.equals("Phone"))
+                    intent.putExtra("Type", "Environmental");
+                else if(choice.equals("Wear"))
+                    intent.putExtra("Type", "WearEnvironmental");
                 startActivity(intent);
 
             }
@@ -52,7 +62,10 @@ public class HomeActivity extends AppCompatActivity {
 
                 Intent intent =
                         new Intent(HomeActivity.this, SelectActivity.class);
-                intent.putExtra("Type", "Position");
+                if(choice.equals("Phone"))
+                    intent.putExtra("Type", "Position");
+                else if(choice.equals("Wear"))
+                    intent.putExtra("Type", "WearPosition");
                 startActivity(intent);
 
             }
@@ -63,14 +76,24 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent =
-                        new Intent(HomeActivity.this, SensorData.class);
-                intent.putExtra("Type", "SensorList");
-                startActivity(intent);
+                Intent intent;
+
+                if(choice.equals("Phone")) {
+
+                    intent = new Intent(HomeActivity.this, SensorData.class);
+                    intent.putExtra("Type", "SensorList");
+                    startActivity(intent);
+                }
+                else if(choice.equals("Wear")) {
+                    intent = new Intent(HomeActivity.this, WatchDataActivity.class);
+                    intent.putExtra("Type", "WearSensorList");
+                    startActivity(intent);
+                }
+
 
             }
         });
-
+/*
         Button watchSensor = (Button) findViewById(R.id.watch_sensor_button);
         watchSensor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +105,11 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+
         });
+        */
     }
+
 
 
     @Override

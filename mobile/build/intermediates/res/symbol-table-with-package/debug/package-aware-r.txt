@@ -835,6 +835,8 @@ id select_dialog_listview
 id sensor_list
 id sensor_list_button
 id sensor_list_wear
+id sensor_phone_button
+id sensor_wear_button
 id shortcut
 id showCustom
 id showHome
@@ -914,8 +916,8 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_home
-layout activity_main
 layout activity_main2
+layout activity_select
 layout activity_sensor_data
 layout activity_watch_data
 layout my_layout
