@@ -328,6 +328,26 @@ public class WearSensorService extends WearableListenerService implements Sensor
                         Toast.makeText(this, "Sensor you requested is probably",
                                 Toast.LENGTH_LONG).show();
                     break;
+                case "WearHeartRate":
+                    if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null){
+                        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+                        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                    }
+
+                    else
+                        Toast.makeText(this, "Sensor you requested is probably",
+                                Toast.LENGTH_LONG).show();
+                    break;
+                case "WearHeartBeat":
+                    if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_BEAT) != null){
+                        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_BEAT);
+                        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                    }
+
+                    else
+                        Toast.makeText(this, "Sensor you requested is probably",
+                                Toast.LENGTH_LONG).show();
+                    break;
 
 
                 default:

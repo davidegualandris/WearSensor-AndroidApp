@@ -61,7 +61,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                    if(mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
                         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
                    else
-                       Toast.makeText(this, "Sensor you requested is probably",
+                       Toast.makeText(this, "Sensor you requested is probably broken",
                                Toast.LENGTH_LONG).show();
                 break;
             case "Magnetometer":
@@ -69,7 +69,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     if(mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null)
                         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
                     else
-                        Toast.makeText(this, "Sensor you requested is probably",
+                        Toast.makeText(this, "Sensor you requested is probably broken",
                                 Toast.LENGTH_LONG).show();
                 break;
 
@@ -77,21 +77,21 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Gyroscope":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "LinearAcceleration":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
 
@@ -99,63 +99,63 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Proximity":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "AmbientTemperature":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Pressure":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Humidity":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "RotationVector":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Temperature":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
 
             case "Game":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "GeoVector":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
 
@@ -163,7 +163,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "AccelerometerUncalibrated":
@@ -171,7 +171,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 if(mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED)!= null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                                 Toast.LENGTH_LONG).show();
 
                 break;
@@ -179,31 +179,52 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "StepCounter":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "MagnetometerUncalibrated":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED);
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
 
             case "Pose6Dof":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF);
+
                 else
-                    Toast.makeText(this, "Sensor you requested is probably",
+                    Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
+
+            case "HeartRate":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null) {
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+                }
+
+                else
+                    Toast.makeText(this, "Sensor you requested is probably broken",
+                            Toast.LENGTH_LONG).show();
+                break;
+            case "HeartBeat":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null) {
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_BEAT);
+                }
+
+                else
+                    Toast.makeText(this, "Sensor you requested is probably broken",
+                            Toast.LENGTH_LONG).show();
+                break;
+
 
             case "SensorList":
                 setContentView(R.layout.activity_sensor_data);
@@ -412,6 +433,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "Humidity":
             case "StepCounter":
             case "Temperature":
+            case "HeartRate":
+            case "HeartBeat":
                 single = true;
                 listp.add(mSensor.getName());
                 printData(event.values, listp, single);
@@ -440,6 +463,19 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        if(accuracy == mSensorManager.SENSOR_STATUS_NO_CONTACT){
+            Toast.makeText(this, "Tighten band and try again",
+                    Toast.LENGTH_LONG).show();
+
+        }
+
+        if(accuracy == mSensorManager.SENSOR_STATUS_UNRELIABLE){
+            Toast.makeText(this, "The value returned by this sensor cannot be trusted",
+                    Toast.LENGTH_LONG).show();
+
+        }
+
 
     }
 

@@ -235,6 +235,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             case Sensor.TYPE_RELATIVE_HUMIDITY:
             case Sensor.TYPE_STEP_COUNTER:
             case Sensor.TYPE_TEMPERATURE:
+            case Sensor.TYPE_HEART_RATE:
+            case Sensor.TYPE_HEART_BEAT:
                 listp.add(getResources().getString(R.string.onedimension_text, values[0]));
                 exceList.add(getResources().getString(R.string.excel_onedimension_text));
                 break;
@@ -252,6 +254,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 exceList.add(getResources().getString(R.string.excel_acc_unc_x));
                 exceList.add(getResources().getString(R.string.excel_acc_unc_y));
                 exceList.add(getResources().getString(R.string.excel_acc_unc_x));
+                break;
 
             case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
                 listp.add(getResources().getString(R.string.x_text, values[0]));
@@ -346,6 +349,10 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         // mDataClient = Wearable.getDataClient(this);
         new StartWearableActivityTask().execute();
 
+    }
+
+    public void pauseSensorData(View view){
+        
     }
 
 

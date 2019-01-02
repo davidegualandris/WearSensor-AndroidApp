@@ -93,21 +93,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-/*
-        Button watchSensor = (Button) findViewById(R.id.watch_sensor_button);
-        watchSensor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent =
-                        new Intent(HomeActivity.this, SelectActivity.class);
-                intent.putExtra("Type", "WatchSensor");
-                startActivity(intent);
-
-            }
-
-        });
-        */
     }
 
 

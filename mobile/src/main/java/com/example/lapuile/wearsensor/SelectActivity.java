@@ -76,6 +76,8 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
     Button orientation;
     Button stepCounter;
     Button poseSix;
+    Button heartRate;
+    Button heartBeat;
 
     // SISTEMARE PARTENDO DA QUA
 
@@ -484,6 +486,46 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             }
         });
 
+        heartRate = (Button) findViewById(R.id.heart_rate_button);
+        heartRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent;
+
+                if (choice.equals("Position")) {
+
+                    intent = new Intent(SelectActivity.this, SensorData.class);
+                    intent.putExtra("Type", "HeartRate");
+                    startActivity(intent);
+                } else if (choice.equals("WearPosition")) {
+                    intent = new Intent(SelectActivity.this, WatchDataActivity.class);
+                    intent.putExtra("Type", "WearHeartRate");
+                    startActivity(intent);
+                }
+            }
+        });
+
+        heartBeat = (Button) findViewById(R.id.pose_6_dof_button);
+        heartBeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent;
+
+                if (choice.equals("Position")) {
+
+                    intent = new Intent(SelectActivity.this, SensorData.class);
+                    intent.putExtra("Type", "HeartBeat");
+                    startActivity(intent);
+                } else if (choice.equals("WearPosition")) {
+                    intent = new Intent(SelectActivity.this, WatchDataActivity.class);
+                    intent.putExtra("Type", "WearHeartBeat");
+                    startActivity(intent);
+                }
+            }
+        });
+
 
 //        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
 
@@ -510,6 +552,11 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     gyroscopeUncalibrated.setVisibility(View.VISIBLE);
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
                     stepCounter.setVisibility(View.VISIBLE);
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null)
+                    stepCounter.setVisibility(View.VISIBLE);
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_BEAT) != null)
+                    stepCounter.setVisibility(View.VISIBLE);
+
                 break;
 
             case "Environmental":
@@ -548,7 +595,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                 break;
         }
         if (choice.equals("WearMotion") || choice.equals("WearEnvironmental") || choice.equals("WearPosition")) {
-            Log.i(TAG, "QUAA CI DEVI ENTRARE!");
+
             new StartWearableActivityTask().execute();
         }
 
