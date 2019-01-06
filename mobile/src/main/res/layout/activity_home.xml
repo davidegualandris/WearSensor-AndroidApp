@@ -22,7 +22,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1"
-        android:background="#006064"
+        android:background="@drawable/button_custom"
         android:paddingTop="8dp"
         android:text="@string/sensor_list_button_text"
         android:textColor="@color/common_google_signin_btn_text_dark_default" />
@@ -38,7 +38,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/button_custom"
         android:text="@string/motion_button_text"
         android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
@@ -53,7 +53,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1"
-        android:background="#006064"
+        android:background="@drawable/button_custom"
         android:text="@string/environmental_button_text"
         android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
@@ -68,7 +68,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1"
-        android:background="#006064"
+        android:background="@drawable/button_custom"
         android:paddingTop="8dp"
         android:text="@string/position_button_text"
         android:textColor="@color/common_google_signin_btn_text_dark_default" />

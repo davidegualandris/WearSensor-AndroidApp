@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -56,28 +58,29 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
     private static final String ENVIRONMENTAL_KEY = "environmental";
     private static final String POSITION_KEY = "position";
 
-    Button accelerometer;
-    Button accelerometerUncalibrated;
-    Button magnetometer;
-    Button magnetometerUncalibrated;
-    Button gravity;
-    Button gyroscope;
-    Button gyroscopeUncalibrated;
-    Button linear_acceleration;
-    Button light;
-    Button proximity;
-    Button ambient_temperature;
-    Button pressure;
-    Button humidity;
-    Button rotation_vector;
-    Button temperature;
-    Button gameRotation;
-    Button geoMagneticVector;
-    Button orientation;
-    Button stepCounter;
-    Button poseSix;
-    Button heartRate;
-    Button heartBeat;
+    private ProgressBar progressBar;
+    private Button accelerometer;
+    private Button accelerometerUncalibrated;
+    private Button magnetometer;
+    private Button magnetometerUncalibrated;
+    private Button gravity;
+    private Button gyroscope;
+    private Button gyroscopeUncalibrated;
+    private Button linear_acceleration;
+    private Button light;
+    private Button proximity;
+    private Button ambient_temperature;
+    private Button pressure;
+    private Button humidity;
+    private Button rotation_vector;
+    private Button temperature;
+    private Button gameRotation;
+    private Button geoMagneticVector;
+    private Button orientation;
+    private Button stepCounter;
+    private Button poseSix;
+    private Button heartRate;
+    private Button heartBeat;
 
     // SISTEMARE PARTENDO DA QUA
 
@@ -87,6 +90,8 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
         setContentView(R.layout.activity_select);
         choice = getIntent().getStringExtra("Type");
         Log.i(TAG, "CHOICE : " + choice);
+
+
 
 
         accelerometer = (Button) findViewById(R.id.accelerometer_button);
@@ -506,7 +511,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             }
         });
 
-        heartBeat = (Button) findViewById(R.id.pose_6_dof_button);
+        heartBeat = (Button) findViewById(R.id.heart_beat_button);
         heartBeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -627,6 +632,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
     private void sendStartActivityMessage(String node) {
 
 
+
         String msg = choice;
         byte[] msgByte = msg.getBytes();
         Task<Integer> sendMessageTask;
@@ -641,9 +647,13 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             Log.i(TAG, "Message sent: " + result + " to " + LIST_PATH + node);
 
         } catch (ExecutionException exception) {
+            Toast.makeText(this, "You have to connect your wear",
+                    Toast.LENGTH_LONG).show();
             Log.e(TAG, "Task failed: " + exception);
 
+
         } catch (InterruptedException exception) {
+
             Log.e(TAG, "Interrupt occurred: " + exception);
         }
     }
@@ -748,22 +758,59 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
 
     }
 
+
+
     @Override
     public void onMessageReceived(@NonNull MessageEvent messageEvent) {
 
     }
 
 
-    private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
+    private class StartWearableActivityTask extends AsyncTask<Void, Integer, String> {
+
+        int progress;
+        @Override
+        protected void onPreExecute() {
+            progress = 0;
+            progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+            progressBar.setVisibility(View.VISIBLE);
+
+            super.onPreExecute();
+        }
 
         @Override
-        protected Void doInBackground(Void... args) {
+        protected String doInBackground(Void... args) {
             Collection<String> nodes = getNodes();
+
+            if(nodes.isEmpty())
+                return null;
+            progressBar.setMax(100);
             for (String node : nodes) {
 
                 sendStartActivityMessage(node);
+
             }
-            return null;
+            return "Doit";
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+            publishProgress(values);
+            super.onProgressUpdate(values);
+
+           // progressBar.getProgressDrawable();
+        }
+
+        @Override
+        protected void onPostExecute(String node) {
+            super.onPostExecute(node);
+            if(node == null)
+                Toast.makeText(getApplicationContext(), "You have to connect your wear",
+                        Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+
         }
     }
 
@@ -784,12 +831,16 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             }
 
         } catch (ExecutionException exception) {
+            Toast.makeText(this, "You have to connect your wear",
+                    Toast.LENGTH_LONG).show();
             Log.e(TAG, "Task failed: " + exception);
 
         } catch (InterruptedException exception) {
             Log.e(TAG, "Interrupt occurred: " + exception);
         }
 
+
+        Log.i(TAG, "AAAAAAAAAAAAAAAA " + results);
         return results;
     }
 

@@ -1,9 +1,11 @@
 package com.example.lapuile.wearsensor;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,12 +14,17 @@ import android.renderscript.Element;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -86,11 +93,16 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         MessageClient.OnMessageReceivedListener,
         CapabilityClient.OnCapabilityChangedListener {
 
+    private final static int INTERVAL = 1000;
+
+
+    boolean god;
+
     public static final String TAG = "BasicSensorsApi";
 
     private static final String SENSOR_KEY = "sensor";
 
-    private static final String LIST_PATH = "/list";
+    private static final String LIST_PATH = "/sensorList";
     private static final String LIST_KEY = "list";
 
     private static final String CAPABILITY_NAME = "watch_server";
@@ -101,33 +113,46 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
     private String intentChoice;
 
-    private float [] copyValue;
+    private float[] copyValue;
 
     private String sensorName;
     private int sensorType;
+    String decision;
 
     final ArrayList<String> exceList = new ArrayList<String>();
 
     ArrayList<String> listGlobal;
 
+
     ListView sensor_list;
+    private static final int PERMISSION_REQUEST_CODE = 200;
+
+    private StartWearableActivityTask wearable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watch_data);
 
+        decision = "";
 
         sensor_list = findViewById(R.id.sensor_list_wear);
 
         intentChoice = getIntent().getStringExtra("Type");
 
-        if (intentChoice.equals("WatchList")) {
+        if (intentChoice.equals("WearSensorList")) {
 
-            ImageButton play = (findViewById(R.id.play_button));
+            Button play = (findViewById(R.id.play_button));
             play.setVisibility(View.INVISIBLE);
-            ImageButton pause = (findViewById(R.id.pause_button));
+            Button pause = (findViewById(R.id.pause_button));
             pause.setVisibility(View.INVISIBLE);
+            Wearable.getDataClient(this).addListener(this);
+            Wearable.getMessageClient(this).addListener(this);
+            Wearable.getCapabilityClient(this)
+                    .addListener(this, Uri.parse("wear://"), CapabilityClient.FILTER_REACHABLE);
+
+
 
             new StartWearableActivityTask().execute();
 
@@ -141,22 +166,28 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     protected void onResume() {
         super.onResume();
 
-        Wearable.getDataClient(this).addListener(this);
-        Wearable.getMessageClient(this).addListener(this);
-        Wearable.getCapabilityClient(this)
-                .addListener(this, Uri.parse("wear://"), CapabilityClient.FILTER_REACHABLE);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
+        decision = "stop";
         Wearable.getDataClient(this).removeListener(this);
         Wearable.getMessageClient(this).removeListener(this);
         Wearable.getCapabilityClient(this).removeListener(this);
 
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Wearable.getDataClient(this).removeListener(this);
+        Wearable.getMessageClient(this).removeListener(this);
+        Wearable.getCapabilityClient(this).removeListener(this);
+    }
 
     @Override
     public void onCapabilityChanged(@NonNull CapabilityInfo capabilityInfo) {
@@ -172,14 +203,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             if (event.getType() == DataEvent.TYPE_CHANGED) {
                 // DataItem changed
                 DataItem item = event.getDataItem();
-                if (item.getUri().getPath().equals(SENSOR_REQUEST_MESSAGE_PATH)) {
-                    DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
-                    item.getData();
-                    updateSensorWear(dataMap.getFloatArray(SENSOR_KEY));
-                    sensorName = dataMap.getString(NAME_KEY);
-                    sensorType = dataMap.getInt(TYPE_KEY);
-
-                }
 
                 if (item.getUri().getPath().equals(LIST_PATH)) {
                     DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
@@ -188,9 +211,179 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                     updateListWear(listGlobal);
 
                 }
+                if (item.getUri().getPath().equals(SENSOR_REQUEST_MESSAGE_PATH)) {
+                    DataMap dataMap = DataMapItem.fromDataItem(item).getDataMap();
+                    item.getData();
+                    switch (intentChoice) {
+                        case "WearAccelerometer":
+                            if (dataMap.getFloatArray("Accelerometer") != null) {
+                                updateSensorWear(dataMap.getFloatArray("Accelerometer"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearMagnetometer":
+                            if (dataMap.getFloatArray("Magnetometer") != null)
+                                updateSensorWear(dataMap.getFloatArray("Magnetometer"));
+                            sensorName = dataMap.getString(NAME_KEY);
+                            sensorType = dataMap.getInt(TYPE_KEY);
+                            break;
+                        case "WearGravity":
+                            if (dataMap.getFloatArray("Gravity") != null) {
+                                updateSensorWear(dataMap.getFloatArray("Gravity"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearGyroscope":
+                            if (dataMap.getFloatArray("Gyroscope") != null) {
+                                updateSensorWear(dataMap.getFloatArray("Gyroscope"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearLinearAcceleration":
+                            if (dataMap.getFloatArray("LinearAcceleration") != null) {
+                                updateSensorWear(dataMap.getFloatArray("LinearAcceleration"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearRotationVector":
+                            if (dataMap.getFloatArray("RotationVector") != null) {
+                                updateSensorWear(dataMap.getFloatArray("RotationVector"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearGame":
+                            if (dataMap.getFloatArray("Game") != null) {
+                                updateSensorWear(dataMap.getFloatArray("Game"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearGeoVector":
+                            if (dataMap.getFloatArray("Geo") != null) {
+                                updateSensorWear(dataMap.getFloatArray("Geo"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearOrientation":
+                            if (dataMap.getFloatArray("Orientation") != null) {
+                                updateSensorWear(dataMap.getFloatArray("Orientation"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearPose6Dof":
+                            if (dataMap.getFloatArray("Pose6Dof") != null) {
+                                updateSensorWear(dataMap.getFloatArray("Pose6Dof"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+
+                        case "WearLight":
+                            if (dataMap.getFloatArray("Light") != null){
+                                updateSensorWear(dataMap.getFloatArray("Light"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                    }
+                            break;
+
+                        case "WearProximity":
+                            if(dataMap.getFloatArray("Proximity")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("Proximity"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearAmbientTemperature":
+                            if(dataMap.getFloatArray("AmbientTemperature")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("AmbientTemperature"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearPressure":
+                            if(dataMap.getFloatArray("Pressure")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("Pressure"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearHumidity":
+                            if(dataMap.getFloatArray("Humidity")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("Humidity"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearStepCounter":
+                            if(dataMap.getFloatArray("StepCounter")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("StepCounter"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearTemperature":
+                            if(dataMap.getFloatArray("Temperature")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("Temperature"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearHeartRate":
+                            if(dataMap.getFloatArray("HeartRate")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("HeartRate"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearHeartBeat":
+                            if(dataMap.getFloatArray("HeartBeat")!= null)
+                            updateSensorWear(dataMap.getFloatArray("HeartBeat"));
+                            sensorName = dataMap.getString(NAME_KEY);
+                            sensorType = dataMap.getInt(TYPE_KEY);
+                            break;
+
+
+                        case "WearAccelerometerUncalibrated":
+                            if(dataMap.getFloatArray("AccelerometerUncalibrated")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("AccelerometerUncalibrated"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+                        case "WearGyroscopeUncalibrated":
+                            if(dataMap.getFloatArray("GyroscopeUncalibrated")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("GyroscopeUncalibrated"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                        }
+                            break;
+                        case "WearMagnetometerUncalibrated":
+                            if(dataMap.getFloatArray("MagnetometerUncalibrated")!= null) {
+                                updateSensorWear(dataMap.getFloatArray("MagnetometerUncalibrated"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                            }
+                            break;
+
+
+                        default:
+                            break;
+                    }
+
+
+                }
+
+
 
             } else if (event.getType() == DataEvent.TYPE_DELETED) {
-                // DataItem deleted
+                Log.i(TAG, "DATADELEETED");
             }
         }
     }
@@ -325,8 +518,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         }
 
 
-
-
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, R.layout.my_layout, listp);
 
@@ -347,57 +538,116 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
     public void playSensorDataWear(View view) {
         // mDataClient = Wearable.getDataClient(this);
-        new StartWearableActivityTask().execute();
+        decision = "start";
+        Wearable.getDataClient(this).addListener(this);
+        Wearable.getMessageClient(this).addListener(this);
+        Wearable.getCapabilityClient(this)
+                .addListener(this, Uri.parse("wear://"), CapabilityClient.FILTER_REACHABLE);
+        wearable = new StartWearableActivityTask();
+        wearable.execute();
 
     }
 
-    public void pauseSensorData(View view){
-        
+    public void pauseSensorDataWear(View view) {
+
+        decision = "stop";
+        wearable.cancel(true);
+        Wearable.getDataClient(this).removeListener(this);
+        Wearable.getMessageClient(this).removeListener(this);
+        Wearable.getCapabilityClient(this).removeListener(this);
+
+
     }
 
 
     @WorkerThread
     private void sendStartActivityMessage(String node) {
 
-
-        String msg = intentChoice;
-        byte[] msgByte = msg.getBytes();
         Task<Integer> sendMessageTask;
+        if (decision.equals("stop")) {
+            String msg = decision;
+            byte[] msgByte = msg.getBytes();
+            sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, SENSOR_REQUEST_MESSAGE_PATH, msgByte);
+            try {
+                // Block on a task and get the result synchronously (because this is on a background
+                // thread). sendMessage(START_PHONE_ACTIVITY, "");
+                Integer result = Tasks.await(sendMessageTask);
+                Log.i(TAG, "Message sent: " + result + " to " + node + msg);
 
-           if(intentChoice.equals("WearSensorList"))
-               sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, LIST_PATH, msgByte);
-           else
-               sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, SENSOR_REQUEST_MESSAGE_PATH, msgByte);
+            } catch (ExecutionException exception) {
+                Log.e(TAG, "Task failed: " + exception);
+
+            } catch (InterruptedException exception) {
+                Log.e(TAG, "Interrupt occurred: " + exception);
+            }
+        } else {
 
 
+            String msg = intentChoice;
+            byte[] msgByte = msg.getBytes();
 
-        try {
-            // Block on a task and get the result synchronously (because this is on a background
-            // thread). sendMessage(START_PHONE_ACTIVITY, "");
-            Integer result = Tasks.await(sendMessageTask);
-            Log.i(TAG, "Message sent: " + result + " to " + LIST_PATH + node);
 
-        } catch (ExecutionException exception) {
-            Log.e(TAG, "Task failed: " + exception);
+            if (intentChoice.equals("WearSensorList"))
+                sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, LIST_PATH, msgByte);
+            else
+                sendMessageTask = Wearable.getMessageClient(this).sendMessage(node, SENSOR_REQUEST_MESSAGE_PATH, msgByte);
 
-        } catch (InterruptedException exception) {
-            Log.e(TAG, "Interrupt occurred: " + exception);
+
+            try {
+                // Block on a task and get the result synchronously (because this is on a background
+                // thread). sendMessage(START_PHONE_ACTIVITY, "");
+                Integer result = Tasks.await(sendMessageTask);
+                Log.i(TAG, "Message sent: " + result + " to " + msg);
+
+            } catch (ExecutionException exception) {
+                Log.e(TAG, "Task failed: " + exception);
+
+            } catch (InterruptedException exception) {
+                Log.e(TAG, "Interrupt occurred: " + exception);
+            }
         }
     }
 
 
-
-
     private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
 
         @Override
         protected Void doInBackground(Void... args) {
+
             Collection<String> nodes = getNodes();
             for (String node : nodes) {
 
-                sendStartActivityMessage(node);
+                Log.i(TAG, "ISCANCELLED  " + isCancelled());
+                if (!isCancelled()) {
+
+                    sendStartActivityMessage(node);
+                }
             }
             return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getApplicationContext(), "Stopping...",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (!decision.equals("stop") && !intentChoice.equals("WearSensorList"))
+                new StartWearableActivityTask().execute();
+            else
+                this.cancel(true);
+
         }
     }
 
@@ -418,6 +668,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             }
 
         } catch (ExecutionException exception) {
+            Toast.makeText(this, "You have to connect your wear",
+                    Toast.LENGTH_LONG).show();
             Log.e(TAG, "Task failed: " + exception);
 
         } catch (InterruptedException exception) {
@@ -436,34 +688,75 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         return false;
     }
 
-    public void saveSensorData(View view) {
-        if (intentChoice.equals("WatchList")) {
 
-            if (isExternalStorageWritable() && listGlobal != null) {
-                ExcelSheet listSheet = new ExcelSheet(listGlobal);
-                listSheet.exportListWearToExcel();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.save_action:
+                saveSensorData();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void saveSensorData() {
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSION_REQUEST_CODE);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+
+
+            if (intentChoice.equals("WearSensorList")) {
+
+                if (isExternalStorageWritable() && listGlobal != null) {
+                    ExcelSheet listSheet = new ExcelSheet(listGlobal);
+                    listSheet.exportListWearToExcel();
+
+                } else
+                    Toast.makeText(this, "External Storage isn't writable",
+                            Toast.LENGTH_LONG).show();
+            } else if (isExternalStorageWritable() && sensorName != null && copyValue != null && exceList != null) {
+
+                ExcelSheet dataSheet = new ExcelSheet(sensorName, copyValue, exceList);
+                dataSheet.exportWearToExcel();
+                Toast.makeText(this, "Saved",
+                        Toast.LENGTH_LONG).show();
             } else
                 Toast.makeText(this, "External Storage isn't writable",
                         Toast.LENGTH_LONG).show();
-        }
-        else
-        if (isExternalStorageWritable()){
-            ExcelSheet dataSheet = new ExcelSheet(sensorName, copyValue, exceList);
-            dataSheet.exportWearToExcel();
-        }
 
-        else
-            Toast.makeText(this, "External Storage isn't writable",
-                    Toast.LENGTH_LONG).show();
-
+        }
     }
 }
-
-
-
-
-
 
 
 

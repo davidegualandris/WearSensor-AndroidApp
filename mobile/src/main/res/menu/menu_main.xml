@@ -5,10 +5,10 @@
     tools:context="om.example.lapuile.wearsensor.HomeActivity">
 
     <item
-        android:id="@+id/watch_action"
+        android:id="@+id/save_action"
         android:orderInCategory="100"
         android:title="action_watch"
-        android:icon="@drawable/watch_image"
+        android:icon="@drawable/save"
         app:showAsAction="always"
         />
 

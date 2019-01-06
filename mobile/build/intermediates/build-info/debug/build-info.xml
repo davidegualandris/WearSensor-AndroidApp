@@ -2,13 +2,13 @@
 <instant-run
     abi="arm64-v8a,armeabi-v7a,armeabi"
     api-level="26"
-    build-mode="FULL"
+    build-mode="COLD"
     density="xxhdpi"
     format="10"
     plugin-version="3.2.1"
-    timestamp="1546274726823"
+    timestamp="1546793703549"
     token="-152109609993737072"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
@@ -23,49 +23,9 @@
         name="verifier"
         duration="0" />
 
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_7.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/dep/dependencies.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_1.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/resources/instant-run/debug/resources-debug.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_2.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_3.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_8.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_9.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_5.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_6.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_4.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_0.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/instant-run-apk/debug/mobile-debug.apk"
-        type="SPLIT_MAIN" />
-
     <build
         build-mode="FULL"
-        timestamp="1546274726823"
+        timestamp="1546789714085"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_7.apk"
@@ -107,5 +67,18 @@
             location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/instant-run-apk/debug/mobile-debug.apk"
             type="SPLIT_MAIN" />
     </build>
+    <build
+        build-mode="COLD"
+        ir-eligibility="COMPATIBLE"
+        timestamp="1546793398733"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/split-apk/debug/slices/slice_0.apk"
+            type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1546793703549"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

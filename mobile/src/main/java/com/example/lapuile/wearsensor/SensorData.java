@@ -13,6 +13,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -141,6 +144,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
                 else
+
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
 
@@ -228,9 +232,9 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
             case "SensorList":
                 setContentView(R.layout.activity_sensor_data);
-                ImageButton play = (findViewById(R.id.play_button));
+                Button play = (findViewById(R.id.play_button));
                 play.setVisibility(View.INVISIBLE);
-                ImageButton pause = (findViewById(R.id.pause_button));
+                Button pause = (findViewById(R.id.pause_button));
                 pause.setVisibility(View.INVISIBLE);
                 List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
                 ListView sensorText = findViewById(R.id.sensor_list);
@@ -501,7 +505,28 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         return false;
     }
 
-    public void saveSensorData(View view) {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.menu.menu_main:
+                saveSensorData();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void saveSensorData() {
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)

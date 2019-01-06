@@ -20,7 +20,8 @@
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
-        <meta-data android:name="com.google.android.gms.version"
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.wearable.standalone"
@@ -29,18 +30,24 @@
         <service
             android:name=".WearSensorService"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+
                 <data
                     android:host="*"
                     android:pathPrefix="/sensor"
                     android:scheme="wear" />
-
             </intent-filter>
+
+        </service>
+        <service
+            android:name=".SelectWearService"
+            android:enabled="true"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+
                 <data
                     android:host="*"
                     android:pathPrefix="/list"
@@ -48,9 +55,15 @@
 
             </intent-filter>
 
+            <intent-filter>
+            <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+
+            <data
+                android:host="*"
+                android:pathPrefix="/sensorList"
+                android:scheme="wear" />
+            </intent-filter>
         </service>
-
-
     </application>
 
 </manifest>

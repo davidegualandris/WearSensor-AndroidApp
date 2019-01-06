@@ -379,6 +379,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color blue
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -387,6 +388,7 @@ color bright_foreground_material_dark
 color bright_foreground_material_light
 color button_material_dark
 color button_material_light
+color clicked
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
@@ -407,6 +409,7 @@ color dim_foreground_material_dark
 color dim_foreground_material_light
 color error_color_material_dark
 color error_color_material_light
+color focused
 color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
@@ -646,6 +649,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable button_custom
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -683,6 +687,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable pause
 drawable play
+drawable save
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable watch_image
@@ -766,6 +771,8 @@ id group_divider
 id groups
 id gyroscope_button
 id gyroscope_uncalibrated_button
+id heart_beat_button
+id heart_rate_button
 id home
 id homeAsUp
 id humidity_button
@@ -808,6 +815,7 @@ id play_button
 id pose_6_dof_button
 id position_button
 id pressure_button
+id progressBar2
 id progress_circular
 id progress_horizontal
 id proximity_button
@@ -816,7 +824,7 @@ id right
 id right_icon
 id right_side
 id rotation_vector_button
-id save_button
+id save_action
 id screen
 id scrollIndicatorDown
 id scrollIndicatorUp
@@ -873,9 +881,7 @@ id tv
 id uniform
 id up
 id useLogo
-id watch_action
 id watch_query
-id watch_sensor_button
 id watch_sensor_list_button
 id wide
 id withText

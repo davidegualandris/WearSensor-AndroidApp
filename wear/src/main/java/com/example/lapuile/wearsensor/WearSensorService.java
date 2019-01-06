@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -43,15 +44,10 @@ public class WearSensorService extends WearableListenerService implements Sensor
     private static final String DATA_ITEM_RECEIVED_PATH = "/data-item-received";
     public static final String SENSOR_PATH = "/sensor";
 
-    private static final String LIST_PATH = "/list";
-    private static final String LIST_KEY = "list";
-
-    private static final String MOTION_KEY = "motion";
-    private static final String ENVIRONMENTAL_KEY = "environmental";
-    private static final String POSITION_KEY = "position";
 
 
-    private static final String SENSOR_KEY = "sensor";
+
+    private static final String SENSOR_KEY ="sensor";
     private static final String NAME_KEY = "name";
     private static final String TYPE_KEY = "type";
 
@@ -62,16 +58,14 @@ public class WearSensorService extends WearableListenerService implements Sensor
 
 
 
-    private float[] values;
+
+
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-
-
 
 
     }
@@ -94,34 +88,13 @@ public class WearSensorService extends WearableListenerService implements Sensor
 
         Log.i(TAG, "onMessageReceived: " + choice);
 
-        if (messageEvent.getPath().equals(LIST_PATH))
-            switch (choice) {
-                case "WearMotion":
-                    sendMotionSensors();
-                    break;
-                case "WearSensorList":
-                    sensorList();
-                    break;
-                case "WearEnvironmental":
-                    sendEnvironmentalSensors();
-                    break;
-                case "WearPosition":
-                    sendPositionSensors();
-                    break;
-                default:
-                    break;
-
-
-            }
-
-
-
-
         // Check to see if the message is to start an activity
         if (messageEvent.getPath().equals(SENSOR_PATH)) {
             Log.i(TAG, "onMessageReceived: " + messageEvent);
 
             switch (choice) {
+                case "stop":
+                    mSensorManager.unregisterListener(this);
                 case "WearAccelerometer":
 
                     if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
@@ -148,7 +121,7 @@ public class WearSensorService extends WearableListenerService implements Sensor
                     if (mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null){
                         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
                         mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
-            }
+                    }
 
                     else
                         Toast.makeText(this, "Sensor you requested is probably",
@@ -360,52 +333,250 @@ public class WearSensorService extends WearableListenerService implements Sensor
             super.onMessageReceived(messageEvent);
     }
 
-    private void sendMotionSensors(){
-        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-        final ArrayList<Integer> listType = new ArrayList<Integer>();
 
 
-        for (Sensor currentSensor : sensorList) {
-
-            if(currentSensor.getType() == Sensor.TYPE_ACCELEROMETER ||
-                    currentSensor.getType() == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED ||
-                    currentSensor.getType() == Sensor.TYPE_GYROSCOPE ||
-                    currentSensor.getType() == Sensor.TYPE_GYROSCOPE_UNCALIBRATED ||
-                    currentSensor.getType() == Sensor.TYPE_GRAVITY ||
-                    currentSensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION ||
-                    currentSensor.getType() == Sensor.TYPE_ROTATION_VECTOR ||
-                    currentSensor.getType() == Sensor.TYPE_STEP_COUNTER ||
-                    currentSensor.getType() == Sensor.TYPE_HEART_RATE ||
-                    currentSensor.getType() == Sensor.TYPE_HEART_BEAT)
-                listType.add(currentSensor.getType());
-
-
-
-        }
-
-        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/list");
-        putDataMapReq.getDataMap().putIntegerArrayList(MOTION_KEY, listType);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
-        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-        putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
-        putDataTask.addOnSuccessListener(
-                new OnSuccessListener<DataItem>() {
-                    @Override
-                    public void onSuccess(DataItem dataItem) {
-                        Log.i(TAG, "Sending VALUES was successful: " + dataItem + listType);
-                    }
-                });
-
-
-    }
-
-    private void sensorData() {
+    private void sensorData(float [] values, int type, String name) {
         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/sensor");
+
         putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
-        putDataMapReq.getDataMap().putFloatArray(SENSOR_KEY, values);
-        putDataMapReq.getDataMap().putInt(TYPE_KEY, mSensor.getType());
-        putDataMapReq.getDataMap().putString(NAME_KEY, mSensor.getName());
+        switch (choice) {
+            case "stop":
+                mSensorManager.unregisterListener(this);
+            case "WearAccelerometer":
+
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
+                    if(type == Sensor.TYPE_ACCELEROMETER) {
+                        putDataMapReq.getDataMap().putFloatArray("Accelerometer", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+
+                break;
+            case "WearMagnetometer":
+
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null)
+                    if(type == Sensor.TYPE_MAGNETIC_FIELD) {
+                        putDataMapReq.getDataMap().putFloatArray("Magnetometer", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+
+            case "WearGravity":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null)
+                    if(type == Sensor.TYPE_GRAVITY) {
+                        putDataMapReq.getDataMap().putFloatArray("Gravity", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearGyroscope":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null)
+                    if(type == Sensor.TYPE_GYROSCOPE) {
+                        putDataMapReq.getDataMap().putFloatArray("Gyroscope", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearLinearAcceleration":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null)
+                    if(type == Sensor.TYPE_LINEAR_ACCELERATION){
+                        putDataMapReq.getDataMap().putFloatArray("LinearAcceleration", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+            }
+                break;
+
+            case "WearLight":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null)
+                    if(type == Sensor.TYPE_LIGHT) {
+                        putDataMapReq.getDataMap().putFloatArray("Light", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearProximity":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) != null)
+                    if(type == Sensor.TYPE_PROXIMITY) {
+                        putDataMapReq.getDataMap().putFloatArray("Proximity", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearAmbientTemperature":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null)
+                    if(type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+                        putDataMapReq.getDataMap().putFloatArray("AmbientTemperature", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearPressure":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) != null)
+                    if(type == Sensor.TYPE_PRESSURE) {
+                        putDataMapReq.getDataMap().putFloatArray("Pressure", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+
+                break;
+            case "WearHumidity":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) != null)
+                    if(type == Sensor.TYPE_RELATIVE_HUMIDITY) {
+                        putDataMapReq.getDataMap().putFloatArray("Humidity", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearRotationVector":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null)
+                    if(type == Sensor.TYPE_ROTATION_VECTOR) {
+                        putDataMapReq.getDataMap().putFloatArray("RotationVector", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearTemperature":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null)
+                    if(type == Sensor.TYPE_TEMPERATURE) {
+                        putDataMapReq.getDataMap().putFloatArray("Temperature", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+            case "WearGame":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null)
+                    if(type == Sensor.TYPE_GAME_ROTATION_VECTOR) {
+                        putDataMapReq.getDataMap().putFloatArray("Game", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearGeoVector":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null)
+                    if(type == Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) {
+                        putDataMapReq.getDataMap().putFloatArray("Geo", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+
+            case "WearOrientation":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null)
+                    if(type == Sensor.TYPE_ORIENTATION) {
+                        putDataMapReq.getDataMap().putFloatArray("Orientation", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearAccelerometerUncalibrated":
+
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) != null)
+                    if(type == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) {
+                        putDataMapReq.getDataMap().putFloatArray("AccelerometerUncalibrated", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+
+                break;
+            case "WearGyroscopeUncalibrated":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED) != null)
+                    if(type == Sensor.TYPE_GYROSCOPE_UNCALIBRATED) {
+                        putDataMapReq.getDataMap().putFloatArray("GyroscopeUncalibrated", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearStepCounter":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
+                    if(type == Sensor.TYPE_STEP_COUNTER) {
+                        putDataMapReq.getDataMap().putFloatArray("StepCounter", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearMagnetometerUncalibrated":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED) != null)
+                    if(type == Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED) {
+                        putDataMapReq.getDataMap().putFloatArray("MagnetometerUncalibrated", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+
+            case "WearPose6Dof":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF) != null)
+                    if(type == Sensor.TYPE_POSE_6DOF) {
+                        putDataMapReq.getDataMap().putFloatArray("Pose6Dof", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearHeartRate":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null)
+                    if(type == Sensor.TYPE_HEART_RATE) {
+                        putDataMapReq.getDataMap().putFloatArray("HeartRate", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                break;
+            case "WearHeartBeat":
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_BEAT) != null)
+                    if(type == Sensor.TYPE_HEART_BEAT) {
+                        putDataMapReq.getDataMap().putFloatArray("HeartBeat", values);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
+
+                    }
+
+                    break;
+
+
+                    default:
+                        break;
+
+                }
+
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
         Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
@@ -422,115 +593,12 @@ public class WearSensorService extends WearableListenerService implements Sensor
 
 
 
-    private void sendPositionSensors(){
-        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-        final ArrayList<Integer> listType = new ArrayList<Integer>();
 
-
-
-
-        for (Sensor currentSensor : sensorList) {
-
-            if(currentSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD ||
-                    currentSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED ||
-                    currentSensor.getType() == Sensor.TYPE_PROXIMITY ||
-                    currentSensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR ||
-                    currentSensor.getType() == Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR ||
-                    currentSensor.getType() == Sensor.TYPE_ORIENTATION ||
-                    currentSensor.getType() == Sensor.TYPE_POSE_6DOF)
-                listType.add(currentSensor.getType());
-
-
-
-        }
-
-        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/list");
-        putDataMapReq.getDataMap().putIntegerArrayList(POSITION_KEY, listType);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
-        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-        putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
-        putDataTask.addOnSuccessListener(
-                new OnSuccessListener<DataItem>() {
-                    @Override
-                    public void onSuccess(DataItem dataItem) {
-                        Log.i(TAG, "Sending VALUES was successful: " + dataItem + listType);
-                    }
-                });
-
-
-    }
-
-    private void sendEnvironmentalSensors(){
-        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-        final ArrayList<Integer> listType = new ArrayList<Integer>();
-
-
-
-
-        for (Sensor currentSensor : sensorList) {
-
-            if(currentSensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE ||
-                    currentSensor.getType() == Sensor.TYPE_LIGHT ||
-                    currentSensor.getType() == Sensor.TYPE_PRESSURE ||
-                    currentSensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY ||
-                    currentSensor.getType() == Sensor.TYPE_TEMPERATURE )
-                listType.add(currentSensor.getType());
-
-
-
-        }
-
-        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/list");
-        putDataMapReq.getDataMap().putIntegerArrayList(ENVIRONMENTAL_KEY, listType);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
-        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-        putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
-        putDataTask.addOnSuccessListener(
-                new OnSuccessListener<DataItem>() {
-                    @Override
-                    public void onSuccess(DataItem dataItem) {
-                        Log.i(TAG, "Sending VALUES was successful: " + dataItem + listType);
-                    }
-                });
-
-
-    }
-
-
-
-
-    private void sensorList() {
-        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-        final ArrayList<String> listp = new ArrayList<String>();
-
-
-        for (Sensor currentSensor : sensorList) {
-
-            listp.add(currentSensor.getName());
-
-
-       }
-
-        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/list");
-        putDataMapReq.getDataMap().putStringArrayList(LIST_KEY, listp);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
-        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-        putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
-        putDataTask.addOnSuccessListener(
-                new OnSuccessListener<DataItem>() {
-                    @Override
-                    public void onSuccess(DataItem dataItem) {
-                        Log.i(TAG, "Sending VALUES was successful: " + dataItem+ listp);
-                    }
-                });
-    }
     @Override
     public void onSensorChanged(SensorEvent event) {
-        values = event.values;
-        sensorData();
+
+
+        sensorData(event.values, event.sensor.getType(), event.sensor.getName());
     }
 
     @Override
