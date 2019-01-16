@@ -33,6 +33,9 @@
         <activity android:name="com.example.lapuile.wearsensor.SelectActivity" />
         <activity android:name="com.example.lapuile.wearsensor.SensorData" />
         <activity android:name="com.example.lapuile.wearsensor.WatchDataActivity" />
+
+        <service android:name="com.example.lapuile.wearsensor.WatchDataActivity$StartWearableActivityService" />
+
         <activity android:name="com.example.lapuile.wearsensor.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

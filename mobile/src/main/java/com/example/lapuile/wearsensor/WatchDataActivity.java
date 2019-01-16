@@ -3,6 +3,8 @@ package com.example.lapuile.wearsensor;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.IntentService;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +12,7 @@ import android.hardware.Sensor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.IBinder;
 import android.renderscript.Element;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -127,7 +130,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     ListView sensor_list;
     private static final int PERMISSION_REQUEST_CODE = 200;
 
-    private StartWearableActivityTask wearable;
+
 
 
     @Override
@@ -151,6 +154,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             Wearable.getMessageClient(this).addListener(this);
             Wearable.getCapabilityClient(this)
                     .addListener(this, Uri.parse("wear://"), CapabilityClient.FILTER_REACHABLE);
+
 
 
 
@@ -543,20 +547,93 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         Wearable.getMessageClient(this).addListener(this);
         Wearable.getCapabilityClient(this)
                 .addListener(this, Uri.parse("wear://"), CapabilityClient.FILTER_REACHABLE);
-        wearable = new StartWearableActivityTask();
-        wearable.execute();
+        new StartWearableActivityTask().execute();
 
     }
 
     public void pauseSensorDataWear(View view) {
 
         decision = "stop";
-        wearable.cancel(true);
+        new StartWearableActivityTask().execute();
         Wearable.getDataClient(this).removeListener(this);
         Wearable.getMessageClient(this).removeListener(this);
         Wearable.getCapabilityClient(this).removeListener(this);
 
 
+    }
+
+
+
+/*
+    private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... args) {
+
+            Collection<String> nodes = getNodes();
+            for (String node : nodes) {
+
+                Log.i(TAG, "ISCANCELLED  " + isCancelled());
+                if (!isCancelled()) {
+
+                    sendStartActivityMessage(node);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getApplicationContext(), "Stopping...",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (!decision.equals("stop") && !intentChoice.equals("WearSensorList"))
+                new StartWearableActivityTask().execute();
+            else
+                this.cancel(true);
+
+        }
+    }
+    */
+
+    @WorkerThread
+    private Collection<String> getNodes() {
+        HashSet<String> results = new HashSet<>();
+
+        Task<List<Node>> nodeListTask =
+                Wearable.getNodeClient(getApplicationContext()).getConnectedNodes();
+
+        try {
+            // Block on a task and get the result synchronously (because this is on a background
+            // thread).
+            List<Node> nodes = Tasks.await(nodeListTask);
+
+            for (Node node : nodes) {
+                results.add(node.getId());
+            }
+
+        } catch (ExecutionException exception) {
+            Toast.makeText(this, "You have to connect your wear",
+                    Toast.LENGTH_LONG).show();
+            Log.e(TAG, "Task failed: " + exception);
+
+        } catch (InterruptedException exception) {
+            Log.e(TAG, "Interrupt occurred: " + exception);
+        }
+
+        return results;
     }
 
 
@@ -609,6 +686,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     }
 
 
+
     private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
 
 
@@ -643,41 +721,17 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (!decision.equals("stop") && !intentChoice.equals("WearSensorList"))
-                new StartWearableActivityTask().execute();
-            else
-                this.cancel(true);
+
+
 
         }
     }
 
-    @WorkerThread
-    private Collection<String> getNodes() {
-        HashSet<String> results = new HashSet<>();
 
-        Task<List<Node>> nodeListTask =
-                Wearable.getNodeClient(getApplicationContext()).getConnectedNodes();
 
-        try {
-            // Block on a task and get the result synchronously (because this is on a background
-            // thread).
-            List<Node> nodes = Tasks.await(nodeListTask);
 
-            for (Node node : nodes) {
-                results.add(node.getId());
-            }
 
-        } catch (ExecutionException exception) {
-            Toast.makeText(this, "You have to connect your wear",
-                    Toast.LENGTH_LONG).show();
-            Log.e(TAG, "Task failed: " + exception);
 
-        } catch (InterruptedException exception) {
-            Log.e(TAG, "Interrupt occurred: " + exception);
-        }
-
-        return results;
-    }
 
 
     public boolean isExternalStorageWritable() {
