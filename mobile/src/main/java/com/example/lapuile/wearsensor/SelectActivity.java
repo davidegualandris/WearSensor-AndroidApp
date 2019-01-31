@@ -58,7 +58,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
     private static final String ENVIRONMENTAL_KEY = "environmental";
     private static final String POSITION_KEY = "position";
 
-    private ProgressBar progressBar;
+
     private Button accelerometer;
     private Button accelerometerUncalibrated;
     private Button magnetometer;
@@ -90,6 +90,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
         setContentView(R.layout.activity_select);
         choice = getIntent().getStringExtra("Type");
         Log.i(TAG, "CHOICE : " + choice);
+
 
 
 
@@ -768,12 +769,10 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
 
     private class StartWearableActivityTask extends AsyncTask<Void, Integer, String> {
 
-        int progress;
+
         @Override
         protected void onPreExecute() {
-            progress = 0;
-            progressBar = (ProgressBar) findViewById(R.id.progressBar2);
-            progressBar.setVisibility(View.VISIBLE);
+
 
             super.onPreExecute();
         }
@@ -784,7 +783,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
 
             if(nodes.isEmpty())
                 return null;
-            progressBar.setMax(100);
+
             for (String node : nodes) {
 
                 sendStartActivityMessage(node);
@@ -809,7 +808,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             if(node == null)
                 Toast.makeText(getApplicationContext(), "You have to connect your wear",
                         Toast.LENGTH_LONG).show();
-            progressBar.setVisibility(View.INVISIBLE);
+
 
         }
     }

@@ -54,21 +54,13 @@ public class WearSensorService extends WearableListenerService {
 
     private String choice;
 
-    private Thread backgroundThread;
 
-
-    private boolean register;
-
-
-    private boolean running;
-
-
-    Handler mHandler;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
+
 
 
     }

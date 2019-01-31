@@ -2,6 +2,7 @@ package com.example.lapuile.wearsensor;
 
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
+import android.nfc.Tag;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ExcelSheet {
         sensorName = name;
         sensorValue = value;
         dataSensorList = dataSensorPass;
+        Log.i( TAG, dataSensorPass.get(0));
 
     }
 
@@ -53,7 +55,7 @@ public class ExcelSheet {
             sensorDir.mkdirs();
 
 
-        final String dirName = "List of sensors";
+        final String dirName = "List of Phone sensors";
 
 
 
@@ -179,13 +181,20 @@ public class ExcelSheet {
         if(!sensorDir.exists())
             sensorDir.mkdirs();
 
+        File phoneDir = new File(sensorDir, "PhoneSensor");
+
+        if(!phoneDir.exists())
+            phoneDir.mkdirs();
+
+
+
 
         final String dirName = sensorName;
 
 
 
         //file path
-        File directory = new File(sensorDir, dirName);
+        File directory = new File(phoneDir, dirName);
 
         if(!directory.exists())
             directory.mkdirs();
@@ -207,14 +216,18 @@ public class ExcelSheet {
                 WritableSheet sheet = workbook.createSheet(sensorName, 0);
 
                 try {
-                    int row = 0;
-                    for (int i = 0; i < sensorValue.length && i < dataSensorList.size(); i++) {
+                    sheet.addCell(new Label(0,0 , sensorName));
+
+                    int row = 1;
+                    for (int i = 1; i < dataSensorList.size(); i++) {
+
+                        String[] splitted = dataSensorList.get(i).split(":");
 
 
+                        sheet.addCell(new Label(0, row, splitted[0])); // column and row
 
-                        sheet.addCell(new Label(0, row, dataSensorList.get(i))); // column and row
 
-                        sheet.addCell(new Number(1, row, sensorValue[i]));
+                        sheet.addCell(new Label(1, row, splitted[1]));
                         row++;
 
                     }
@@ -266,6 +279,7 @@ public class ExcelSheet {
         if (!directory.mkdirs()) {
             Log.e(TAG, "Directory not created");
 
+
             WorkbookSettings wbSettings = new WorkbookSettings();
             wbSettings.setLocale(new Locale("en", "EN"));
             WritableWorkbook workbook;
@@ -277,14 +291,17 @@ public class ExcelSheet {
 
 
                 try {
-                    int row = 0;
-                    for (int i = 0; i < sensorValue.length && i < dataSensorList.size(); i++) {
+                    sheet.addCell(new Label(0,0 , sensorName));
+                    int row = 1;
+                    for (int i = 1; i < dataSensorList.size(); i++) {
+
+                        String[] splitted = dataSensorList.get(i).split(":");
 
 
+                        sheet.addCell(new Label(0, row, splitted[0])); // column and row
 
-                        sheet.addCell(new Label(0, row, dataSensorList.get(i))); // column and row
 
-                        sheet.addCell(new Number(1, row, sensorValue[i]));
+                        sheet.addCell(new Label(1, row, splitted[1]));
                         row++;
 
                     }

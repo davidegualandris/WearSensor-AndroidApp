@@ -122,7 +122,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     private int sensorType;
     String decision;
 
-    final ArrayList<String> exceList = new ArrayList<String>();
+    ArrayList<String> exceList = new ArrayList<String>();
 
     ArrayList<String> listGlobal;
 
@@ -402,124 +402,138 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     }
 
 
-    private void updateSensorWear(float[] values) {
-        copyValue = values;
+    private void updateSensorWear(float[] sensorData) {
+        copyValue = sensorData;
         final ArrayList<String> listp = new ArrayList<String>();
 
         switch (sensorType) {
 
             case Sensor.TYPE_ACCELEROMETER:
-            case Sensor.TYPE_MAGNETIC_FIELD:
-            case Sensor.TYPE_GRAVITY:
-            case Sensor.TYPE_GYROSCOPE:
             case Sensor.TYPE_LINEAR_ACCELERATION:
+            case Sensor.TYPE_GRAVITY:
+
+                listp.add(getString(R.string.acc_grav_x_text, sensorData[0]));
+                listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[1]));
+                listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[2]));
+                break;
+
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                listp.add(getString(R.string.magnetic_field_x_text, sensorData[0]));
+                listp.add(getString(R.string.magnetic_field_y_text, sensorData[1]));
+                listp.add(getString(R.string.magnetic_field_z_text, sensorData[2]));
+                break;
+
+            case Sensor.TYPE_GYROSCOPE:
+                listp.add(getString(R.string.gyroscope_x_text, sensorData[0]));
+                listp.add(getString(R.string.gyroscope_y_text, sensorData[1]));
+                listp.add(getString(R.string.gyroscope_z_text, sensorData[2]));
+                break;
+
             case Sensor.TYPE_ROTATION_VECTOR:
             case Sensor.TYPE_GAME_ROTATION_VECTOR:
             case Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR:
+
+                listp.add(getResources().getString(R.string.rotation_vector_text_x, sensorData[0]));
+                listp.add(getResources().getString(R.string.rotation_vector_text_y, sensorData[1]));
+                listp.add(getResources().getString(R.string.rotation_vector_text_z, sensorData[2]));
+                listp.add(getResources().getString(R.string.rotation_vector_cos, sensorData[3]));
+
+
+
+                if(Sensor.TYPE_GAME_ROTATION_VECTOR != sensorType)
+                    listp.add(getResources().getString(R.string.rotation_vector_estimated, sensorData[4]));
+
+                break;
             case Sensor.TYPE_ORIENTATION:
-                listp.add(getResources().getString(R.string.x_text, values[0]));
-                listp.add(getResources().getString(R.string.y_text, values[1]));
-                listp.add(getResources().getString(R.string.z_text, values[2]));
-                exceList.add(getResources().getString(R.string.excel_x_text));
-                exceList.add(getResources().getString(R.string.excel_y_text));
-                exceList.add(getResources().getString(R.string.excel_z_text));
+                listp.add(getString(R.string.orientation_x_text, sensorData[0]));
+                listp.add(getString(R.string.orientation_y_text, sensorData[1]));
+                listp.add(getString(R.string.orientation_z_text, sensorData[2]));
+
                 break;
 
             case Sensor.TYPE_LIGHT:
+                listp.add(getString(R.string.light_text, sensorData[0]));
+                break;
             case Sensor.TYPE_PROXIMITY:
-            case Sensor.TYPE_AMBIENT_TEMPERATURE:
+                listp.add(getString(R.string.proximity, sensorData[0]));
+                break;
+
             case Sensor.TYPE_PRESSURE:
+                listp.add(getString(R.string.pressure_text, sensorData[0]));
+                break;
             case Sensor.TYPE_RELATIVE_HUMIDITY:
+                listp.add(getString(R.string.humidity_text, sensorData[0])+ "%");
+                break;
             case Sensor.TYPE_STEP_COUNTER:
+                listp.add(getString(R.string.step_counter_text, sensorData[0]));
+                break;
             case Sensor.TYPE_TEMPERATURE:
+            case Sensor.TYPE_AMBIENT_TEMPERATURE:
+                listp.add(getString(R.string.ambient_temperature, sensorData[0]));
+                break;
             case Sensor.TYPE_HEART_RATE:
+                listp.add(getString(R.string.heart_rate_text, sensorData[0]));
+                break;
             case Sensor.TYPE_HEART_BEAT:
-                listp.add(getResources().getString(R.string.onedimension_text, values[0]));
-                exceList.add(getResources().getString(R.string.excel_onedimension_text));
+                listp.add(getString(R.string.onedimension_text, sensorData[0]));
                 break;
 
             case Sensor.TYPE_ACCELEROMETER_UNCALIBRATED:
-                listp.add(getResources().getString(R.string.x_text, values[0]));
-                listp.add(getResources().getString(R.string.y_text, values[1]));
-                listp.add(getResources().getString(R.string.z_text, values[2]));
-                exceList.add(getResources().getString(R.string.excel_x_text));
-                exceList.add(getResources().getString(R.string.excel_y_text));
-                exceList.add(getResources().getString(R.string.excel_z_text));
-                listp.add(getResources().getString(R.string.acc_unc_x, values[3]));
-                listp.add(getResources().getString(R.string.acc_unc_y, values[4]));
-                listp.add(getResources().getString(R.string.acc_unc_x, values[5]));
-                exceList.add(getResources().getString(R.string.excel_acc_unc_x));
-                exceList.add(getResources().getString(R.string.excel_acc_unc_y));
-                exceList.add(getResources().getString(R.string.excel_acc_unc_x));
+                listp.add(getResources().getString(R.string.acc_unc_x, sensorData[0]));
+                listp.add(getResources().getString(R.string.acc_unc_y, sensorData[1]));
+                listp.add(getResources().getString(R.string.acc_unc_z, sensorData[2]));
+
+                listp.add(getResources().getString(R.string.acc_unc_x_2, sensorData[3]));
+                listp.add(getResources().getString(R.string.acc_unc_y_2, sensorData[4]));
+                listp.add(getResources().getString(R.string.acc_unc_z_2, sensorData[5]));
+
                 break;
 
             case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
-                listp.add(getResources().getString(R.string.x_text, values[0]));
-                listp.add(getResources().getString(R.string.y_text, values[1]));
-                listp.add(getResources().getString(R.string.z_text, values[2]));
-                exceList.add(getResources().getString(R.string.excel_x_text));
-                exceList.add(getResources().getString(R.string.excel_y_text));
-                exceList.add(getResources().getString(R.string.excel_z_text));
-                listp.add(getResources().getString(R.string.gyrosc_unc_x, values[3]));
-                listp.add(getResources().getString(R.string.gyrosc_unc_y, values[4]));
-                listp.add(getResources().getString(R.string.gyrosc_unc_z, values[5]));
-                exceList.add(getResources().getString(R.string.excel_gyrosc_unc_x));
-                exceList.add(getResources().getString(R.string.excel_gyrosc_unc_y));
-                exceList.add(getResources().getString(R.string.excel_gyrosc_unc_z));
+                listp.add(getResources().getString(R.string.gyrosc_unc_x, sensorData[0]));
+                listp.add(getResources().getString(R.string.gyrosc_unc_y, sensorData[1]));
+                listp.add(getResources().getString(R.string.gyrosc_unc_z, sensorData[2]));
+
+
+                listp.add(getResources().getString(R.string.gyrosc_unc_x_2, sensorData[3]));
+                listp.add(getResources().getString(R.string.gyrosc_unc_y_2, sensorData[4]));
+                listp.add(getResources().getString(R.string.gyrosc_unc_z_2, sensorData[5]));
+
             case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
-                listp.add(getResources().getString(R.string.x_text, values[0]));
-                listp.add(getResources().getString(R.string.y_text, values[1]));
-                listp.add(getResources().getString(R.string.z_text, values[2]));
-                exceList.add(getResources().getString(R.string.excel_x_text));
-                exceList.add(getResources().getString(R.string.excel_y_text));
-                exceList.add(getResources().getString(R.string.excel_z_text));
-                listp.add(getResources().getString(R.string.magnet_unc_x, values[3]));
-                listp.add(getResources().getString(R.string.magnet_unc_y, values[4]));
-                listp.add(getResources().getString(R.string.magnet_unc_z, values[5]));
-                exceList.add(getResources().getString(R.string.excel_magnet_unc_x));
-                exceList.add(getResources().getString(R.string.excel_magnet_unc_y));
-                exceList.add(getResources().getString(R.string.excel_magnet_unc_z));
+                listp.add(getResources().getString(R.string.magnet_unc_x, sensorData[0]));
+                listp.add(getResources().getString(R.string.magnet_unc_y, sensorData[1]));
+                listp.add(getResources().getString(R.string.magnet_unc_z, sensorData[2]));
+
+                listp.add(getResources().getString(R.string.magnet_unc_x_2, sensorData[3]));
+                listp.add(getResources().getString(R.string.magnet_unc_y_2, sensorData[4]));
+                listp.add(getResources().getString(R.string.magnet_unc_z_2, sensorData[5]));
+
 
                 break;
 
             case Sensor.TYPE_POSE_6DOF:
-                listp.add(getResources().getString(R.string.x_text, values[0]));
-                listp.add(getResources().getString(R.string.y_text, values[1]));
-                listp.add(getResources().getString(R.string.z_text, values[2]));
-                listp.add(getResources().getString(R.string.pose_6_dof_cos, values[3]));
-                listp.add(getResources().getString(R.string.translation_along_x, values[4]));
-                listp.add(getResources().getString(R.string.translation_along_y, values[5]));
-                listp.add(getResources().getString(R.string.translation_along_z, values[6]));
-                listp.add(getResources().getString(R.string.delta_quat_x, values[7]));
-                listp.add(getResources().getString(R.string.delta_quat_y, values[8]));
-                listp.add(getResources().getString(R.string.delta_quat_z, values[9]));
-                listp.add(getResources().getString(R.string.delta_quat_rot_cos, values[10]));
-                listp.add(getResources().getString(R.string.delta_transl_x, values[11]));
-                listp.add(getResources().getString(R.string.delta_transl_y, values[12]));
-                listp.add(getResources().getString(R.string.delta_transl_z, values[13]));
-                listp.add(getResources().getString(R.string.sequence_number, values[14]));
+                listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[0]));
+                listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[1]));
+                listp.add(getResources().getString(R.string.acc_grav_x_text, sensorData[2]));
+                listp.add(getResources().getString(R.string.pose_6_dof_cos, sensorData[3]));
+                listp.add(getResources().getString(R.string.translation_along_x, sensorData[4]));
+                listp.add(getResources().getString(R.string.translation_along_y, sensorData[5]));
+                listp.add(getResources().getString(R.string.translation_along_z, sensorData[6]));
+                listp.add(getResources().getString(R.string.delta_quat_x, sensorData[7]));
+                listp.add(getResources().getString(R.string.delta_quat_y, sensorData[8]));
+                listp.add(getResources().getString(R.string.delta_quat_z, sensorData[9]));
+                listp.add(getResources().getString(R.string.delta_quat_rot_cos, sensorData[10]));
+                listp.add(getResources().getString(R.string.delta_transl_x, sensorData[11]));
+                listp.add(getResources().getString(R.string.delta_transl_y, sensorData[12]));
+                listp.add(getResources().getString(R.string.delta_transl_z, sensorData[13]));
+                listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
 
-
-                exceList.add(getResources().getString(R.string.excel_x_text));
-                exceList.add(getResources().getString(R.string.excel_y_text));
-                exceList.add(getResources().getString(R.string.excel_z_text));
-                exceList.add(getResources().getString(R.string.excel_pose_6_dof_cos));
-                exceList.add(getResources().getString(R.string.excel_translation_along_x));
-                exceList.add(getResources().getString(R.string.excel_translation_along_y));
-                exceList.add(getResources().getString(R.string.excel_translation_along_z));
-                exceList.add(getResources().getString(R.string.excel_delta_quat_x));
-                exceList.add(getResources().getString(R.string.excel_delta_quat_y));
-                exceList.add(getResources().getString(R.string.excel_delta_quat_z));
-                exceList.add(getResources().getString(R.string.excel_delta_quat_rot_cos));
-                exceList.add(getResources().getString(R.string.excel_delta_transl_x));
-                exceList.add(getResources().getString(R.string.excel_delta_transl_y));
-                exceList.add(getResources().getString(R.string.excel_delta_transl_z));
-                exceList.add(getResources().getString(R.string.excel_sequence_number));
                 break;
 
             default:
                 break;
         }
+        exceList = listp;
 
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -564,49 +578,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
 
 
-/*
-    private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
 
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... args) {
-
-            Collection<String> nodes = getNodes();
-            for (String node : nodes) {
-
-                Log.i(TAG, "ISCANCELLED  " + isCancelled());
-                if (!isCancelled()) {
-
-                    sendStartActivityMessage(node);
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-            Toast.makeText(getApplicationContext(), "Stopping...",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if (!decision.equals("stop") && !intentChoice.equals("WearSensorList"))
-                new StartWearableActivityTask().execute();
-            else
-                this.cancel(true);
-
-        }
-    }
-    */
 
     @WorkerThread
     private Collection<String> getNodes() {

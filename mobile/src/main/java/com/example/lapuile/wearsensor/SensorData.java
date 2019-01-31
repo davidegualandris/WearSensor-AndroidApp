@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,16 +32,19 @@ import jxl.Sheet;
 
 public class SensorData extends AppCompatActivity implements SensorEventListener {
 
-    private  SensorManager mSensorManager;
+    private SensorManager mSensorManager;
 
     private Sensor mSensor;
 
     ListView sensor_list;
+    TextView sensor_description;
 
     private static final int PERMISSION_REQUEST_CODE = 200;
 
 
-    final ArrayList<String> exceList = new ArrayList<String>();
+    ArrayList<String> exceList = new ArrayList<String>();
+
+
     private float[] copyValue;
     final ArrayList<String> listList = new ArrayList<String>();
 
@@ -53,27 +57,27 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
         sensor_list = (findViewById(R.id.sensor_list));
 
-
-
-
+        sensor_description = findViewById(R.id.sensor_description);
 
         switch (getStringIntent()) {
 
             case "Accelerometer":
 
-                   if(mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
-                        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-                   else
-                       Toast.makeText(this, "Sensor you requested is probably broken",
-                               Toast.LENGTH_LONG).show();
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+                    sensor_description.setText(R.string.accelerometer_description);
+                }
+                else
+                    Toast.makeText(this, "Sensor you requested is probably broken",
+                            Toast.LENGTH_LONG).show();
                 break;
             case "Magnetometer":
 
-                    if(mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null)
-                        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-                    else
-                        Toast.makeText(this, "Sensor you requested is probably broken",
-                                Toast.LENGTH_LONG).show();
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null)
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+                else
+                    Toast.makeText(this, "Sensor you requested is probably broken",
+                            Toast.LENGTH_LONG).show();
                 break;
 
             case "Gravity":
@@ -172,11 +176,11 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 break;
             case "AccelerometerUncalibrated":
 
-                if(mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED)!= null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) != null)
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED);
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
-                                Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();
 
                 break;
             case "GyroscopeUncalibrated":
@@ -213,18 +217,14 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "HeartRate":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
-                }
-
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "HeartBeat":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_BEAT);
-                }
-
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -242,12 +242,12 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
                 for (Sensor currentSensor : sensorList) {
 
-                    listList.add(currentSensor.getName());
+                    exceList.add(currentSensor.getName());
                 }
 
 
                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                        (this, R.layout.my_layout, listList);
+                        (this, R.layout.my_layout, exceList);
 
                 sensorText.setAdapter(adapter);
 
@@ -257,8 +257,6 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             default:
                 break;
         }
-
-
 
 
     }
@@ -292,94 +290,165 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 */
 
 
-    private void printData(float[] sensorData, final ArrayList<String> listp, boolean single) {
-
-        if(getStringIntent().equals("Pose6Dof")){
-            listp.add(getResources().getString(R.string.x_text, sensorData[0]));
-            listp.add(getResources().getString(R.string.y_text, sensorData[1]));
-            listp.add(getResources().getString(R.string.z_text, sensorData[2]));
-            listp.add(getResources().getString(R.string.pose_6_dof_cos, sensorData[3]));
-            listp.add(getResources().getString(R.string.translation_along_x, sensorData[4]));
-            listp.add(getResources().getString(R.string.translation_along_y, sensorData[5]));
-            listp.add(getResources().getString(R.string.translation_along_z, sensorData[6]));
-            listp.add(getResources().getString(R.string.delta_quat_x, sensorData[7]));
-            listp.add(getResources().getString(R.string.delta_quat_y, sensorData[8]));
-            listp.add(getResources().getString(R.string.delta_quat_z, sensorData[9]));
-            listp.add(getResources().getString(R.string.delta_quat_rot_cos, sensorData[10]));
-            listp.add(getResources().getString(R.string.delta_transl_x, sensorData[11]));
-            listp.add(getResources().getString(R.string.delta_transl_y, sensorData[12]));
-            listp.add(getResources().getString(R.string.delta_transl_z, sensorData[13]));
-            listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
+    private void printData(float[] sensorData, final ArrayList<String> listp) {
 
 
-            exceList.add(getResources().getString(R.string.excel_x_text));
-            exceList.add(getResources().getString(R.string.excel_y_text));
-            exceList.add(getResources().getString(R.string.excel_z_text));
-            exceList.add(getResources().getString(R.string.excel_pose_6_dof_cos));
-            exceList.add(getResources().getString(R.string.excel_translation_along_x));
-            exceList.add(getResources().getString(R.string.excel_translation_along_y));
-            exceList.add(getResources().getString(R.string.excel_translation_along_z));
-            exceList.add(getResources().getString(R.string.excel_delta_quat_x));
-            exceList.add(getResources().getString(R.string.excel_delta_quat_y));
-            exceList.add(getResources().getString(R.string.excel_delta_quat_z));
-            exceList.add(getResources().getString(R.string.excel_delta_quat_rot_cos));
-            exceList.add(getResources().getString(R.string.excel_delta_transl_x));
-            exceList.add(getResources().getString(R.string.excel_delta_transl_y));
-            exceList.add(getResources().getString(R.string.excel_delta_transl_z));
-            exceList.add(getResources().getString(R.string.excel_sequence_number));
+        switch (getStringIntent()) {
+            case "Pose6Dof":
+
+                listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[0]));
+                listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[1]));
+                listp.add(getResources().getString(R.string.acc_grav_x_text, sensorData[2]));
+                listp.add(getResources().getString(R.string.pose_6_dof_cos, sensorData[3]));
+                listp.add(getResources().getString(R.string.translation_along_x, sensorData[4]));
+                listp.add(getResources().getString(R.string.translation_along_y, sensorData[5]));
+                listp.add(getResources().getString(R.string.translation_along_z, sensorData[6]));
+                listp.add(getResources().getString(R.string.delta_quat_x, sensorData[7]));
+                listp.add(getResources().getString(R.string.delta_quat_y, sensorData[8]));
+                listp.add(getResources().getString(R.string.delta_quat_z, sensorData[9]));
+                listp.add(getResources().getString(R.string.delta_quat_rot_cos, sensorData[10]));
+                listp.add(getResources().getString(R.string.delta_transl_x, sensorData[11]));
+                listp.add(getResources().getString(R.string.delta_transl_y, sensorData[12]));
+                listp.add(getResources().getString(R.string.delta_transl_z, sensorData[13]));
+                listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
+
+
+
+                break;
+            case "Accelerometer":
+            case "Gravity":
+            case "LinearAcceleration":
+
+
+                listp.add(getString(R.string.acc_grav_x_text, sensorData[0]));
+                listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[1]));
+                listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[2]));
+
+                break;
+            case "RotationVector":
+            case "Game":
+            case "GeoVector":
+
+                listp.add(getResources().getString(R.string.rotation_vector_text_x, sensorData[0]));
+                listp.add(getResources().getString(R.string.rotation_vector_text_y, sensorData[1]));
+                listp.add(getResources().getString(R.string.rotation_vector_text_z, sensorData[2]));
+                listp.add(getResources().getString(R.string.rotation_vector_cos, sensorData[3]));
+
+
+                if(!getStringIntent().equals("Game")) {
+                    listp.add(getResources().getString(R.string.rotation_vector_estimated, sensorData[4]));
+
+
+            }
+
+
+                break;
+
+
+            case "Gyroscope":
+                listp.add(getString(R.string.gyroscope_x_text, sensorData[0]));
+                listp.add(getString(R.string.gyroscope_y_text, sensorData[1]));
+                listp.add(getString(R.string.gyroscope_z_text, sensorData[2]));
+
+                break;
+            case "Magnetometer":
+                listp.add(getString(R.string.magnetic_field_x_text, sensorData[0]));
+                listp.add(getString(R.string.magnetic_field_y_text, sensorData[1]));
+                listp.add(getString(R.string.magnetic_field_z_text, sensorData[2]));
+
+                break;
+            case "Pressure":
+                listp.add(getString(R.string.pressure_text, sensorData[0]));
+
+                break;
+            case "Humidity":
+                listp.add(getString(R.string.humidity_text, sensorData[0])+ "%");
+
+                break;
+
+            case "Orientation":
+                listp.add(getString(R.string.orientation_x_text, sensorData[0]));
+                listp.add(getString(R.string.orientation_y_text, sensorData[1]));
+                listp.add(getString(R.string.orientation_z_text, sensorData[2]));
+
+                break;
+            case "Proximity":
+                listp.add(getString(R.string.proximity, sensorData[0]));
+
+                break;
+            case "StepCounter":
+                listp.add(getString(R.string.step_counter_text, sensorData[0]));
+
+                break;
+            case "AmbientTemperature":
+            case "Temperature":
+                listp.add(getString(R.string.ambient_temperature, sensorData[0]));
+
+                break;
+            case "Light":
+                listp.add(getString(R.string.light_text, sensorData[0]));
+
+                break;
+            case "HeartRate":
+                listp.add(getString(R.string.heart_rate_text, sensorData[0]));
+
+                break;
+            case "HeartBeat":
+                listp.add(getString(R.string.onedimension_text, sensorData[0]));
+
+                break;
+            default:
+                break;
+
+
 
         }
 
-
-        if (single) {
-            listp.add(getResources().getString(R.string.onedimension_text, sensorData[0]));
-            exceList.add(getResources().getString(R.string.excel_onedimension_text));
-        }
-        else {
-            listp.add(getResources().getString(R.string.x_text, sensorData[0]));
-            listp.add(getResources().getString(R.string.y_text, sensorData[1]));
-            listp.add(getResources().getString(R.string.z_text, sensorData[2]));
-            exceList.add(getResources().getString(R.string.excel_x_text));
-            exceList.add(getResources().getString(R.string.excel_y_text));
-            exceList.add(getResources().getString(R.string.excel_z_text));
-
-        }
+        exceList = listp;
 
     }
+
 
     private void printDataUncalibrated(float[] sensorData, final ArrayList<String> listp) {
 
 
-        listp.add(getResources().getString(R.string.x_text, sensorData[0]));
-        listp.add(getResources().getString(R.string.y_text, sensorData[1]));
-        listp.add(getResources().getString(R.string.z_text, sensorData[2]));
-        exceList.add(getResources().getString(R.string.excel_x_text));
-        exceList.add(getResources().getString(R.string.excel_y_text));
-        exceList.add(getResources().getString(R.string.excel_z_text));
         if (getStringIntent().equals("AccelerometerUncalibrated")) {
-            listp.add(getResources().getString(R.string.acc_unc_x, sensorData[3]));
-            listp.add(getResources().getString(R.string.acc_unc_y, sensorData[4]));
-            listp.add(getResources().getString(R.string.acc_unc_x, sensorData[5]));
-            exceList.add(getResources().getString(R.string.excel_acc_unc_x));
-            exceList.add(getResources().getString(R.string.excel_acc_unc_y));
-            exceList.add(getResources().getString(R.string.excel_acc_unc_x));
+
+            listp.add(getResources().getString(R.string.acc_unc_x, sensorData[0]));
+            listp.add(getResources().getString(R.string.acc_unc_y, sensorData[1]));
+            listp.add(getResources().getString(R.string.acc_unc_z, sensorData[2]));
+
+            listp.add(getResources().getString(R.string.acc_unc_x_2, sensorData[3]));
+            listp.add(getResources().getString(R.string.acc_unc_y_2, sensorData[4]));
+            listp.add(getResources().getString(R.string.acc_unc_z_2, sensorData[5]));
+
         } else if (getStringIntent().equals("GyroscopeUncalibrated")) {
-            listp.add(getResources().getString(R.string.gyrosc_unc_x, sensorData[3]));
-            listp.add(getResources().getString(R.string.gyrosc_unc_y, sensorData[4]));
-            listp.add(getResources().getString(R.string.gyrosc_unc_z, sensorData[5]));
-            exceList.add(getResources().getString(R.string.excel_gyrosc_unc_x));
-            exceList.add(getResources().getString(R.string.excel_gyrosc_unc_y));
-            exceList.add(getResources().getString(R.string.excel_gyrosc_unc_z));
+            listp.add(getResources().getString(R.string.gyrosc_unc_x, sensorData[0]));
+            listp.add(getResources().getString(R.string.gyrosc_unc_y, sensorData[1]));
+            listp.add(getResources().getString(R.string.gyrosc_unc_z, sensorData[2]));
+
+
+            listp.add(getResources().getString(R.string.gyrosc_unc_x_2, sensorData[3]));
+            listp.add(getResources().getString(R.string.gyrosc_unc_y_2, sensorData[4]));
+            listp.add(getResources().getString(R.string.gyrosc_unc_z_2, sensorData[5]));
+
+
 
         } else {
-            listp.add(getResources().getString(R.string.magnet_unc_x, sensorData[3]));
-            listp.add(getResources().getString(R.string.magnet_unc_y, sensorData[4]));
-            listp.add(getResources().getString(R.string.magnet_unc_z, sensorData[5]));
-            exceList.add(getResources().getString(R.string.excel_magnet_unc_x));
-            exceList.add(getResources().getString(R.string.excel_magnet_unc_y));
-            exceList.add(getResources().getString(R.string.excel_magnet_unc_z));
+            listp.add(getResources().getString(R.string.magnet_unc_x, sensorData[0]));
+            listp.add(getResources().getString(R.string.magnet_unc_y, sensorData[1]));
+            listp.add(getResources().getString(R.string.magnet_unc_z, sensorData[2]));
+
+            listp.add(getResources().getString(R.string.magnet_unc_x_2, sensorData[3]));
+            listp.add(getResources().getString(R.string.magnet_unc_y_2, sensorData[4]));
+            listp.add(getResources().getString(R.string.magnet_unc_z_2, sensorData[5]));
+
+
 
         }
+        exceList = listp;
+
+
     }
 
 
@@ -426,7 +495,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
 
                 listp.add(mSensor.getName());
-                printData(event.values, listp, single);
+                printData(event.values, listp);
                 copyValue = event.values;
                 break;
 
@@ -439,9 +508,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "Temperature":
             case "HeartRate":
             case "HeartBeat":
-                single = true;
                 listp.add(mSensor.getName());
-                printData(event.values, listp, single);
+                printData(event.values, listp);
                 copyValue = event.values;
                 break;
 
@@ -458,7 +526,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 break;
         }
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this,R.layout.my_layout, listp);
+                (this, R.layout.my_layout, listp);
 
         sensor_list.setAdapter(adapter);
 
@@ -468,13 +536,13 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-        if(accuracy == mSensorManager.SENSOR_STATUS_NO_CONTACT){
+        if (accuracy == mSensorManager.SENSOR_STATUS_NO_CONTACT) {
             Toast.makeText(this, "Tighten band and try again",
                     Toast.LENGTH_LONG).show();
 
         }
 
-        if(accuracy == mSensorManager.SENSOR_STATUS_UNRELIABLE){
+        if (accuracy == mSensorManager.SENSOR_STATUS_UNRELIABLE) {
             Toast.makeText(this, "The value returned by this sensor cannot be trusted",
                     Toast.LENGTH_LONG).show();
 
@@ -484,13 +552,10 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     }
 
 
-
     public void playSensorData(View view) {
-            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-        }
-
-
+    }
 
 
     public void pauseSensorData(View view) {
@@ -518,7 +583,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.menu.menu_main:
+            case R.id.save_action:
                 saveSensorData();
                 return true;
             default:
@@ -551,10 +616,10 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             }
         } else {
 
-            if(isExternalStorageWritable()) {
+            if (isExternalStorageWritable()) {
 
                 if (getStringIntent().equals("SensorList")) {
-                    ExcelSheet Sheet = new ExcelSheet(listList);
+                    ExcelSheet Sheet = new ExcelSheet(exceList);
                     Sheet.exportListToExcel();
                 } else {
                     if (copyValue != null) {
@@ -564,17 +629,14 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                         Toast.makeText(this, "Play sensor data before!",
                                 Toast.LENGTH_LONG).show();
                 }
-            }
-            else
+            } else
                 Toast.makeText(this, "External Storage isn't writable",
                         Toast.LENGTH_LONG).show();
 
 
-
         }
 
-        }
-
+    }
 
 
 }

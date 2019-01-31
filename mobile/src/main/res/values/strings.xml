@@ -4,18 +4,50 @@
     <string name="accelerometer_button_text">Accelerometer</string>
 
 
-    <string name="x_text">on x: %1$.2f</string>
-    <string name="y_text">on y: %1$.2f</string>
-    <string name="z_text">on z: %1$.2f</string>
-    <string name="excel_x_text">on x</string>
-    <string name="excel_y_text">on y</string>
-    <string name="excel_z_text">on z</string>
+    <string name="acc_grav_x_text">on x: %1$.2f m/s²</string>
+    <string name="acc_grav_y_text">on y: %1$.2f m/s²</string>
+    <string name="acc_grav_z_text">on z: %1$.2f m/s²</string>
+
+    <string name="gyroscope_x_text">on x: %1$.2f rad/s</string>
+    <string name="gyroscope_y_text">on y: %1$.2f rad/s</string>
+    <string name="gyroscope_z_text">on z: %1$.2f rad/s</string>
+
+    <string name="ambient_temperature">degrees: %1$.2f C°</string>
+    <string name="excel_ambient_temperature">temperature</string>
+
+
+    <string name="light_text">light: %1$.2f lx </string>
+
+
+    <string name="proximity">proximity: %1$.2f cm </string>
+
+
+    <string name="pressure_text">pressure: %1$.2f mbar </string>
+
+    <string name="humidity_text">humidity: %1$.2f </string>
+
+
+
+
+
+    <string name="orientation_x_text">on x: %1$.2f °</string>
+    <string name="orientation_y_text">on y: %1$.2f °</string>
+    <string name="orientation_z_text">on z: %1$.2f °</string>
+
+    <string name="magnetic_field_x_text">on x: %1$.2f μT</string>
+    <string name="magnetic_field_y_text">on y: %1$.2f μT</string>
+    <string name="magnetic_field_z_text">on z: %1$.2f μT</string>
+
+
+
+
     <string name="onedimension_text">value: %1$.2f</string>
-    <string name="excel_onedimension_text">value</string>
-    <string name="error_string">Il device non possiede questo sensore</string>
+    <string name="heart_rate_text">value: %1$.2f BPM</string>
+
+    <string name="error_sensor_not_present_text">Sensor is not installed on this device</string>
 
     <string name="magnetometer_text">Magnetometer</string>
-    <string name="gravity_text">GRAVITY</string>
+    <string name="gravity_text">GRAVITY </string>
     <string name="gyroscope_button_text">gyroscope</string>
     <string name="linear_acceleration_button_text">LINEAR ACCELERATION</string>
     <string name="light_button_text">Light</string>
@@ -29,54 +61,54 @@
     <string name="accelerometer_uncalibrated_text">accelerometer \n uncalibrated</string>
     <string name="gyroscope_uncalibrated_text">gyroscope \n uncalibrated</string>
 
-    <string name="acc_unc_x">on x with estimated bias compensation :%1$.2f </string>
-    <string name="acc_unc_y">on y with estimated bias compensation :%1$.2f </string>
-    <string name="acc_unc_z">on z with estimated bias compensation :%1$.2f </string>
+    <string name="acc_unc_x">on x without bias compensation: %1$.2f m/s² </string>
+    <string name="acc_unc_y">on y without bias compensation: %1$.2f m/s²</string>
+    <string name="acc_unc_z">on z without bias compensation: %1$.2f m/s²</string>
+    <string name="acc_unc_x_2">on x with estimated bias compensation: %1$.2f m/s² </string>
+    <string name="acc_unc_y_2">on y with estimated bias compensation: %1$.2f m/s²</string>
+    <string name="acc_unc_z_2">on z with estimated bias compensation: %1$.2f m/s²</string>
 
-    <string name="excel_acc_unc_x">on x with estimated bias compensation </string>
-    <string name="excel_acc_unc_y">on y with estimated bias compensation </string>
-    <string name="excel_acc_unc_z">on z with estimated bias compensation </string>
 
-    <string name="gyrosc_unc_x">Estimated drift around the x axis :%1$.2f </string>
-    <string name="gyrosc_unc_y">Estimated drift around the y axis :%1$.2f </string>
-    <string name="gyrosc_unc_z">Estimated drift around the z axis :%1$.2f </string>
 
-    <string name="excel_gyrosc_unc_x">Estimated drift around the x axis </string>
-    <string name="excel_gyrosc_unc_y">Estimated drift around the y axis </string>
-    <string name="excel_gyrosc_unc_z">Estimated drift around the z axis </string>
+    <string name="gyrosc_unc_x">angular speed around x: %1$.2f rad/s</string>
+    <string name="gyrosc_unc_y">angular speed around y: %1$.2f rad/s</string>
+    <string name="gyrosc_unc_z">angular speed around z: %1$.2f rad/s</string>
+
+
+    <string name="gyrosc_unc_x_2">Estimated drift around x: %1$.2f rad/s</string>
+    <string name="gyrosc_unc_y_2">Estimated drift around y: %1$.2f rad/s</string>
+    <string name="gyrosc_unc_z_2">Estimated drift around z: %1$.2f rad/s</string>
+
+
+
 
     <string name="step_counter_button_text">step counter</string>
 
-    <string name="magnet_unc_x">Iron bias estimation along x axis :%1$.2f </string>
-    <string name="magnet_unc_y">Iron bias estimation along y axis :%1$.2f </string>
-    <string name="magnet_unc_z">Iron bias estimation along z axis :%1$.2f </string>
-
-    <string name="excel_magnet_unc_x">Iron bias estimation along x axis </string>
-    <string name="excel_magnet_unc_y">Iron bias estimation along y axis </string>
-    <string name="excel_magnet_unc_z">Iron bias estimation along z axis </string>
+    <string name="step_counter_text">steps: %1$.2f </string>
 
 
-    <string name="sensor_list_button_text">sensor avaiable</string>
+    <string name="magnet_unc_x">along x axis: %1$.2f </string>
+    <string name="magnet_unc_y">along y axis: %1$.2f </string>
+    <string name="magnet_unc_z">along z axis: %1$.2f </string>
+
+    <string name="magnet_unc_x_2">Iron bias estimation along x axis: %1$.2f </string>
+    <string name="magnet_unc_y_2">Iron bias estimation along y axis: %1$.2f </string>
+    <string name="magnet_unc_z_2">Iron bias estimation along z axis: %1$.2f </string>
+
+    <string name="rotation_vector_text_x">x*sin(θ/2): %1$.2f </string>
+    <string name="rotation_vector_text_y">y*sin(θ/2): %1$.2f </string>
+    <string name="rotation_vector_text_z">z*sin(θ/2): %1$.2f </string>
+    <string name="rotation_vector_cos">cos(θ/2): %1$.2f </string>
+    <string name="rotation_vector_estimated">estimated heading Accuracy: %1$.2f rad</string>
+
+
+
+
+    <string name="sensor_list_button_text">sensor available</string>
 
     <string name="pose_6_dof_text_button">pose 6 dof</string>
 
-    <string name="excel_pose_6_dof_cos">cos(θ/2)</string>
-    <string name="excel_translation_along_x">Translation along x axis from an arbitrary origin </string>
-    <string name="excel_translation_along_y">Translation along y axis from an arbitrary origin </string>
-    <string name="excel_translation_along_z">Translation along z axis from an arbitrary origin </string>
 
-    <string name="excel_delta_quat_x">Delta quaternion rotation x*sin(θ/2) </string>
-    <string name="excel_delta_quat_y">Delta quaternion rotation y*sin(θ/2) </string>
-    <string name="excel_delta_quat_z">Delta quaternion rotation z*sin(θ/2) </string>
-
-    <string name="excel_delta_quat_rot_cos">Delta quaternion rotation cos(θ/2) </string>
-
-
-    <string name="excel_delta_transl_x">Delta translation along x axis </string>
-    <string name="excel_delta_transl_y">Delta translation along y axis </string>
-    <string name="excel_delta_transl_z">Delta translation along z axis </string>
-
-    <string name="excel_sequence_number">Sequence number </string>
 
 
     <string name="pose_6_dof_cos">cos(θ/2) : %1$.2f</string>
@@ -84,18 +116,18 @@
     <string name="translation_along_y">Translation along y axis from an arbitrary origin : %1$.2f</string>
     <string name="translation_along_z">Translation along z axis from an arbitrary origin : %1$.2f</string>
 
-    <string name="delta_quat_x">Delta quaternion rotation x*sin(θ/2) : %1$.2f</string>
-    <string name="delta_quat_y">Delta quaternion rotation y*sin(θ/2) : %1$.2f</string>
-    <string name="delta_quat_z">Delta quaternion rotation z*sin(θ/2) : %1$.2f</string>
+    <string name="delta_quat_x">Delta quaternion rotation x*sin(θ/2): %1$.2f</string>
+    <string name="delta_quat_y">Delta quaternion rotation y*sin(θ/2): %1$.2f</string>
+    <string name="delta_quat_z">Delta quaternion rotation z*sin(θ/2): %1$.2f</string>
 
-    <string name="delta_quat_rot_cos">Delta quaternion rotation cos(θ/2)  : %1$.2f</string>
+    <string name="delta_quat_rot_cos">Delta quaternion rotation cos(θ/2): %1$.2f</string>
 
 
-    <string name="delta_transl_x">Delta translation along x axis : %1$.2f</string>
-    <string name="delta_transl_y">Delta translation along y axis : %1$.2f</string>
-    <string name="delta_transl_z">Delta translation along z axis : %1$.2f</string>
+    <string name="delta_transl_x">Delta translation along x axis: %1$.2f</string>
+    <string name="delta_transl_y">Delta translation along y axis: %1$.2f</string>
+    <string name="delta_transl_z">Delta translation along z axis: %1$.2f</string>
 
-    <string name="sequence_number">Sequence number : %1$.2f </string>
+    <string name="sequence_number">Sequence number: %1$.2f </string>
 
     <string name="connected_nodes">Nodes: %1$s</string>
 
@@ -103,4 +135,9 @@
     <string name="watch_sensors_list">Watch sensors list</string>
     <string name="query_watch_sensors">query watch sensors</string>
     <string name="query_sensors">query watch sensors</string>
+
+
+    <string name="accelerometer_description">Measures the acceleration force in m/s² that
+        is applied to a deviceon all three physical axes (x, y, and z),
+        including the force of gravity.</string>
 </resources>

@@ -43,6 +43,8 @@ public class WearDataService extends Service implements SensorEventListener {
     @Override
     public void onDestroy() {
         kill = true;
+        mSensorManager.unregisterListener(this);
+
         super.onDestroy();
     }
 
@@ -262,7 +264,7 @@ public class WearDataService extends Service implements SensorEventListener {
 
 
 
-        public WearHandler(String intent) {
+        private WearHandler(String intent) {
 
             choice = intent;
             kill = false;
@@ -270,7 +272,7 @@ public class WearDataService extends Service implements SensorEventListener {
         }
 
 
-        public void handleData() {
+        private void handleData() {
 
             mHandler.post(new Runnable() {
                 @Override
