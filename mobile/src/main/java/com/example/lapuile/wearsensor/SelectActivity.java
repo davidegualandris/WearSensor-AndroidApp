@@ -57,6 +57,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
     private static final String MOTION_KEY = "motion";
     private static final String ENVIRONMENTAL_KEY = "environmental";
     private static final String POSITION_KEY = "position";
+    private boolean success;
 
 
     private Button accelerometer;
@@ -805,7 +806,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
         @Override
         protected void onPostExecute(String node) {
             super.onPostExecute(node);
-            if(node == null)
+            if(!success || node == null)
                 Toast.makeText(getApplicationContext(), "You have to connect your wear",
                         Toast.LENGTH_LONG).show();
 
@@ -815,6 +816,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
 
     @WorkerThread
     private Collection<String> getNodes() {
+        success = true;
         HashSet<String> results = new HashSet<>();
 
         Task<List<Node>> nodeListTask =
@@ -830,8 +832,9 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             }
 
         } catch (ExecutionException exception) {
-            Toast.makeText(this, "You have to connect your wear",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "You have to connect your wear",
+                 //   Toast.LENGTH_LONG).show();
+            success = false;
             Log.e(TAG, "Task failed: " + exception);
 
         } catch (InterruptedException exception) {

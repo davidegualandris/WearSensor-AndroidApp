@@ -138,6 +138,115 @@
 
 
     <string name="accelerometer_description">Measures the acceleration force in m/s² that
-        is applied to a deviceon all three physical axes (x, y, and z),
+        is applied to a device on all three physical axes (x, y, and z),
         including the force of gravity.</string>
+
+    <string name="magnetometer_description">Measures the ambient geomagnetic field
+        for all three physical axes (x, y, z) in μT.</string>
+
+    <string name="gravity_description">Measures the force of gravity in m/s²
+        that is applied to a device on all three physical axes (x, y, z).</string>
+
+    <string name="gyroscope_description">Measures rate of device of rotation in rad/s around
+        each of the three physical axes (x, y, and z).</string>
+
+    <string name="linear_acceleration_description">Measures the acceleration force in m/s²
+        that is applied to a device on all three physical axes (x, y, and z),
+        excluding the force of gravity.</string>
+
+    <string name="light_description">Measures the ambient light level (illumination) in lx.</string>
+
+    <string name="proximity_description">Measures the proximity of an object in cm
+        relative to the view screen of a device.
+        This sensor is typically used to determine whether a handset is being held up to a person\'s ear.</string>
+
+    <string name="ambient_t_description">Measures the ambient room temperature in degrees Celsius (°C).</string>
+
+    <string name="pressure_description">Measures the ambient air pressure in hPa or mbar.</string>
+
+    <string name="humidity_description">Measures the relative ambient humidity in percent (%).</string>
+
+    <string name="rotation_vector_description">Measures the orientation of a device
+        by providing the three elements of the device\'s rotation vector.</string>
+
+    <string name="temperature_description">Measures the temperature of the device in degrees Celsius (°C).
+        This sensor implementation varies across devices and
+        this sensor was replaced with the TYPE_AMBIENT_TEMPERATURE sensor in API Level 14</string>
+
+
+    <string name="game_description">The game rotation vector Measures the orientation of a device
+        by providing the three elements of the device\'s rotation vector,
+        except it does not use the geomagnetic field.
+        Therefore the Y axis does not point north but instead to some other reference.
+        That reference is allowed to drift by the same order of magnitude as the gyroscope drifts around the Z axis.</string>
+
+
+    <string name="geo_vector_description">The geomagnetic rotation vector sensor is similar to the Rotation vector sensor:
+        measures the orientation of a device
+        by providing the three elements of the device\'s rotation vector,
+        but it uses a magnetometer instead of a gyroscope.
+        The accuracy of this sensor is lower than the normal rotation vector sensor, but the power consumption is reduced.</string>
+
+
+
+    <string name="orientation_description">Measures degrees of rotation that a device makes around all three physical axes (x, y, z).
+        As of API level 3 you can obtain the inclination matrix and
+        rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor
+        in conjunction with the getRotationMatrix() method.</string>
+
+
+
+
+    <string name="acc_unc_description"> Measures the acceleration force in m/s² that
+        is applied to a device. Factory calibration and temperature compensation
+        will still be applied to the "uncalibrated" measurement.
+        x_uncalib, y_uncalib, z_uncalib are the measured acceleration in X, Y, Z axes similar to the Sensor.TYPE_ACCELEROMETER,
+        without any bias correction (factory bias compensation and any temperature compensation is allowed).
+        x_bias, y_bias, z_bias are the estimated biases.</string>
+
+
+    <string name="gyrosc_unc_description">All values are in radians/second and measure the rate of rotation around the X, Y and Z axis.
+        An estimation of the drift on each axis is reported as well.
+        No gyro-drift compensation is performed.
+        Factory calibration and temperature compensation is still applied to the rate of rotation (angular speeds).</string>
+
+    <string name="step_counter_description">The step counter sensor provides the number of steps taken by the user since
+        the last reboot while the sensor was activated..</string>
+
+
+    <string name="magnet_unc_description">Similar to Sensor.TYPE_MAGNETIC_FIELD, but the hard iron
+        calibration is reported separately instead of being included in the measurement.
+        Factory calibration and temperature compensation will still be applied to the uncalibrated measurement.
+        Assumptions that the magnetic field is due to the Earth\'s poles is avoided.</string>
+
+
+    <string name="pose_6dof_description">A TYPE_POSE_6DOF event consists of a rotation expressed as a quaternion
+        and a translation expressed in SI units.
+        The event also contains a delta rotation and translation that show how the device
+        pose has changed since the previous sequence numbered pose. The event uses the canonical Android Sensor axes.</string>
+
+
+
+    <string name="heart_rate_description">The reported value is the heart rate in beats per minute.</string>
+
+    <string name="heart_beat_description">A sensor of this type returns an event everytime a hear beat peak is detected.
+        Peak here ideally corresponds to the positive peak in the QRS complex of an ECG signal.
+    values[0]: confidence
+    A confidence value of 0.0 indicates complete uncertainty - that a peak is as likely to be at the indicated timestamp as anywhere else. A confidence value of 1.0 indicates complete certainly
+        - that a peak is completely unlikely to be anywhere else on the QRS complex.</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

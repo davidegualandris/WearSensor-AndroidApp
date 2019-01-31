@@ -33,6 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -117,9 +118,11 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     private String intentChoice;
 
     private float[] copyValue;
+    TextView sensor_description;
 
     private String sensorName;
     private int sensorType;
+    private String description;
     String decision;
 
     ArrayList<String> exceList = new ArrayList<String>();
@@ -131,8 +134,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     private static final int PERMISSION_REQUEST_CODE = 200;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +142,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         decision = "";
 
         sensor_list = findViewById(R.id.sensor_list_wear);
+        //sensor_description = findViewById(R.id.sensor_description);
 
         intentChoice = getIntent().getStringExtra("Type");
 
@@ -154,8 +156,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             Wearable.getMessageClient(this).addListener(this);
             Wearable.getCapabilityClient(this)
                     .addListener(this, Uri.parse("wear://"), CapabilityClient.FILTER_REACHABLE);
-
-
 
 
             new StartWearableActivityTask().execute();
@@ -224,19 +224,23 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                                 updateSensorWear(dataMap.getFloatArray("Accelerometer"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.accelerometer_description);
                             }
                             break;
                         case "WearMagnetometer":
-                            if (dataMap.getFloatArray("Magnetometer") != null)
+                            if (dataMap.getFloatArray("Magnetometer") != null) {
                                 updateSensorWear(dataMap.getFloatArray("Magnetometer"));
-                            sensorName = dataMap.getString(NAME_KEY);
-                            sensorType = dataMap.getInt(TYPE_KEY);
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.magnetometer_description);
+                            }
                             break;
                         case "WearGravity":
                             if (dataMap.getFloatArray("Gravity") != null) {
                                 updateSensorWear(dataMap.getFloatArray("Gravity"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.gravity_description);
                             }
                             break;
                         case "WearGyroscope":
@@ -244,6 +248,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                                 updateSensorWear(dataMap.getFloatArray("Gyroscope"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.gyroscope_description);
                             }
                             break;
                         case "WearLinearAcceleration":
@@ -251,6 +256,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                                 updateSensorWear(dataMap.getFloatArray("LinearAcceleration"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.linear_acceleration_description);
                             }
                             break;
                         case "WearRotationVector":
@@ -258,6 +264,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                                 updateSensorWear(dataMap.getFloatArray("RotationVector"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.rotation_vector_description);
                             }
                             break;
                         case "WearGame":
@@ -265,13 +272,16 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                                 updateSensorWear(dataMap.getFloatArray("Game"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.game_description);
                             }
                             break;
                         case "WearGeoVector":
                             if (dataMap.getFloatArray("Geo") != null) {
+
                                 updateSensorWear(dataMap.getFloatArray("Geo"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.geo_vector_description);
                             }
                             break;
                         case "WearOrientation":
@@ -279,6 +289,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                                 updateSensorWear(dataMap.getFloatArray("Orientation"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.orientation_description);
                             }
                             break;
                         case "WearPose6Dof":
@@ -286,93 +297,110 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                                 updateSensorWear(dataMap.getFloatArray("Pose6Dof"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.pose_6dof_description);
                             }
                             break;
 
                         case "WearLight":
-                            if (dataMap.getFloatArray("Light") != null){
+                            if (dataMap.getFloatArray("Light") != null) {
                                 updateSensorWear(dataMap.getFloatArray("Light"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
-                    }
+                                description = getString(R.string.light_description);
+                            }
                             break;
 
                         case "WearProximity":
-                            if(dataMap.getFloatArray("Proximity")!= null) {
+                            if (dataMap.getFloatArray("Proximity") != null) {
                                 updateSensorWear(dataMap.getFloatArray("Proximity"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.proximity_description);
                             }
                             break;
                         case "WearAmbientTemperature":
-                            if(dataMap.getFloatArray("AmbientTemperature")!= null) {
+                            if (dataMap.getFloatArray("AmbientTemperature") != null) {
                                 updateSensorWear(dataMap.getFloatArray("AmbientTemperature"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.ambient_t_description);
                             }
                             break;
                         case "WearPressure":
-                            if(dataMap.getFloatArray("Pressure")!= null) {
+                            if (dataMap.getFloatArray("Pressure") != null) {
                                 updateSensorWear(dataMap.getFloatArray("Pressure"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.pressure_description);
                             }
                             break;
                         case "WearHumidity":
-                            if(dataMap.getFloatArray("Humidity")!= null) {
+                            if (dataMap.getFloatArray("Humidity") != null) {
                                 updateSensorWear(dataMap.getFloatArray("Humidity"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.humidity_description);
                             }
                             break;
                         case "WearStepCounter":
-                            if(dataMap.getFloatArray("StepCounter")!= null) {
+                            if (dataMap.getFloatArray("StepCounter") != null) {
                                 updateSensorWear(dataMap.getFloatArray("StepCounter"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.step_counter_description);
                             }
                             break;
                         case "WearTemperature":
-                            if(dataMap.getFloatArray("Temperature")!= null) {
+                            if (dataMap.getFloatArray("Temperature") != null) {
                                 updateSensorWear(dataMap.getFloatArray("Temperature"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.temperature_description);
                             }
                             break;
                         case "WearHeartRate":
-                            if(dataMap.getFloatArray("HeartRate")!= null) {
+                            if (dataMap.getFloatArray("HeartRate") != null) {
                                 updateSensorWear(dataMap.getFloatArray("HeartRate"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.heart_rate_description);
                             }
                             break;
                         case "WearHeartBeat":
-                            if(dataMap.getFloatArray("HeartBeat")!= null)
-                            updateSensorWear(dataMap.getFloatArray("HeartBeat"));
-                            sensorName = dataMap.getString(NAME_KEY);
-                            sensorType = dataMap.getInt(TYPE_KEY);
+                            if (dataMap.getFloatArray("HeartBeat") != null) {
+                                updateSensorWear(dataMap.getFloatArray("HeartBeat"));
+                                sensorName = dataMap.getString(NAME_KEY);
+                                sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.heart_beat_description);
+                            }
+
                             break;
 
 
                         case "WearAccelerometerUncalibrated":
-                            if(dataMap.getFloatArray("AccelerometerUncalibrated")!= null) {
+                            if (dataMap.getFloatArray("AccelerometerUncalibrated") != null) {
                                 updateSensorWear(dataMap.getFloatArray("AccelerometerUncalibrated"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+
+                                description = getString(R.string.acc_unc_description);
                             }
                             break;
                         case "WearGyroscopeUncalibrated":
-                            if(dataMap.getFloatArray("GyroscopeUncalibrated")!= null) {
+                            if (dataMap.getFloatArray("GyroscopeUncalibrated") != null) {
+
                                 updateSensorWear(dataMap.getFloatArray("GyroscopeUncalibrated"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
-                        }
+                                description = getString(R.string.gyrosc_unc_description);
+                            }
                             break;
                         case "WearMagnetometerUncalibrated":
-                            if(dataMap.getFloatArray("MagnetometerUncalibrated")!= null) {
+                            if (dataMap.getFloatArray("MagnetometerUncalibrated") != null) {
                                 updateSensorWear(dataMap.getFloatArray("MagnetometerUncalibrated"));
                                 sensorName = dataMap.getString(NAME_KEY);
                                 sensorType = dataMap.getInt(TYPE_KEY);
+                                description = getString(R.string.magnet_unc_description);
                             }
                             break;
 
@@ -383,7 +411,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
 
                 }
-
 
 
             } else if (event.getType() == DataEvent.TYPE_DELETED) {
@@ -406,16 +433,20 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         copyValue = sensorData;
         final ArrayList<String> listp = new ArrayList<String>();
 
+        listp.add(sensorName);
+
         switch (sensorType) {
 
             case Sensor.TYPE_ACCELEROMETER:
             case Sensor.TYPE_LINEAR_ACCELERATION:
             case Sensor.TYPE_GRAVITY:
 
+
                 listp.add(getString(R.string.acc_grav_x_text, sensorData[0]));
                 listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[1]));
                 listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[2]));
                 break;
+
 
             case Sensor.TYPE_MAGNETIC_FIELD:
                 listp.add(getString(R.string.magnetic_field_x_text, sensorData[0]));
@@ -439,8 +470,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getResources().getString(R.string.rotation_vector_cos, sensorData[3]));
 
 
-
-                if(Sensor.TYPE_GAME_ROTATION_VECTOR != sensorType)
+                if (Sensor.TYPE_GAME_ROTATION_VECTOR != sensorType)
                     listp.add(getResources().getString(R.string.rotation_vector_estimated, sensorData[4]));
 
                 break;
@@ -462,7 +492,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getString(R.string.pressure_text, sensorData[0]));
                 break;
             case Sensor.TYPE_RELATIVE_HUMIDITY:
-                listp.add(getString(R.string.humidity_text, sensorData[0])+ "%");
+                listp.add(getString(R.string.humidity_text, sensorData[0]) + "%");
                 break;
             case Sensor.TYPE_STEP_COUNTER:
                 listp.add(getString(R.string.step_counter_text, sensorData[0]));
@@ -498,6 +528,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getResources().getString(R.string.gyrosc_unc_x_2, sensorData[3]));
                 listp.add(getResources().getString(R.string.gyrosc_unc_y_2, sensorData[4]));
                 listp.add(getResources().getString(R.string.gyrosc_unc_z_2, sensorData[5]));
+                break;
 
             case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
                 listp.add(getResources().getString(R.string.magnet_unc_x, sensorData[0]));
@@ -533,8 +564,9 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             default:
                 break;
         }
+        listp.add(description);
         exceList = listp;
-
+        //MODIFICARE FILE EXCEL CON DESCRIZIONE
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, R.layout.my_layout, listp);
@@ -575,9 +607,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
 
     }
-
-
-
 
 
     @WorkerThread
@@ -658,7 +687,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     }
 
 
-
     private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
 
 
@@ -695,15 +723,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             super.onPostExecute(aVoid);
 
 
-
         }
     }
-
-
-
-
-
-
 
 
     public boolean isExternalStorageWritable() {

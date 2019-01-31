@@ -35,9 +35,14 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     private SensorManager mSensorManager;
 
     private Sensor mSensor;
+    private String mSensorName;
+    private float[] copyValue;
+    private String description;
+
 
     ListView sensor_list;
     TextView sensor_description;
+
 
     private static final int PERMISSION_REQUEST_CODE = 200;
 
@@ -45,7 +50,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     ArrayList<String> exceList = new ArrayList<String>();
 
 
-    private float[] copyValue;
+
     final ArrayList<String> listList = new ArrayList<String>();
 
     @Override
@@ -57,7 +62,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
         sensor_list = (findViewById(R.id.sensor_list));
 
-        sensor_description = findViewById(R.id.sensor_description);
+        //sensor_description = findViewById(R.id.sensor_description);
 
         switch (getStringIntent()) {
 
@@ -65,7 +70,9 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-                    sensor_description.setText(R.string.accelerometer_description);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.accelerometer_description);
+
                 }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
@@ -73,141 +80,203 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 break;
             case "Magnetometer":
 
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.magnetometer_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
 
             case "Gravity":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.gravity_description);
+                }
+
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Gyroscope":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.gyroscope_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "LinearAcceleration":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.linear_acceleration_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
 
             case "Light":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.light_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Proximity":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.proximity_description);
+                }
+
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "AmbientTemperature":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.ambient_t_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Pressure":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.pressure_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Humidity":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.humidity_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "RotationVector":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.rotation_vector_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "Temperature":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.temperature_description);
+                }
                 else
 
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
 
             case "Game":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.game_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "GeoVector":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.geo_vector_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
 
             case "Orientation":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null) {
+
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.orientation_description);
+                }
+
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "AccelerometerUncalibrated":
 
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER_UNCALIBRATED);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.acc_unc_description);
+
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
 
                 break;
             case "GyroscopeUncalibrated":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.gyrosc_unc_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "StepCounter":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.step_counter_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
             case "MagnetometerUncalibrated":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.magnet_unc_description);
+                }
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
 
             case "Pose6Dof":
-                if (mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF) != null)
+                if (mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.pose_6dof_description);
+                }
 
                 else
                     Toast.makeText(this, "Sensor you requested is probably broken",
@@ -217,6 +286,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "HeartRate":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.heart_rate_description);
                 } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
@@ -224,6 +295,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "HeartBeat":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_BEAT);
+                    mSensorName = mSensor.getName();
+                    description = getString(R.string.heart_beat_description);
                 } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
@@ -292,6 +365,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     private void printData(float[] sensorData, final ArrayList<String> listp) {
 
+        listp.add(mSensorName);
 
         switch (getStringIntent()) {
             case "Pose6Dof":
@@ -323,6 +397,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getString(R.string.acc_grav_x_text, sensorData[0]));
                 listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[1]));
                 listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[2]));
+
 
                 break;
             case "RotationVector":
@@ -404,6 +479,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
         }
 
+        listp.add(description);
         exceList = listp;
 
     }
@@ -479,7 +555,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         //sensor_list= findViewById(R.id.sensor_list);
 
         final ArrayList<String> listp = new ArrayList<String>();
-        boolean single = false;
+
         switch (getStringIntent()) {
 
             case "Accelerometer":
@@ -494,7 +570,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "Pose6Dof":
 
 
-                listp.add(mSensor.getName());
+
                 printData(event.values, listp);
                 copyValue = event.values;
                 break;
@@ -508,7 +584,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "Temperature":
             case "HeartRate":
             case "HeartBeat":
-                listp.add(mSensor.getName());
+
                 printData(event.values, listp);
                 copyValue = event.values;
                 break;
@@ -516,7 +592,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "AccelerometerUncalibrated":
             case "GyroscopeUncalibrated":
             case "MagnetometerUncalibrated":
-                listp.add(mSensor.getName());
+
                 printDataUncalibrated(event.values, listp);
                 copyValue = event.values;
                 break;

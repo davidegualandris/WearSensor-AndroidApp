@@ -7,6 +7,6 @@
     android:background="@color/common_google_signin_btn_text_dark_focused"
     android:gravity="left"
     android:padding="5sp"
-    android:singleLine="true"
+    android:singleLine="false"
     android:textColor="@color/common_google_signin_btn_text_dark_default"
     android:textSize="18sp" />
