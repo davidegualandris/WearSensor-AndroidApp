@@ -19,7 +19,6 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
-import static android.support.constraint.Constraints.TAG;
 
 public class WearDataService extends Service implements SensorEventListener {
 
@@ -49,13 +48,11 @@ public class WearDataService extends Service implements SensorEventListener {
     }
 
 
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         String choice = intent.getStringExtra("Type");
-
 
 
         switch (choice) {
@@ -247,8 +244,6 @@ public class WearDataService extends Service implements SensorEventListener {
         backgroundThread.start();
 
 
-
-
         return super.onStartCommand(intent, flags, startId);
 
     }
@@ -261,7 +256,6 @@ public class WearDataService extends Service implements SensorEventListener {
 
         private static final String NAME_KEY = "name";
         private static final String TYPE_KEY = "type";
-
 
 
         private WearHandler(String intent) {
@@ -278,7 +272,7 @@ public class WearDataService extends Service implements SensorEventListener {
                 @Override
                 public void run() {
 
-                    if(!kill) {
+                    if (!kill) {
 
                         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/sensor");
 
@@ -541,15 +535,14 @@ public class WearDataService extends Service implements SensorEventListener {
         }
 
 
-
-    @Override
-    public void run() {
+        @Override
+        public void run() {
 
             handleData();
 
-    }
+        }
 
-}
+    }
 
 
     @Override

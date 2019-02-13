@@ -1,11 +1,11 @@
 package com.example.lapuile.wearsensor;
 
-import android.app.Service;
+
 import android.content.Context;
-import android.content.Intent;
+
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.os.IBinder;
+
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +36,7 @@ public class SelectWearService extends WearableListenerService {
     private static final String POSITION_KEY = "position";
 
     private SensorManager mSensorManager;
+
     public SelectWearService() {
     }
 
@@ -49,7 +50,7 @@ public class SelectWearService extends WearableListenerService {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         try {
-           String choice = new String(messageEvent.getData(), "UTF-8");
+            String choice = new String(messageEvent.getData(), "UTF-8");
 
             Log.i(TAG, "onMessageReceived: " + choice);
 
@@ -81,14 +82,14 @@ public class SelectWearService extends WearableListenerService {
         super.onMessageReceived(messageEvent);
     }
 
-    private void sendMotionSensors(){
+    private void sendMotionSensors() {
         List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
         final ArrayList<Integer> listType = new ArrayList<Integer>();
 
 
         for (Sensor currentSensor : sensorList) {
 
-            if(currentSensor.getType() == Sensor.TYPE_ACCELEROMETER ||
+            if (currentSensor.getType() == Sensor.TYPE_ACCELEROMETER ||
                     currentSensor.getType() == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED ||
                     currentSensor.getType() == Sensor.TYPE_GYROSCOPE ||
                     currentSensor.getType() == Sensor.TYPE_GYROSCOPE_UNCALIBRATED ||
@@ -101,12 +102,11 @@ public class SelectWearService extends WearableListenerService {
                 listType.add(currentSensor.getType());
 
 
-
         }
 
         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/list");
         putDataMapReq.getDataMap().putIntegerArrayList(MOTION_KEY, listType);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
+        putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
         Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
@@ -122,16 +122,14 @@ public class SelectWearService extends WearableListenerService {
     }
 
 
-    private void sendPositionSensors(){
+    private void sendPositionSensors() {
         List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
         final ArrayList<Integer> listType = new ArrayList<Integer>();
 
 
-
-
         for (Sensor currentSensor : sensorList) {
 
-            if(currentSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD ||
+            if (currentSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD ||
                     currentSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED ||
                     currentSensor.getType() == Sensor.TYPE_PROXIMITY ||
                     currentSensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR ||
@@ -141,12 +139,11 @@ public class SelectWearService extends WearableListenerService {
                 listType.add(currentSensor.getType());
 
 
-
         }
 
         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/list");
         putDataMapReq.getDataMap().putIntegerArrayList(POSITION_KEY, listType);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
+        putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
         Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
@@ -161,29 +158,26 @@ public class SelectWearService extends WearableListenerService {
 
     }
 
-    private void sendEnvironmentalSensors(){
+    private void sendEnvironmentalSensors() {
         List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
         final ArrayList<Integer> listType = new ArrayList<Integer>();
 
 
-
-
         for (Sensor currentSensor : sensorList) {
 
-            if(currentSensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE ||
+            if (currentSensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE ||
                     currentSensor.getType() == Sensor.TYPE_LIGHT ||
                     currentSensor.getType() == Sensor.TYPE_PRESSURE ||
                     currentSensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY ||
-                    currentSensor.getType() == Sensor.TYPE_TEMPERATURE )
+                    currentSensor.getType() == Sensor.TYPE_TEMPERATURE)
                 listType.add(currentSensor.getType());
-
 
 
         }
 
         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/list");
         putDataMapReq.getDataMap().putIntegerArrayList(ENVIRONMENTAL_KEY, listType);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
+        putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
         Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
@@ -197,8 +191,6 @@ public class SelectWearService extends WearableListenerService {
 
 
     }
-
-
 
 
     private void sensorList() {
@@ -215,7 +207,7 @@ public class SelectWearService extends WearableListenerService {
 
         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/sensorList");
         putDataMapReq.getDataMap().putStringArrayList(LIST_KEY, listp);
-        putDataMapReq.getDataMap().putLong("Time",System.currentTimeMillis());
+        putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
         Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
@@ -223,7 +215,7 @@ public class SelectWearService extends WearableListenerService {
                 new OnSuccessListener<DataItem>() {
                     @Override
                     public void onSuccess(DataItem dataItem) {
-                        Log.i(TAG, "Sending VALUES was successful: " + dataItem+ listp);
+                        Log.i(TAG, "Sending VALUES was successful: " + dataItem + listp);
                     }
                 });
     }

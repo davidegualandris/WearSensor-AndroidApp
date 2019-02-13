@@ -32,37 +32,49 @@ public class ExcelSheet {
 
     private String sensorName;
     private float[] sensorValue;
+    private String description;
+    private String blueData;
 
     private ArrayList<String> dataSensorList = new ArrayList<String>();
 
-    public ExcelSheet(String name, float[] value, ArrayList<String> dataSensorPass) {
+    private String mdeviceName;
+
+    public ExcelSheet(String name, float[] value, ArrayList<String> dataSensorPass, String descr) {
         sensorName = name;
         sensorValue = value;
         dataSensorList = dataSensorPass;
-        Log.i( TAG, dataSensorPass.get(0));
+        description = descr;
+        Log.i(TAG, dataSensorPass.get(0));
 
     }
 
-    public ExcelSheet(ArrayList<String> dataSensorList){
+    public ExcelSheet(String chara, String data, String name, String descr) {
+        sensorName = chara;
+        blueData = data;
+        mdeviceName = name;
+        description = descr;
+
+    }
+
+    public ExcelSheet(ArrayList<String> dataSensorList) {
         this.dataSensorList = dataSensorList;
     }
 
-    public void exportListToExcel(){
+    public void exportListToExcel() {
 
-        File sensorDir = new File(Environment.getExternalStorageDirectory(),"WearSensor");
+        File sensorDir = new File(Environment.getExternalStorageDirectory(), "WearSensor");
 
-        if(!sensorDir.exists())
+        if (!sensorDir.exists())
             sensorDir.mkdirs();
 
 
         final String dirName = "List of Phone sensors";
 
 
-
         //file path
         File directory = new File(sensorDir, dirName);
 
-        if(!directory.exists())
+        if (!directory.exists())
             directory.mkdirs();
 
         String fileName = "List.xls";
@@ -110,23 +122,21 @@ public class ExcelSheet {
     }
 
 
+    public void exportListWearToExcel() {
 
-    public void exportListWearToExcel(){
+        File sensorDir = new File(Environment.getExternalStorageDirectory(), "WearSensor");
 
-        File sensorDir = new File(Environment.getExternalStorageDirectory(),"WearSensor");
-
-        if(!sensorDir.exists())
+        if (!sensorDir.exists())
             sensorDir.mkdirs();
 
 
         final String dirName = "List of Wear sensors";
 
 
-
         //file path
         File directory = new File(sensorDir, dirName);
 
-        if(!directory.exists())
+        if (!directory.exists())
             directory.mkdirs();
 
         String fileName = "ListWear.xls";
@@ -173,30 +183,25 @@ public class ExcelSheet {
 
     }
 
+    public void exportBluetoothToExcel() {
+        File sensorDir = new File(Environment.getExternalStorageDirectory(), "WearSensor");
 
-    public void exportToExcel() {
-
-        File sensorDir = new File(Environment.getExternalStorageDirectory(),"WearSensor");
-
-        if(!sensorDir.exists())
+        if (!sensorDir.exists())
             sensorDir.mkdirs();
 
-        File phoneDir = new File(sensorDir, "PhoneSensor");
+        File phoneDir = new File(sensorDir, mdeviceName);
 
-        if(!phoneDir.exists())
+        if (!phoneDir.exists())
             phoneDir.mkdirs();
-
-
 
 
         final String dirName = sensorName;
 
 
-
         //file path
         File directory = new File(phoneDir, dirName);
 
-        if(!directory.exists())
+        if (!directory.exists())
             directory.mkdirs();
 
         String fileName = "Data.xls";
@@ -216,10 +221,83 @@ public class ExcelSheet {
                 WritableSheet sheet = workbook.createSheet(sensorName, 0);
 
                 try {
-                    sheet.addCell(new Label(0,0 , sensorName));
+
+                    sheet.addCell(new Label(0, 0, sensorName));
+
+
+                    sheet.addCell(new Label(0, 1, "Value")); // column and row
+
+
+                    sheet.addCell(new Label(1, 1, blueData));
+
+                    sheet.addCell(new Label(0, 2, "Description"));
+                    sheet.addCell(new Label(1, 2, description));
+
+
+                    // sheet.addCell(new Label(0, row, description));
+
+                } catch (RowsExceededException e) {
+                    e.printStackTrace();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
+                workbook.write();
+                try {
+                    workbook.close();
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void exportToExcel() {
+
+        File sensorDir = new File(Environment.getExternalStorageDirectory(), "WearSensor");
+
+        if (!sensorDir.exists())
+            sensorDir.mkdirs();
+
+        File phoneDir = new File(sensorDir, "PhoneSensor");
+
+        if (!phoneDir.exists())
+            phoneDir.mkdirs();
+
+
+        final String dirName = sensorName;
+
+
+        //file path
+        File directory = new File(phoneDir, dirName);
+
+        if (!directory.exists())
+            directory.mkdirs();
+
+        String fileName = "Data.xls";
+
+        File file = new File(directory, fileName);
+
+        if (!directory.mkdirs()) {
+            Log.e(TAG, "Directory not created");
+
+            WorkbookSettings wbSettings = new WorkbookSettings();
+            wbSettings.setLocale(new Locale("en", "EN"));
+            WritableWorkbook workbook;
+
+            try {
+                workbook = Workbook.createWorkbook(file, wbSettings);
+                //Excel sheet name. 0 represents first sheet
+                WritableSheet sheet = workbook.createSheet(sensorName, 0);
+
+                try {
+                    Log.i(TAG, "LIST" + dataSensorList);
+                    sheet.addCell(new Label(0, 0, sensorName));
 
                     int row = 1;
-                    for (int i = 1; i < dataSensorList.size(); i++) {
+                    for (int i = 1; i < dataSensorList.size() - 1; i++) {
 
                         String[] splitted = dataSensorList.get(i).split(":");
 
@@ -231,6 +309,7 @@ public class ExcelSheet {
                         row++;
 
                     }
+                    sheet.addCell(new Label(0, row, description));
 
                 } catch (RowsExceededException e) {
                     e.printStackTrace();
@@ -252,24 +331,23 @@ public class ExcelSheet {
 
     public void exportWearToExcel() {
 
-        File sensorDir = new File(Environment.getExternalStorageDirectory(),"WearSensor");
+        File sensorDir = new File(Environment.getExternalStorageDirectory(), "WearSensor");
 
-        if(!sensorDir.exists())
+        if (!sensorDir.exists())
             sensorDir.mkdirs();
 
         File watchDir = new File(sensorDir, "WatchSensor");
 
-        if(!watchDir.exists())
+        if (!watchDir.exists())
             watchDir.mkdirs();
 
         final String dirName = sensorName;
 
 
-
         //file path
         File directory = new File(watchDir, dirName);
 
-        if(!directory.exists())
+        if (!directory.exists())
             directory.mkdirs();
 
         String fileName = "Data.xls";
@@ -291,9 +369,11 @@ public class ExcelSheet {
 
 
                 try {
-                    sheet.addCell(new Label(0,0 , sensorName));
+
+
+                    sheet.addCell(new Label(0, 0, sensorName));
                     int row = 1;
-                    for (int i = 1; i < dataSensorList.size(); i++) {
+                    for (int i = 1; i < dataSensorList.size() - 1; i++) {
 
                         String[] splitted = dataSensorList.get(i).split(":");
 
@@ -305,6 +385,7 @@ public class ExcelSheet {
                         row++;
 
                     }
+                    sheet.addCell(new Label(0, row, description));
 
                 } catch (RowsExceededException e) {
                     e.printStackTrace();

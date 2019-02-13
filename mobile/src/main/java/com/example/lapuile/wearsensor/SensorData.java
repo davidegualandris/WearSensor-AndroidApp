@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,24 +12,26 @@ import android.hardware.SensorManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
+
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jxl.Sheet;
 
 public class SensorData extends AppCompatActivity implements SensorEventListener {
 
@@ -41,7 +44,6 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
 
     ListView sensor_list;
-    TextView sensor_description;
 
 
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -50,8 +52,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     ArrayList<String> exceList = new ArrayList<String>();
 
 
-
-    final ArrayList<String> listList = new ArrayList<String>();
+    public static final String TAG = "SENSORDATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +62,14 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         sensor_list = (findViewById(R.id.sensor_list));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //sensor_description = findViewById(R.id.sensor_description);
+        Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setTitle(getIntent().getStringExtra("Type"));
 
+
+        Log.i(TAG, getStringIntent());
         switch (getStringIntent()) {
 
             case "Accelerometer":
@@ -73,8 +79,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensorName = mSensor.getName();
                     description = getString(R.string.accelerometer_description);
 
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -84,8 +89,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.magnetometer_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -95,9 +99,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.gravity_description);
-                }
-
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -106,8 +108,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.gyroscope_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -116,8 +117,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.linear_acceleration_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -127,8 +127,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.light_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -137,9 +136,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.proximity_description);
-                }
-
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -148,8 +145,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.ambient_t_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -158,8 +154,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.pressure_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -168,8 +163,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.humidity_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -178,8 +172,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.rotation_vector_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -188,8 +181,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.temperature_description);
-                }
-                else
+                } else
 
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
@@ -199,8 +191,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.game_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -209,8 +200,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.geo_vector_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -221,9 +211,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.orientation_description);
-                }
-
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -234,8 +222,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensorName = mSensor.getName();
                     description = getString(R.string.acc_unc_description);
 
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
 
@@ -245,8 +232,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.gyrosc_unc_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -255,8 +241,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.step_counter_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -265,8 +250,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.magnet_unc_description);
-                }
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -276,9 +260,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_POSE_6DOF);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.pose_6dof_description);
-                }
-
-                else
+                } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
                             Toast.LENGTH_LONG).show();
                 break;
@@ -304,16 +286,17 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
 
             case "SensorList":
-                setContentView(R.layout.activity_sensor_data);
+                LinearLayout mLinearLayout = findViewById(R.id.linearLayout2);
+                mLinearLayout.setVisibility(View.GONE);
+
                 Button play = (findViewById(R.id.play_button));
-                play.setVisibility(View.INVISIBLE);
+                play.setVisibility(View.GONE);
                 Button pause = (findViewById(R.id.pause_button));
-                pause.setVisibility(View.INVISIBLE);
-                List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-                ListView sensorText = findViewById(R.id.sensor_list);
+                pause.setVisibility(View.GONE);
+                List<Sensor> sensorText = mSensorManager.getSensorList(Sensor.TYPE_ALL);
 
 
-                for (Sensor currentSensor : sensorList) {
+                for (Sensor currentSensor : sensorText) {
 
                     exceList.add(currentSensor.getName());
                 }
@@ -322,7 +305,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>
                         (this, R.layout.my_layout, exceList);
 
-                sensorText.setAdapter(adapter);
+                sensor_list.setAdapter(adapter);
+                Log.i(TAG, "ADAPTER");
 
 
                 break;
@@ -387,7 +371,6 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
 
 
-
                 break;
             case "Accelerometer":
             case "Gravity":
@@ -410,11 +393,11 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getResources().getString(R.string.rotation_vector_cos, sensorData[3]));
 
 
-                if(!getStringIntent().equals("Game")) {
+                if (!getStringIntent().equals("Game")) {
                     listp.add(getResources().getString(R.string.rotation_vector_estimated, sensorData[4]));
 
 
-            }
+                }
 
 
                 break;
@@ -437,7 +420,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
                 break;
             case "Humidity":
-                listp.add(getString(R.string.humidity_text, sensorData[0])+ "%");
+                listp.add(getString(R.string.humidity_text, sensorData[0]) + "%");
 
                 break;
 
@@ -476,11 +459,12 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 break;
 
 
-
         }
+
 
         listp.add(description);
         exceList = listp;
+
 
     }
 
@@ -509,7 +493,6 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             listp.add(getResources().getString(R.string.gyrosc_unc_z_2, sensorData[5]));
 
 
-
         } else {
             listp.add(getResources().getString(R.string.magnet_unc_x, sensorData[0]));
             listp.add(getResources().getString(R.string.magnet_unc_y, sensorData[1]));
@@ -520,8 +503,10 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             listp.add(getResources().getString(R.string.magnet_unc_z_2, sensorData[5]));
 
 
-
         }
+
+
+        listp.add(description);
         exceList = listp;
 
 
@@ -568,7 +553,6 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "GeoVector":
             case "Orientation":
             case "Pose6Dof":
-
 
 
                 printData(event.values, listp);
@@ -629,7 +613,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
 
     public void playSensorData(View view) {
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
 
     }
 
@@ -662,12 +646,15 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case R.id.save_action:
                 saveSensorData();
                 return true;
+            case android.R.id.home:
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     public void saveSensorData() {
+
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -697,10 +684,15 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 if (getStringIntent().equals("SensorList")) {
                     ExcelSheet Sheet = new ExcelSheet(exceList);
                     Sheet.exportListToExcel();
+                    Toast.makeText(this, "Saved",
+                            Toast.LENGTH_LONG).show();
+
                 } else {
                     if (copyValue != null) {
-                        ExcelSheet Sheet = new ExcelSheet(mSensor.getName(), copyValue, exceList);
+                        ExcelSheet Sheet = new ExcelSheet(mSensor.getName(), copyValue, exceList, description);
                         Sheet.exportToExcel();
+                        Toast.makeText(this, "Saved",
+                                Toast.LENGTH_LONG).show();
                     } else
                         Toast.makeText(this, "Play sensor data before!",
                                 Toast.LENGTH_LONG).show();

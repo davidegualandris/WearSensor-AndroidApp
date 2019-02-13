@@ -27,9 +27,6 @@
     <string name="humidity_text">humidity: %1$.2f </string>
 
 
-
-
-
     <string name="orientation_x_text">on x: %1$.2f °</string>
     <string name="orientation_y_text">on y: %1$.2f °</string>
     <string name="orientation_z_text">on z: %1$.2f °</string>
@@ -37,8 +34,6 @@
     <string name="magnetic_field_x_text">on x: %1$.2f μT</string>
     <string name="magnetic_field_y_text">on y: %1$.2f μT</string>
     <string name="magnetic_field_z_text">on z: %1$.2f μT</string>
-
-
 
 
     <string name="onedimension_text">value: %1$.2f</string>
@@ -56,7 +51,7 @@
     <string name="pressure_button_text">PRESSURE</string>
     <string name="relative_humidity_button_text">RELATIVE HUMIDITY</string>
     <string name="motion_button_text">motion sensors</string>
-    <string name="environmental_button_text">environmental sensors</string>
+    <string name="environmental_button_text">environment sensors</string>
     <string name="position_button_text">position sensors</string>
     <string name="accelerometer_uncalibrated_text">accelerometer \n uncalibrated</string>
     <string name="gyroscope_uncalibrated_text">gyroscope \n uncalibrated</string>
@@ -69,7 +64,6 @@
     <string name="acc_unc_z_2">on z with estimated bias compensation: %1$.2f m/s²</string>
 
 
-
     <string name="gyrosc_unc_x">angular speed around x: %1$.2f rad/s</string>
     <string name="gyrosc_unc_y">angular speed around y: %1$.2f rad/s</string>
     <string name="gyrosc_unc_z">angular speed around z: %1$.2f rad/s</string>
@@ -78,8 +72,6 @@
     <string name="gyrosc_unc_x_2">Estimated drift around x: %1$.2f rad/s</string>
     <string name="gyrosc_unc_y_2">Estimated drift around y: %1$.2f rad/s</string>
     <string name="gyrosc_unc_z_2">Estimated drift around z: %1$.2f rad/s</string>
-
-
 
 
     <string name="step_counter_button_text">step counter</string>
@@ -102,13 +94,9 @@
     <string name="rotation_vector_estimated">estimated heading Accuracy: %1$.2f rad</string>
 
 
-
-
     <string name="sensor_list_button_text">sensor available</string>
 
     <string name="pose_6_dof_text_button">pose 6 dof</string>
-
-
 
 
     <string name="pose_6_dof_cos">cos(θ/2) : %1$.2f</string>
@@ -188,13 +176,10 @@
         The accuracy of this sensor is lower than the normal rotation vector sensor, but the power consumption is reduced.</string>
 
 
-
     <string name="orientation_description">Measures degrees of rotation that a device makes around all three physical axes (x, y, z).
         As of API level 3 you can obtain the inclination matrix and
         rotation matrix for a device by using the gravity sensor and the geomagnetic field sensor
         in conjunction with the getRotationMatrix() method.</string>
-
-
 
 
     <string name="acc_unc_description"> Measures the acceleration force in m/s² that
@@ -226,7 +211,6 @@
         pose has changed since the previous sequence numbered pose. The event uses the canonical Android Sensor axes.</string>
 
 
-
     <string name="heart_rate_description">The reported value is the heart rate in beats per minute.</string>
 
     <string name="heart_beat_description">A sensor of this type returns an event everytime a hear beat peak is detected.
@@ -234,19 +218,50 @@
     values[0]: confidence
     A confidence value of 0.0 indicates complete uncertainty - that a peak is as likely to be at the indicated timestamp as anywhere else. A confidence value of 1.0 indicates complete certainly
         - that a peak is completely unlikely to be anywhere else on the QRS complex.</string>
+    
+
+
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="label_data">Data:</string>
+    <string name="label_device_address">Device address:</string>
+    <string name="label_state">State:</string>
+    <string name="no_data">No data</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="bonded">Bonded</string>
+
+    <string name="title_devices">BLE Device Scan</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">Unknown service</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
 
 
 
+    <string name="intro_message">
+        <![CDATA[
 
 
+            This sample demonstrates how to use the Bluetooth LE Generic Attribute Profile (GATT)
+            to transmit arbitrary data between devices.
 
 
+        ]]>
+    </string>
 
+    <string name="body_location_description">describe the location of heart rate sensor</string>
+    
+    <string name="Heart_Rate_Char_Measurement">the reported value is the heart
+        rate in beats per minute.</string>
 
-
-
-
-
-
-
+    <string name="Battery_level">The current charge level of a battery.
+        100% represents fully charged while 0% represents fully discharged</string>
 </resources>
+

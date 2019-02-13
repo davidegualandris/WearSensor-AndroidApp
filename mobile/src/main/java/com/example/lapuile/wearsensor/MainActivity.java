@@ -1,5 +1,6 @@
 package com.example.lapuile.wearsensor;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        ActionBar actionBar = getActionBar();
 
         Button phoneSensor = (Button) findViewById(R.id.sensor_phone_button);
         phoneSensor.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Button bluetoothSensor = (Button) findViewById(R.id.sensor_bluetooth_button);
+        bluetoothSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent =
+                        new Intent(MainActivity.this, DeviceScanActivity.class);
+                intent.putExtra("Type", "Bluetooth");
+                startActivity(intent);
+
+            }
+        });
     }
-    }
+}
+
 

@@ -2,28 +2,27 @@ package com.example.lapuile.wearsensor;
 
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.IntentService;
-import android.app.Service;
-import android.content.Context;
-import android.content.Intent;
+
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.IBinder;
-import android.renderscript.Element;
+
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
+
+import android.support.annotation.WorkerThread
+
+
+        ;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,38 +30,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
+
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptionsExtension;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.internal.Constants;
-import com.google.android.gms.fitness.data.BleDevice;
-import com.google.android.gms.fitness.request.BleScanCallback;
-import com.google.android.gms.fitness.request.DataReadRequest;
-import com.google.android.gms.fitness.result.DataReadResponse;
 import com.google.android.gms.tasks.Task;
 
-import com.google.android.gms.fitness.Fitness;
-import com.google.android.gms.fitness.FitnessOptions;
-import com.google.android.gms.fitness.data.DataPoint;
-import com.google.android.gms.fitness.data.DataSource;
-import com.google.android.gms.fitness.data.DataType;
-import com.google.android.gms.fitness.data.Field;
-import com.google.android.gms.fitness.data.Value;
-import com.google.android.gms.fitness.request.DataSourcesRequest;
-import com.google.android.gms.fitness.request.OnDataPointListener;
-import com.google.android.gms.fitness.request.SensorRequest;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.android.gms.wearable.CapabilityClient;
 import com.google.android.gms.wearable.CapabilityInfo;
@@ -78,47 +53,38 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
+
 import java.util.Collection;
-import java.util.Date;
+
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
-import static android.util.Config.LOGD;
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+import java.util.concurrent.ExecutionException;
 
 
 public class WatchDataActivity extends AppCompatActivity implements DataClient.OnDataChangedListener,
         MessageClient.OnMessageReceivedListener,
         CapabilityClient.OnCapabilityChangedListener {
 
-    private final static int INTERVAL = 1000;
 
-
-    boolean god;
+    boolean success;
 
     public static final String TAG = "BasicSensorsApi";
 
-    private static final String SENSOR_KEY = "sensor";
 
     private static final String LIST_PATH = "/sensorList";
     private static final String LIST_KEY = "list";
 
-    private static final String CAPABILITY_NAME = "watch_server";
+
     public static final String SENSOR_REQUEST_MESSAGE_PATH = "/sensor";
     private static final String NAME_KEY = "name";
     private static final String TYPE_KEY = "type";
-    private String transcriptionNodeId = null;
+
 
     private String intentChoice;
 
     private float[] copyValue;
-    TextView sensor_description;
+
 
     private String sensorName;
     private int sensorType;
@@ -138,16 +104,22 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watch_data);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setTitle(getIntent().getStringExtra("Type"));
 
         decision = "";
 
         sensor_list = findViewById(R.id.sensor_list_wear);
-        //sensor_description = findViewById(R.id.sensor_description);
+
 
         intentChoice = getIntent().getStringExtra("Type");
 
         if (intentChoice.equals("WearSensorList")) {
-
+            LinearLayout mLinearLayout = findViewById(R.id.linearLayout2);
+            mLinearLayout.setVisibility(View.GONE);
             Button play = (findViewById(R.id.play_button));
             play.setVisibility(View.INVISIBLE);
             Button pause = (findViewById(R.id.pause_button));
@@ -162,6 +134,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
 
         }
+
 
     }
 
@@ -178,6 +151,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         super.onPause();
 
         decision = "stop";
+        new StartWearableActivityTask().execute();
         Wearable.getDataClient(this).removeListener(this);
         Wearable.getMessageClient(this).removeListener(this);
         Wearable.getCapabilityClient(this).removeListener(this);
@@ -196,7 +170,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     @Override
     public void onCapabilityChanged(@NonNull CapabilityInfo capabilityInfo) {
         Log.i(TAG, "onCapabilityChanged: " + capabilityInfo);
-
     }
 
     @Override
@@ -641,6 +614,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     @WorkerThread
     private void sendStartActivityMessage(String node) {
 
+        success = true;
         Task<Integer> sendMessageTask;
         if (decision.equals("stop")) {
             String msg = decision;
@@ -654,9 +628,11 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
             } catch (ExecutionException exception) {
                 Log.e(TAG, "Task failed: " + exception);
+                success = false;
 
             } catch (InterruptedException exception) {
                 Log.e(TAG, "Interrupt occurred: " + exception);
+                success = false;
             }
         } else {
 
@@ -679,6 +655,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
             } catch (ExecutionException exception) {
                 Log.e(TAG, "Task failed: " + exception);
+                success = false;
 
             } catch (InterruptedException exception) {
                 Log.e(TAG, "Interrupt occurred: " + exception);
@@ -687,7 +664,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     }
 
 
-    private class StartWearableActivityTask extends AsyncTask<Void, Void, Void> {
+    private class StartWearableActivityTask extends AsyncTask<Void, Void, String> {
 
 
         @Override
@@ -697,9 +674,11 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         }
 
         @Override
-        protected Void doInBackground(Void... args) {
+        protected String doInBackground(Void... args) {
 
             Collection<String> nodes = getNodes();
+            if (nodes.isEmpty())
+                return null;
             for (String node : nodes) {
 
                 Log.i(TAG, "ISCANCELLED  " + isCancelled());
@@ -708,7 +687,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                     sendStartActivityMessage(node);
                 }
             }
-            return null;
+            return "Do it";
         }
 
         @Override
@@ -719,8 +698,11 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String node) {
+            super.onPostExecute(node);
+            if (!success || node == null)
+                Toast.makeText(getApplicationContext(), "You have to connect your wear",
+                        Toast.LENGTH_LONG).show();
 
 
         }
@@ -751,6 +733,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
             case R.id.save_action:
                 saveSensorData();
                 return true;
+            case android.R.id.home:
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -783,17 +767,34 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
 
             if (intentChoice.equals("WearSensorList")) {
+                if (listGlobal == null) {
+                    Toast.makeText(this, "Play sensor data before!",
+                            Toast.LENGTH_LONG).show();
+                    return;
 
-                if (isExternalStorageWritable() && listGlobal != null) {
+                }
+
+                if (isExternalStorageWritable()) {
+
+
                     ExcelSheet listSheet = new ExcelSheet(listGlobal);
                     listSheet.exportListWearToExcel();
+                    Toast.makeText(this, "Saved",
+                            Toast.LENGTH_LONG).show();
 
                 } else
                     Toast.makeText(this, "External Storage isn't writable",
                             Toast.LENGTH_LONG).show();
-            } else if (isExternalStorageWritable() && sensorName != null && copyValue != null && exceList != null) {
+            } else if (isExternalStorageWritable()) {
+                if (copyValue == null || sensorName == null || exceList == null) {
+                    Toast.makeText(this, "Play sensor data before!",
+                            Toast.LENGTH_LONG).show();
+                    return;
 
-                ExcelSheet dataSheet = new ExcelSheet(sensorName, copyValue, exceList);
+                }
+
+
+                ExcelSheet dataSheet = new ExcelSheet(sensorName, copyValue, exceList, description);
                 dataSheet.exportWearToExcel();
                 Toast.makeText(this, "Saved",
                         Toast.LENGTH_LONG).show();

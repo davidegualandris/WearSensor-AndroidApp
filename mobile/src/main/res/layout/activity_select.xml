@@ -8,19 +8,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/window_background"
     tools:context="com.example.lapuile.wearsensor.SelectActivity"
     tools:layout_editor_absoluteX="16dp"
-    tools:layout_editor_absoluteY="81dp"
-    android:background="@color/common_google_signin_btn_text_dark_focused">
+    tools:layout_editor_absoluteY="81dp">
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:progressDrawable="@color/colorPrimaryDark"
-        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,35 +24,10 @@
             android:orientation="vertical">
 
 
-            <Button
-                android:id="@+id/watch_sensor_list_button"
-                android:layout_width="344dp"
-                android:layout_height="57dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="#006064"
-                android:visibility="gone"
-                style="?android:attr/borderlessButtonStyle"
-                android:text="@string/watch_sensors_list"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
 
-            <Button
-                android:id="@+id/watch_query"
-                android:layout_width="344dp"
-                android:layout_height="57dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="#006064"
-                android:visibility="gone"
-                android:text="@string/query_sensors"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+
 
 
             <Button
@@ -72,11 +39,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="@drawable/button_custom"
-                style="?android:attr/borderlessButtonStyle"
+
+
                 android:visibility="gone"
                 android:text="@string/accelerometer_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary" />
 
             <Button
                 android:id="@+id/accelerometer_uncalibrated_button"
@@ -87,11 +55,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
-                style="?android:attr/borderlessButtonStyle"
+
                 android:text="@string/accelerometer_uncalibrated_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                />
 
 
             <Button
@@ -103,11 +72,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
-                style="?android:attr/borderlessButtonStyle"
+
                 android:text="@string/gravity_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                />
 
             <Button
                 android:id="@+id/gyroscope_button"
@@ -118,10 +88,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
                 android:text="@string/gyroscope_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                 />
 
             <Button
                 android:id="@+id/gyroscope_uncalibrated_button"
@@ -133,9 +104,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="@string/gyroscope_uncalibrated_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/gyroscope_uncalibrated_text" />
 
             <Button
                 android:id="@+id/rotation_vector_button"
@@ -147,9 +118,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="rotation vector"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="rotation vector" />
 
 
             <Button
@@ -163,9 +134,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/linear_acceleration_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                 />
             <Button
                 android:id="@+id/step_counter_button"
                 android:layout_width="344dp"
@@ -176,9 +148,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="@string/step_counter_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/step_counter_button_text" />
 
 
 
@@ -192,10 +164,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
                 android:text="@string/light_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+              />
 
             <Button
                 android:id="@+id/ambient_temperature_button"
@@ -207,9 +180,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="@string/ambient_temperature_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/ambient_temperature_button_text" />
 
             <Button
                 android:id="@+id/pressure_button"
@@ -220,10 +193,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
-                android:text="@string/pressure_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:text="@string/pressure_button_text" />
 
 
             <Button
@@ -236,9 +209,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/relative_humidity_button_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                />
 
 
             <Button
@@ -251,9 +225,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:text="Temperature"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                />
 
 
             <Button
@@ -266,9 +241,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/magnetometer_text"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                />
 
             <Button
                 android:id="@+id/magnetometer_uncalibrated_button"
@@ -280,9 +256,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="magnetometer uncalibrated"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="magnetometer uncalibrated" />
 
 
             <Button
@@ -294,10 +270,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
                 android:text="@string/proximity_text_button"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+              />
 
 
             <Button
@@ -309,10 +286,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
                 android:text="game rotation vector"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+               />
 
             <Button
                 android:id="@+id/orientation_button"
@@ -323,10 +301,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
                 android:text="orientation"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                 />
 
             <Button
                 android:id="@+id/geomagnetic_vector_button"
@@ -338,9 +317,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
                 android:text="geomagnetic vector"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                />
 
             <Button
                 android:id="@+id/pose_6_dof_button"
@@ -352,9 +332,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="@string/pose_6_dof_text_button"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/pose_6_dof_text_button" />
 
 
             <Button
@@ -367,9 +347,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="heart rate"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="heart rate" />
 
             <Button
                 android:id="@+id/heart_beat_button"
@@ -381,9 +361,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:visibility="gone"
-                android:background="#006064"
-                android:text="heart beat"
-                android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="heart beat" />
 
 
         </LinearLayout>
