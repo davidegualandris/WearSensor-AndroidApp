@@ -35,15 +35,28 @@ public class ExcelSheet {
     private String description;
     private String blueData;
 
+    private float maxRange;
+    private float power;
+    private float resolution;
+    private String vendor;
+    private int version;
+
     private ArrayList<String> dataSensorList = new ArrayList<String>();
 
     private String mdeviceName;
 
-    public ExcelSheet(String name, float[] value, ArrayList<String> dataSensorPass, String descr) {
+    public ExcelSheet(String name, float[] value, ArrayList<String> dataSensorPass, String descr,
+                      float range, float battery, float res, int vers, String vend) {
         sensorName = name;
         sensorValue = value;
         dataSensorList = dataSensorPass;
         description = descr;
+
+        maxRange = range;
+        power = battery;
+        resolution = res;
+        version = vers;
+        vendor = vend;
         Log.i(TAG, dataSensorPass.get(0));
 
     }
@@ -297,7 +310,7 @@ public class ExcelSheet {
                     sheet.addCell(new Label(0, 0, sensorName));
 
                     int row = 1;
-                    for (int i = 1; i < dataSensorList.size() - 1; i++) {
+                    for (int i = 1; i <= dataSensorList.size() - 1; i++) {
 
                         String[] splitted = dataSensorList.get(i).split(":");
 
@@ -309,7 +322,23 @@ public class ExcelSheet {
                         row++;
 
                     }
-                    sheet.addCell(new Label(0, row, description));
+                    sheet.addCell(new Label(0, row+1, description));
+
+                    sheet.addCell(new Label(0, row+2, "Vendor"));
+                    sheet.addCell(new Label(1, row+2, vendor));
+
+                    sheet.addCell(new Label(0, row+3, "Version"));
+                    sheet.addCell(new Number(1, row+3, version));
+
+                    sheet.addCell(new Label(0, row+4, "Max Range"));
+                    sheet.addCell(new Number(1, row+4, maxRange));
+
+                    sheet.addCell(new Label(0, row+5, "Resolution"));
+                    sheet.addCell(new Number(1, row+5, resolution));
+
+                    sheet.addCell(new Label(0, row+6, "Power Consumed"));
+                    sheet.addCell(new Number(1, row+6, power));
+
 
                 } catch (RowsExceededException e) {
                     e.printStackTrace();
@@ -373,7 +402,7 @@ public class ExcelSheet {
 
                     sheet.addCell(new Label(0, 0, sensorName));
                     int row = 1;
-                    for (int i = 1; i < dataSensorList.size() - 1; i++) {
+                    for (int i = 1; i <= dataSensorList.size() - 1; i++) {
 
                         String[] splitted = dataSensorList.get(i).split(":");
 
@@ -385,7 +414,21 @@ public class ExcelSheet {
                         row++;
 
                     }
-                    sheet.addCell(new Label(0, row, description));
+                    sheet.addCell(new Label(0, row+1, description));
+                    sheet.addCell(new Label(0, row+2, "Vendor"));
+                    sheet.addCell(new Label(1, row+2, vendor));
+
+                    sheet.addCell(new Label(0, row+3, "Version"));
+                    sheet.addCell(new Number(1, row+3, version));
+
+                    sheet.addCell(new Label(0, row+4, "Max Range"));
+                    sheet.addCell(new Number(1, row+4, maxRange));
+
+                    sheet.addCell(new Label(0, row+5, "Resolution"));
+                    sheet.addCell(new Number(1, row+5, resolution));
+
+                    sheet.addCell(new Label(0, row+6, "Power Consumed"));
+                    sheet.addCell(new Number(1, row+6, power));
 
                 } catch (RowsExceededException e) {
                     e.printStackTrace();

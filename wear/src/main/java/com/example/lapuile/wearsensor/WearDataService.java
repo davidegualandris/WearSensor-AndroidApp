@@ -30,6 +30,16 @@ public class WearDataService extends Service implements SensorEventListener {
     private Thread backgroundThread;
     volatile boolean kill;
 
+    private float maxRange;
+    private float power;
+    private float resolution;
+    private String vendor;
+    private int version;
+
+
+
+
+
     public WearDataService() {
     }
 
@@ -87,7 +97,6 @@ public class WearDataService extends Service implements SensorEventListener {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
                     mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 }
-
 
                 break;
             case "WearLinearAcceleration":
@@ -151,7 +160,7 @@ public class WearDataService extends Service implements SensorEventListener {
                     mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 }
 
-
+                break;
             case "WearGame":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null) {
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
@@ -238,6 +247,16 @@ public class WearDataService extends Service implements SensorEventListener {
             default:
                 break;
         }
+        if(!choice.equals("SensorList")&& mSensor != null){
+
+            maxRange = mSensor.getMaximumRange();
+            power = mSensor.getPower();
+            resolution = mSensor.getResolution();
+            version = mSensor.getVersion();
+            vendor = mSensor.getVendor();
+
+        }
+
 
 
         backgroundThread = new Thread(new WearHandler(choice));
@@ -256,6 +275,12 @@ public class WearDataService extends Service implements SensorEventListener {
 
         private static final String NAME_KEY = "name";
         private static final String TYPE_KEY = "type";
+
+        private static final String MAX_RANGE_KEY = "MaxRange";
+        private static final String POWER_KEY = "Power";
+        private static final String VENDOR_KEY = "Vendor";
+        private static final String VERSION_KEY = "Version";
+        private static final String RESOLUTION_KEY= "Resolution";
 
 
         private WearHandler(String intent) {
@@ -277,240 +302,18 @@ public class WearDataService extends Service implements SensorEventListener {
                         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/sensor");
 
                         putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
-                        switch (choice) {
 
-                            case "WearAccelerometer":
+                        putDataMapReq.getDataMap().putFloatArray(choice, copyvalue);
+                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
+                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
 
+                        putDataMapReq.getDataMap().putFloat(MAX_RANGE_KEY, maxRange);
+                        putDataMapReq.getDataMap().putInt(VERSION_KEY, version);
+                        putDataMapReq.getDataMap().putString(VENDOR_KEY, vendor);
+                        putDataMapReq.getDataMap().putFloat(RESOLUTION_KEY, resolution);
+                        putDataMapReq.getDataMap().putFloat(POWER_KEY, power);
 
-                                if (type == Sensor.TYPE_ACCELEROMETER) {
-                                    putDataMapReq.getDataMap().putFloatArray("Accelerometer", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
 
-                                }
-
-
-                                break;
-                            case "WearMagnetometer":
-
-
-                                if (type == Sensor.TYPE_MAGNETIC_FIELD) {
-                                    putDataMapReq.getDataMap().putFloatArray("Magnetometer", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-
-                            case "WearGravity":
-
-                                if (type == Sensor.TYPE_GRAVITY) {
-                                    putDataMapReq.getDataMap().putFloatArray("Gravity", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearGyroscope":
-
-                                if (type == Sensor.TYPE_GYROSCOPE) {
-                                    putDataMapReq.getDataMap().putFloatArray("Gyroscope", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearLinearAcceleration":
-
-                                if (type == Sensor.TYPE_LINEAR_ACCELERATION) {
-                                    putDataMapReq.getDataMap().putFloatArray("LinearAcceleration", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-                                }
-                                break;
-
-                            case "WearLight":
-
-                                if (type == Sensor.TYPE_LIGHT) {
-                                    putDataMapReq.getDataMap().putFloatArray("Light", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearProximity":
-                                if (mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) != null)
-                                    if (type == Sensor.TYPE_PROXIMITY) {
-                                        putDataMapReq.getDataMap().putFloatArray("Proximity", copyvalue);
-                                        putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                        putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                    }
-
-                                break;
-                            case "WearAmbientTemperature":
-
-                                if (type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-                                    putDataMapReq.getDataMap().putFloatArray("AmbientTemperature", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearPressure":
-
-                                if (type == Sensor.TYPE_PRESSURE) {
-                                    putDataMapReq.getDataMap().putFloatArray("Pressure", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-
-                                break;
-                            case "WearHumidity":
-
-                                if (type == Sensor.TYPE_RELATIVE_HUMIDITY) {
-                                    putDataMapReq.getDataMap().putFloatArray("Humidity", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearRotationVector":
-
-                                if (type == Sensor.TYPE_ROTATION_VECTOR) {
-                                    putDataMapReq.getDataMap().putFloatArray("RotationVector", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearTemperature":
-
-                                if (type == Sensor.TYPE_TEMPERATURE) {
-                                    putDataMapReq.getDataMap().putFloatArray("Temperature", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                            case "WearGame":
-
-                                if (type == Sensor.TYPE_GAME_ROTATION_VECTOR) {
-                                    putDataMapReq.getDataMap().putFloatArray("Game", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-                                }
-
-                                break;
-                            case "WearGeoVector":
-
-                                if (type == Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) {
-                                    putDataMapReq.getDataMap().putFloatArray("Geo", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-
-                            case "WearOrientation":
-
-                                if (type == Sensor.TYPE_ORIENTATION) {
-                                    putDataMapReq.getDataMap().putFloatArray("Orientation", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearAccelerometerUncalibrated":
-
-
-                                if (type == Sensor.TYPE_ACCELEROMETER_UNCALIBRATED) {
-                                    putDataMapReq.getDataMap().putFloatArray("AccelerometerUncalibrated", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-
-                                break;
-                            case "WearGyroscopeUncalibrated":
-
-                                if (type == Sensor.TYPE_GYROSCOPE_UNCALIBRATED) {
-                                    putDataMapReq.getDataMap().putFloatArray("GyroscopeUncalibrated", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearStepCounter":
-
-                                if (type == Sensor.TYPE_STEP_COUNTER) {
-                                    putDataMapReq.getDataMap().putFloatArray("StepCounter", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearMagnetometerUncalibrated":
-
-                                if (type == Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED) {
-                                    putDataMapReq.getDataMap().putFloatArray("MagnetometerUncalibrated", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-
-                            case "WearPose6Dof":
-
-                                if (type == Sensor.TYPE_POSE_6DOF) {
-                                    putDataMapReq.getDataMap().putFloatArray("Pose6Dof", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearHeartRate":
-
-                                if (type == Sensor.TYPE_HEART_RATE) {
-                                    putDataMapReq.getDataMap().putFloatArray("HeartRate", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-                            case "WearHeartBeat":
-
-                                if (type == Sensor.TYPE_HEART_BEAT) {
-                                    putDataMapReq.getDataMap().putFloatArray("HeartBeat", copyvalue);
-                                    putDataMapReq.getDataMap().putInt(TYPE_KEY, type);
-                                    putDataMapReq.getDataMap().putString(NAME_KEY, name);
-
-                                }
-
-                                break;
-
-
-                            default:
-                                break;
-
-                        }
 
                         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
                         putDataReq.setUrgent();

@@ -693,6 +693,7 @@ drawable ic_chevron_right_black_24dp
 drawable ic_clear
 drawable ic_directions_run_black_24dp
 drawable ic_format_list_bulleted_black_24dp
+drawable ic_info_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_menu_black_24dp
@@ -820,6 +821,7 @@ id icon_only
 id ifRoom
 id image
 id info
+id info_action
 id invisible
 id italic
 id left
@@ -833,6 +835,7 @@ id listMode
 id list_item
 id magnetometer_button
 id magnetometer_uncalibrated_button
+id max_range
 id media_actions
 id menu_connect
 id menu_disconnect
@@ -886,10 +889,14 @@ id search_src_text
 id search_voice_btn
 id select_dialog_listview
 id sensor_bluetooth_button
+id sensor_description
 id sensor_list
 id sensor_list_button
 id sensor_list_wear
 id sensor_phone_button
+id sensor_power
+id sensor_resolution
+id sensor_vendor
 id sensor_wear_button
 id shortcut
 id showCustom
@@ -927,6 +934,7 @@ id tv
 id uniform
 id up
 id useLogo
+id version
 id wide
 id withText
 id wrap
@@ -967,7 +975,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout actionbar_indeterminate_progress
 layout activity_home
-layout activity_main
+layout activity_info
 layout activity_main2
 layout activity_scan
 layout activity_select

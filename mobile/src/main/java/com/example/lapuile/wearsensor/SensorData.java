@@ -9,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -39,9 +40,15 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     private Sensor mSensor;
     private String mSensorName;
+
+    private float maxRange;
+    private float power;
+    private float resolution;
+    private String vendor;
+    private int version;
+
     private float[] copyValue;
     private String description;
-
 
     ListView sensor_list;
 
@@ -69,7 +76,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         getSupportActionBar().setTitle(getIntent().getStringExtra("Type"));
 
 
-        Log.i(TAG, getStringIntent());
+
         switch (getStringIntent()) {
 
             case "Accelerometer":
@@ -78,6 +85,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
                     mSensorName = mSensor.getName();
                     description = getString(R.string.accelerometer_description);
+
 
                 } else
                     Toast.makeText(this, "Sensor you requested is probably broken",
@@ -306,13 +314,22 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                         (this, R.layout.my_layout, exceList);
 
                 sensor_list.setAdapter(adapter);
-                Log.i(TAG, "ADAPTER");
+
 
 
                 break;
 
             default:
                 break;
+        }
+        if(!getStringIntent().equals("SensorList")&& mSensor != null){
+            maxRange = mSensor.getMaximumRange();
+
+            power = mSensor.getPower();
+            resolution = mSensor.getResolution();
+            version = mSensor.getVersion();
+            vendor = mSensor.getVendor();
+
         }
 
 
@@ -327,24 +344,9 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
 
 
-/*
-    private void getList() {
-        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-        ListView sensorText = findViewById(R.id.sensor_list);
-        final ArrayList<String> listp = new ArrayList<String>();
-        for (Sensor currentSensor : sensorList) {
-            listp.add(currentSensor.getName());
-        }
 
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, listp);
 
-        sensorText.setAdapter(adapter);
-
-    }
-
-*/
 
 
     private void printData(float[] sensorData, final ArrayList<String> listp) {
@@ -462,7 +464,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         }
 
 
-        listp.add(description);
+
         exceList = listp;
 
 
@@ -537,7 +539,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        //sensor_list= findViewById(R.id.sensor_list);
+
 
         final ArrayList<String> listp = new ArrayList<String>();
 
@@ -635,6 +637,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        if(getStringIntent().equals("SensorList"))
+            menu.findItem(R.id.info_action).setVisible(false);
         return true;
     }
 
@@ -646,8 +650,21 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case R.id.save_action:
                 saveSensorData();
                 return true;
+            case R.id.info_action:
+                Intent intent = new Intent(this, InfoActivity.class);
+
+                intent.putExtra("MaxRange", maxRange);
+
+                intent.putExtra("Power", power);
+                intent.putExtra("Version", version);
+                intent.putExtra("Vendor", vendor);
+                intent.putExtra("Resolution", resolution);
+                intent.putExtra("Description", description);
+                startActivity(intent);
+                return true;
             case android.R.id.home:
                 finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -689,7 +706,8 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
                 } else {
                     if (copyValue != null) {
-                        ExcelSheet Sheet = new ExcelSheet(mSensor.getName(), copyValue, exceList, description);
+                        ExcelSheet Sheet = new ExcelSheet(mSensor.getName(), copyValue, exceList,
+                                description, maxRange, power, resolution, version, vendor);
                         Sheet.exportToExcel();
                         Toast.makeText(this, "Saved",
                                 Toast.LENGTH_LONG).show();

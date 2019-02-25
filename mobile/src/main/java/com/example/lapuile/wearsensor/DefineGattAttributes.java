@@ -20,11 +20,16 @@ public class DefineGattAttributes {
         attributes.put("0000180f-0000-1000-8000-00805f9b34fb", "Battery Service");
         attributes.put("00001810-0000-1000-8000-00805f9b34fb", "Bloody Pressure Service");
         //NOT IMPLEMENTED
-        attributes.put("00001800-0000-1000-8000-00805f9b34fb", "Generic Access");
-        attributes.put("0000181a-0000-1000-8000-00805f9b34fb", "Environmental sensing");
-        attributes.put("00001808-0000-1000-8000-00805f9b34fb", "Glucose");
-        attributes.put("00001809-0000-1000-8000-00805f9b34fb", "Health Thermometer");
-        attributes.put("00001822-0000-1000-8000-00805f9b34fb", "Pulse Oximeter");
+        attributes.put("00001800-0000-1000-8000-00805f9b34fb", "Generic Access Service");
+        attributes.put("0000181a-0000-1000-8000-00805f9b34fb", "Environmental sensing Service");
+        attributes.put("00001808-0000-1000-8000-00805f9b34fb", "Glucose Service");
+        attributes.put("00001809-0000-1000-8000-00805f9b34fb", "Health Thermometer Service");
+        attributes.put("00001822-0000-1000-8000-00805f9b34fb", "Pulse Oximeter Service");
+        attributes.put("E95D0753251D470AA062FA1922DFA9A8", "Accelerometer Service");
+        attributes.put("00002800-0000-1000-8000-00805f9b34fb", "ACCELEROMETER");
+
+
+
 
 
         // Sample Characteristics.
@@ -40,6 +45,7 @@ public class DefineGattAttributes {
         attributes.put("00002a26-0000-1000-8000-00805f9b34fb", "Firmware Revision  String");
         attributes.put("00002a00-0000-1000-8000-00805f9b34fb", "Device name");
         attributes.put("00002a01-0000-1000-8000-00805f9b34fb", "Appearance");
+        attributes.put("E95DCA4B251D470AA062FA1922DFA9A8", "Accelerometer Data");
         //NOT IMPLEMENTED
 
     }

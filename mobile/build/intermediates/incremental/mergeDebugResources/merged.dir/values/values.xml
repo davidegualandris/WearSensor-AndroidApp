@@ -1729,7 +1729,8 @@
         measures the orientation of a device
         by providing the three elements of the device\'s rotation vector,
         but it uses a magnetometer instead of a gyroscope.
-        The accuracy of this sensor is lower than the normal rotation vector sensor, but the power consumption is reduced.</string>
+        The accuracy of this sensor is lower than the normal rotation vector sensor, but the power consumption is reduced.
+    </string>
     <string name="gravity_description">Measures the force of gravity in m/s²
         that is applied to a device on all three physical axes (x, y, z).</string>
     <string name="gravity_text">GRAVITY </string>

@@ -14,6 +14,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class SelectActivity extends AppCompatActivity implements DataClient.OnDataChangedListener,
@@ -95,7 +97,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
         Log.i(TAG, "CHOICE : " + choice);
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
@@ -967,20 +969,46 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
         }
 
 
-        Log.i(TAG, "AAAAAAAAAAAAAAAA " + results);
+
         return results;
+    }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.gatt_services, menu);
+
+        menu.findItem(R.id.menu_connect).setVisible(false);
+        menu.findItem(R.id.menu_disconnect).setVisible(false);
+        menu.findItem(R.id.menu_save).setVisible(false);
+        if(!(choice.equals("WearMotion")|| choice.equals("WearPosition")  ||
+                choice.equals("WearEnvironmental")))
+                menu.findItem(R.id.menu_refresh).setVisible(false);
+
+
+
+
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
+            case R.id.menu_refresh:
+                new StartWearableActivityTask().execute();
+                return true;
+
+
             case android.R.id.home:
                 finish();
                 return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
 

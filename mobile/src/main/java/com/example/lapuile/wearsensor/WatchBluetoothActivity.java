@@ -235,7 +235,7 @@ public class WatchBluetoothActivity extends AppCompatActivity {
         if (mConnected) {
             menu.findItem(R.id.menu_connect).setVisible(false);
             menu.findItem(R.id.menu_disconnect).setVisible(true);
-            //DrawableCompat.setTint(item.getIcon(), color);
+
         } else {
 
             menu.findItem(R.id.menu_connect).setVisible(true);
@@ -256,7 +256,7 @@ public class WatchBluetoothActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_save:
                 save();
-                Log.i(TAG, "UUUUUUUUUUUUUUUU");
+
                 return true;
             case android.R.id.home:
                 finish();

@@ -31,11 +31,26 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.example.lapuile.wearsensor.HomeActivity" />
-        <activity android:name="com.example.lapuile.wearsensor.SelectActivity" />
-        <activity android:name="com.example.lapuile.wearsensor.SensorData" />
-        <activity android:name="com.example.lapuile.wearsensor.WatchDataActivity" />
-        <activity android:name="com.example.lapuile.wearsensor.MainActivity" >
+        <activity
+            android:name="com.example.lapuile.wearsensor.HomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.lapuile.wearsensor.SelectActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.lapuile.wearsensor.SensorData"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.lapuile.wearsensor.WatchDataActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.lapuile.wearsensor.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,6 +60,8 @@
         <activity android:name="com.example.lapuile.wearsensor.WatchBluetoothActivity" />
         <activity
             android:name="com.example.lapuile.wearsensor.DeviceScanActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <service
@@ -52,6 +69,7 @@
             android:enabled="true"
             android:exported="true" />
 
+        <activity android:name="com.example.lapuile.wearsensor.InfoActivity" />
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
             android:excludeFromRecents="true"

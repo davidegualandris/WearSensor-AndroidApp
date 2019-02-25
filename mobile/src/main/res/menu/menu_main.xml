@@ -7,8 +7,16 @@
     <item
         android:id="@+id/save_action"
         android:orderInCategory="100"
-        android:title="action_watch"
+        android:title="save"
         android:icon="@drawable/save"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/info_action"
+        android:orderInCategory="100"
+        android:title="info"
+        android:icon="@drawable/ic_info_black_24dp"
         app:showAsAction="always"
         />
 
