@@ -4,13 +4,12 @@ ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManif
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:2:1-61:12
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:2:1-61:12
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:2:1-61:12
+MERGED from [com.android.support:design:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffb7410c25a75edbc4e40e29815bd57a/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/lapuile/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/df959ee3bc8e99833fc2a738fa9f0c6b/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-wearable:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-wearable-16.0.1.aar/477ba2725caa17cef4a5658a5eaf19f3/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-fitness:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-fitness-16.0.1.aar/de7e5d15cda8310436037b7862303157/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/da51a2d7f46b8b555955feb68c3b515a/AndroidManifest.xml:17:1-39:12
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/92582966f89bdbc5a1e0e809f9238ed6/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/801c35712654ad4235988f6e43c75481/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-location-16.0.0.aar/aa2b12584f500656f7d0f3f00fcdf3a2/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/a11068f094e14a133d3cae993afe148c/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/8e5598f5125cb36e38de03fc7f9dcf66/AndroidManifest.xml:2:1-7:12
@@ -18,11 +17,14 @@ MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/lapuile/.gr
 MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/09f2f4cf670dd6ab7d7eab2bf1967c4c/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/0af7251c460b8e88c7f4f2af0b239478/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/70a73b4d090c992ba042ba31dc76a0f5/AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/dbf749eb440921574ce059f11fa7812a/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-v4:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/135b3560a649708efd4bef76ac25ac12/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/deabbced8feb415b1d3a5bfc4892dc3b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/92582966f89bdbc5a1e0e809f9238ed6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/c8a792950be52d0b4e442fae6e61e2a4/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/5c92d9eba96c8c59e7591ff46fedf354/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-utils:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/a705b645a021dad6554e0439bd7ea5af/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/801c35712654ad4235988f6e43c75481/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/87ae9e4152080d24bd1f199bc70799fc/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:loader:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/a2f21904e9abeac100dfada93fa9ddc3/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:viewpager:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/4b71d6c3bd7a5d1b643a006e312cf77c/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/1e0cbc634bc361f6b95dd1aceba05951/AndroidManifest.xml:17:1-22:12
@@ -31,18 +33,20 @@ MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/lapuile/.gradle
 MERGED from [com.android.support:customview:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/3b8c02a8af9b9e837d7258738e11cfba/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/1d18dde10a5d77895771be2ef5f8e622/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/a79aea0e90ffdab1723ca8ece9e1eafc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/1cbb8bb60c3728c8859a93a6082ee8f0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/bd02c7b5dd46f33126c5626eb1accac4/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:versionedparcelable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/cf2c7df7aa3c4af0423c1b130c38f524/AndroidManifest.xml:17:1-25:12
 MERGED from [com.android.support:cursoradapter:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/9f0e36efb8d262cfc0a155cac2c146e5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/c445a2e9b0b669607cf7f34ca3a34714/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/69592046db6e60ebca4abcc467014347/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/4f22243992884d492da5ab96c3fc3348/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/9c6d8e50e174180648798fa1d4601b53/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/b4d15af1788498c8b483cbda058093ea/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:documentfile:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/8da9a914a161ca4bb920f394ce1e2fcb/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/26d182fa9073248d4f4ee04fff0dadc0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/92e32491ceb38f827ba614e7b1025740/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/97a29310f51ded626108e008ad618657/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/d50217421e4798e74b520e9d61f174aa/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/4f22243992884d492da5ab96c3fc3348/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/9c6d8e50e174180648798fa1d4601b53/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/b4d15af1788498c8b483cbda058093ea/AndroidManifest.xml:17:1-22:12
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:2:1-61:12
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:2:1-61:12
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:2:1-61:12
@@ -81,19 +85,21 @@ ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManif
 	android:name
 		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:9:22-68
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:10:5-74
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:11:5-74
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:10:22-71
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:11:22-71
 uses-permission#android.permission.BLUETOOTH
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:11:5-68
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:12:5-68
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:11:22-65
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:12:22-65
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:12:5-81
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:14:5-81
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:12:22-78
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:14:22-78
 application
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:14:5-59:19
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:16:5-59:19
+MERGED from [com.android.support:design:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffb7410c25a75edbc4e40e29815bd57a/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffb7410c25a75edbc4e40e29815bd57a/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/lapuile/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/df959ee3bc8e99833fc2a738fa9f0c6b/AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/lapuile/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/df959ee3bc8e99833fc2a738fa9f0c6b/AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.gms:play-services-wearable:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-wearable-16.0.1.aar/477ba2725caa17cef4a5658a5eaf19f3/AndroidManifest.xml:22:5-20
@@ -112,10 +118,6 @@ MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /ho
 MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/0af7251c460b8e88c7f4f2af0b239478/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/70a73b4d090c992ba042ba31dc76a0f5/AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/70a73b4d090c992ba042ba31dc76a0f5/AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/dbf749eb440921574ce059f11fa7812a/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/dbf749eb440921574ce059f11fa7812a/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/bd02c7b5dd46f33126c5626eb1accac4/AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/bd02c7b5dd46f33126c5626eb1accac4/AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/cf2c7df7aa3c4af0423c1b130c38f524/AndroidManifest.xml:22:5-23:19
@@ -123,65 +125,59 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] /home/lapuile/.grad
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/bd02c7b5dd46f33126c5626eb1accac4/AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:19:9-35
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:21:9-35
 	android:label
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:17:9-41
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:19:9-41
 	android:roundIcon
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:18:9-54
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:20:9-54
 	android:icon
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:16:9-43
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:18:9-43
 	android:allowBackup
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:15:9-35
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:17:9-35
 	android:theme
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:20:9-40
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:22:9-40
 meta-data#com.google.android.gms.version
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:21:9-23:69
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:23:9-25:69
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/70a73b4d090c992ba042ba31dc76a0f5/AndroidManifest.xml:23:9-25:69
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/70a73b4d090c992ba042ba31dc76a0f5/AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:23:13-66
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:25:13-66
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:22:13-58
-activity#com.example.lapuile.wearsensor.HomeActivity
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:25:9-27:51
-	android:screenOrientation
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:27:13-49
-	android:configChanges
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:26:13-48
-	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:25:19-47
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:24:13-58
 activity#com.example.lapuile.wearsensor.SelectActivity
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:28:9-30:51
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:27:9-29:51
 	android:screenOrientation
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:30:13-49
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:29:13-49
 	android:configChanges
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:29:13-48
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:28:13-48
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:28:19-49
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:27:19-49
 activity#com.example.lapuile.wearsensor.SensorData
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:31:9-33:51
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:30:9-32:51
 	android:screenOrientation
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:33:13-49
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:32:13-49
 	android:configChanges
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:32:13-48
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:31:13-48
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:31:19-45
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:30:19-45
 activity#com.example.lapuile.wearsensor.WatchDataActivity
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:34:9-36:51
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:33:9-35:51
 	android:screenOrientation
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:36:13-49
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:35:13-49
 	android:configChanges
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:35:13-48
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:34:13-48
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:34:19-52
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:33:19-52
 activity#com.example.lapuile.wearsensor.MainActivity
-ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:37:9-45:20
+ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:36:9-45:20
 	android:screenOrientation
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:39:13-49
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:38:13-49
 	android:configChanges
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:38:13-48
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:37:13-48
+	android:theme
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:39:13-51
 	android:name
-		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:37:19-47
+		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:36:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml:40:13-44:29
 action#android.intent.action.MAIN
@@ -222,6 +218,8 @@ uses-sdk
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffb7410c25a75edbc4e40e29815bd57a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffb7410c25a75edbc4e40e29815bd57a/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/lapuile/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/df959ee3bc8e99833fc2a738fa9f0c6b/AndroidManifest.xml:5:5-7:41
@@ -232,10 +230,6 @@ MERGED from [com.google.android.gms:play-services-fitness:16.0.1] /home/lapuile/
 MERGED from [com.google.android.gms:play-services-fitness:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-fitness-16.0.1.aar/de7e5d15cda8310436037b7862303157/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/da51a2d7f46b8b555955feb68c3b515a/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/da51a2d7f46b8b555955feb68c3b515a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/92582966f89bdbc5a1e0e809f9238ed6/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/92582966f89bdbc5a1e0e809f9238ed6/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/801c35712654ad4235988f6e43c75481/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/801c35712654ad4235988f6e43c75481/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-location-16.0.0.aar/aa2b12584f500656f7d0f3f00fcdf3a2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-location-16.0.0.aar/aa2b12584f500656f7d0f3f00fcdf3a2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/a11068f094e14a133d3cae993afe148c/AndroidManifest.xml:5:5-44
@@ -250,16 +244,22 @@ MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /ho
 MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/0af7251c460b8e88c7f4f2af0b239478/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/70a73b4d090c992ba042ba31dc76a0f5/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/70a73b4d090c992ba042ba31dc76a0f5/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/dbf749eb440921574ce059f11fa7812a/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/dbf749eb440921574ce059f11fa7812a/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-v4:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/135b3560a649708efd4bef76ac25ac12/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/135b3560a649708efd4bef76ac25ac12/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/deabbced8feb415b1d3a5bfc4892dc3b/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/deabbced8feb415b1d3a5bfc4892dc3b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/92582966f89bdbc5a1e0e809f9238ed6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/92582966f89bdbc5a1e0e809f9238ed6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/c8a792950be52d0b4e442fae6e61e2a4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/c8a792950be52d0b4e442fae6e61e2a4/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/5c92d9eba96c8c59e7591ff46fedf354/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/5c92d9eba96c8c59e7591ff46fedf354/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-utils:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/a705b645a021dad6554e0439bd7ea5af/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-utils:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/a705b645a021dad6554e0439bd7ea5af/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/801c35712654ad4235988f6e43c75481/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/801c35712654ad4235988f6e43c75481/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/87ae9e4152080d24bd1f199bc70799fc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/87ae9e4152080d24bd1f199bc70799fc/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:loader:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/a2f21904e9abeac100dfada93fa9ddc3/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:loader:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/a2f21904e9abeac100dfada93fa9ddc3/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:viewpager:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/4b71d6c3bd7a5d1b643a006e312cf77c/AndroidManifest.xml:20:5-44
@@ -276,20 +276,18 @@ MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/lapuile/.gradl
 MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/1d18dde10a5d77895771be2ef5f8e622/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/a79aea0e90ffdab1723ca8ece9e1eafc/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/a79aea0e90ffdab1723ca8ece9e1eafc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/1cbb8bb60c3728c8859a93a6082ee8f0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/1cbb8bb60c3728c8859a93a6082ee8f0/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/bd02c7b5dd46f33126c5626eb1accac4/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/bd02c7b5dd46f33126c5626eb1accac4/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:versionedparcelable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/cf2c7df7aa3c4af0423c1b130c38f524/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:versionedparcelable:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/cf2c7df7aa3c4af0423c1b130c38f524/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cursoradapter:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/9f0e36efb8d262cfc0a155cac2c146e5/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cursoradapter:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/9f0e36efb8d262cfc0a155cac2c146e5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/c445a2e9b0b669607cf7f34ca3a34714/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/c445a2e9b0b669607cf7f34ca3a34714/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/69592046db6e60ebca4abcc467014347/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/69592046db6e60ebca4abcc467014347/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/4f22243992884d492da5ab96c3fc3348/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/4f22243992884d492da5ab96c3fc3348/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/9c6d8e50e174180648798fa1d4601b53/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/9c6d8e50e174180648798fa1d4601b53/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/b4d15af1788498c8b483cbda058093ea/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/b4d15af1788498c8b483cbda058093ea/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/8da9a914a161ca4bb920f394ce1e2fcb/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/8da9a914a161ca4bb920f394ce1e2fcb/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/26d182fa9073248d4f4ee04fff0dadc0/AndroidManifest.xml:20:5-44
@@ -300,10 +298,14 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/lapuile/.gradle/cache
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/97a29310f51ded626108e008ad618657/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/d50217421e4798e74b520e9d61f174aa/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/d50217421e4798e74b520e9d61f174aa/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/4f22243992884d492da5ab96c3fc3348/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/4f22243992884d492da5ab96c3fc3348/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/9c6d8e50e174180648798fa1d4601b53/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/9c6d8e50e174180648798fa1d4601b53/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/b4d15af1788498c8b483cbda058093ea/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/b4d15af1788498c8b483cbda058093ea/AndroidManifest.xml:20:5-44
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml
 INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml
-	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
 		INJECTED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml
 		ADDED from /home/lapuile/Documenti/Stage/wearsensor/mobile/src/main/AndroidManifest.xml
@@ -338,11 +340,3 @@ ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/lapuile/.gra
 		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/daa6a0976d3d3f914d70b57e95ba7148/AndroidManifest.xml:26:13-72
 	android:name
 		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/daa6a0976d3d3f914d70b57e95ba7148/AndroidManifest.xml:24:13-79
-meta-data#android.support.VERSION
-ADDED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/dbf749eb440921574ce059f11fa7812a/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/dbf749eb440921574ce059f11fa7812a/AndroidManifest.xml:26:9-28:38
-	android:value
-		ADDED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:28:13-35
-	android:name
-		ADDED from [com.android.support:support-v4:26.1.0] /home/lapuile/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/63f5df5dd5ae73154491db0a84060e48/AndroidManifest.xml:27:13-51

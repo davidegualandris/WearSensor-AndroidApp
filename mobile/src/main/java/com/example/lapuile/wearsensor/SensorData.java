@@ -555,12 +555,6 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             case "GeoVector":
             case "Orientation":
             case "Pose6Dof":
-
-
-                printData(event.values, listp);
-                copyValue = event.values;
-                break;
-
             case "Light":
             case "Proximity":
             case "AmbientTemperature":
@@ -637,6 +631,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.menu_phone_image).setVisible(true);
         if(getStringIntent().equals("SensorList"))
             menu.findItem(R.id.info_action).setVisible(false);
         return true;

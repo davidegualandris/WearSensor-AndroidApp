@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_weight="1"
+    android:background="@color/window_background"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    >
+
+
+
+
+    <Button
+        android:id="@+id/sensor_list_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_custom"
+        android:drawableStart="@drawable/ic_format_list_bulleted_black_24dp"
+        android:drawableEnd="@drawable/ic_watch_home"
+        android:drawablePadding="35dp"
+        android:paddingLeft="35dp"
+        android:paddingTop="8dp"
+        android:paddingRight="35dp"
+        android:text="@string/sensor_list_button_text"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/motion_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_custom"
+        android:drawableStart="@drawable/ic_directions_run_black_24dp"
+        android:drawableEnd="@drawable/ic_watch_home"
+        android:drawablePadding="35dp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:text="@string/motion_button_text"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/environmental_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_custom"
+        android:drawableStart="@drawable/ic_brightness_low_black_24dp"
+        android:drawableEnd="@drawable/ic_watch_home"
+        android:drawablePadding="35dp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:text="@string/environmental_button_text"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/position_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_custom"
+        android:drawableStart="@drawable/ic_my_location_black_24dp"
+        android:drawableEnd="@drawable/ic_watch_home"
+        android:drawablePadding="35dp"
+        android:paddingLeft="35dp"
+        android:paddingTop="8dp"
+        android:paddingRight="35dp"
+        android:text="@string/position_button_text"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+</LinearLayout>

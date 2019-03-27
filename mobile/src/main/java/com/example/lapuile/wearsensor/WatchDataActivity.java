@@ -592,7 +592,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        if(intentChoice.equals("SensorList"))
+        menu.findItem(R.id.menu_watch_image).setVisible(true);
+        if(intentChoice.equals("WearSensorList"))
             menu.findItem(R.id.info_action).setVisible(false);
         return true;
     }

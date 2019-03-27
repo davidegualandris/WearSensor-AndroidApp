@@ -75,6 +75,8 @@ public class BluetoothLeService extends Service {
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
+
+
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
@@ -89,14 +91,6 @@ public class BluetoothLeService extends Service {
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:" +
                         mBluetoothGatt.discoverServices());
-                /*
-            } else if(gatt.getDevice().BOND_BONDED == newState){
-                intentAction = ACTION_GATT_BONDED;
-                mConnectionState = STATE_CONNECTED;
-                Log.i(TAG, "BOOOOOOOONDED");
-                broadcastUpdate(intentAction);
-
-                */
 
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 intentAction = ACTION_GATT_DISCONNECTED;
@@ -289,6 +283,8 @@ public class BluetoothLeService extends Service {
      * {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
      * callback.
      */
+
+
     public boolean connect(final String address) {
         if (mBluetoothAdapter == null || address == null) {
             Log.w(TAG, "BluetoothAdapter not initialized or unspecified address.");
@@ -322,6 +318,8 @@ public class BluetoothLeService extends Service {
 
         // We want to directly connect to the device, so we are setting the autoConnect
         // parameter to false.
+
+
         mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
         Log.d(TAG, "Trying to create a new connection.");
         mBluetoothDeviceAddress = address;
@@ -426,101 +424,3 @@ public class BluetoothLeService extends Service {
     }
 }
 
-/* Do nothing. */ //}
-                /*
-            }
-
-            sendMessage(STATUS_READ_DATA_DONE, 0);
-        }
-    }
-
-    private class WriteThread extends Thread {
-        private ParcelFileDescriptor mFd;
-
-        public WriteThread(ParcelFileDescriptor fd) {
-            super();
-            mFd = fd;
-        }
-
-        @Override
-        public void run() {
-            FileOutputStream fos = new FileOutputStream(mFd.getFileDescriptor());
-            final byte data_AR[] = new byte[] {         (byte) 0xE3, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x2C,
-                    (byte) 0x00, (byte) 0x00,
-                    (byte) 0x50, (byte) 0x79,
-                    (byte) 0x00, (byte) 0x26,
-                    (byte) 0x80, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-                    (byte) 0x80, (byte) 0x00,
-                    (byte) 0x80, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-                    (byte) 0x80, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x08,  //bt add for phone, can be automate in the future
-                    (byte) 0x3C, (byte) 0x5A, (byte) 0x37, (byte) 0xFF,
-                    (byte) 0xFE, (byte) 0x95, (byte) 0xEE, (byte) 0xE3,
-                    (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00};
-            final byte data_DR[] = new byte[] {         (byte) 0xE7, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x12,
-                    (byte) 0x00, (byte) 0x10,
-                    (byte) 0x00, (byte) 0x24,
-                    (byte) 0x02, (byte) 0x01,
-                    (byte) 0x00, (byte) 0x0A,
-                    (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-                    (byte) 0x0D, (byte) 0x1D,
-                    (byte) 0x00, (byte) 0x00 };
-
-            final byte get_MDS[] = new byte[] {         (byte) 0xE7, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x0E,
-                    (byte) 0x00, (byte) 0x0C,
-                    (byte) 0x00, (byte) 0x24,
-                    (byte) 0x01, (byte) 0x03,
-                    (byte) 0x00, (byte) 0x06,
-                    (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x00 };
-
-            final byte data_RR[] = new byte[] {         (byte) 0xE5, (byte) 0x00,
-                    (byte) 0x00, (byte) 0x02,
-                    (byte) 0x00, (byte) 0x00 };
-
-//            final byte data_RRQ[] = new byte[] {        (byte) 0xE4, (byte) 0x00,
-//                                                        (byte) 0x00, (byte) 0x02,
-//                                                        (byte) 0x00, (byte) 0x00 };
-//
-//            final byte data_ABORT[] = new byte[] {      (byte) 0xE6, (byte) 0x00,
-//                                                        (byte) 0x00, (byte) 0x02,
-//                                                        (byte) 0x00, (byte) 0x00 };
-            try {
-                Log.i(TAG, String.valueOf(count));
-                if (count == 1)
-                {
-                    fos.write(data_AR);
-                    Log.i(TAG, "Association Responded!");
-                }
-                else if (count == 2)
-                {
-                    fos.write(get_MDS);
-                    Log.i(TAG, "Get MDS object attributes!");
-                }
-                else if (count == 3)
-                {
-                    fos.write(data_DR);
-                    Log.i(TAG, "Data Responsed!");
-                }
-                else if (count == 4)
-                {
-                    fos.write(data_RR);
-                    Log.i(TAG, "Data Released!");
-                }
-            } catch(IOException ioe) {}
-        }
-
-    }
-}
-
-
-*/

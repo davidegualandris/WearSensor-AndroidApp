@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Tue Feb 26 18:46:38 CET 2019
+0.baseType=DIRECTORY
+0.base=/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/transforms/dexMerger/release/0
+0.path=classes.dex
+0.set=DEX
+count=1

@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
         <item android:id="@+id/menu_refresh"
             android:checkable="false"
             android:orderInCategory="1"
             android:showAsAction="ifRoom"
             android:title="Refresh" />
+
+    <item android:id="@+id/menu_watch_image"
+
+        android:icon="@drawable/watch_icon"
+        android:visible="false"
+        app:showAsAction="always"
+         />
+    <item android:id="@+id/menu_phone_image"
+
+        android:icon="@drawable/ic_phone_android_black_24dp"
+        android:visible="false"
+
+        app:showAsAction="always"
+        />
+
         <item android:id="@+id/menu_connect"
             android:title="@string/menu_connect"
             android:orderInCategory="100"

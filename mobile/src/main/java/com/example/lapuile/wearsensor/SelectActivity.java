@@ -87,14 +87,13 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
     private Button heartRate;
     private Button heartBeat;
 
-    // SISTEMARE PARTENDO DA QUA
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
         choice = getIntent().getStringExtra("Type");
-        Log.i(TAG, "CHOICE : " + choice);
+
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -122,10 +121,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent.putExtra("Type", "WearAccelerometer");
                     startActivity(intent);
 
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
 
                 }
 
@@ -150,11 +145,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearAccelerometerUncalibrated");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
 
@@ -175,11 +165,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearMagnetometer");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -199,11 +184,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearMagnetometerUncalibrated");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -224,11 +204,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearGravity");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
 
@@ -250,11 +225,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearGyroscope");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -275,11 +245,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearGyroscopeUncalibrated");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -299,11 +264,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearLinearAcceleration");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -324,11 +284,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearLight");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothEnvironmental")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -349,11 +304,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearProximity");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -374,11 +324,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearAmbientTemperature");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothEnvironmental")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -399,11 +344,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearPressure");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothEnvironmental")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -424,11 +364,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearHumidity");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothEnvironmental")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -448,11 +383,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearRotationVector");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -472,11 +402,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearTemperature");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothEnvironmental")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -497,11 +422,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearGame");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -521,11 +441,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearGeoVector");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -547,11 +462,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearOrientation");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -572,11 +482,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearStepCounter");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothMotion")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -597,11 +502,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearPose6Dof");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -622,11 +522,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearHeartRate");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -647,11 +542,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
                     intent = new Intent(SelectActivity.this, WatchDataActivity.class);
                     intent.putExtra("Type", "WearHeartBeat");
                     startActivity(intent);
-                } else if (choice.equals("BluetoothPosition")) {
-                    intent = new Intent(SelectActivity.this, WatchBluetoothActivity.class);
-                    intent.putExtra("Type", "Accelerometer");
-                    startActivity(intent);
-
                 }
             }
         });
@@ -724,6 +614,7 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             default:
                 break;
         }
+
         if (choice.equals("WearMotion") || choice.equals("WearEnvironmental") || choice.equals("WearPosition")) {
 
             new StartWearableActivityTask().execute();
@@ -984,9 +875,14 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
         menu.findItem(R.id.menu_connect).setVisible(false);
         menu.findItem(R.id.menu_disconnect).setVisible(false);
         menu.findItem(R.id.menu_save).setVisible(false);
+
         if(!(choice.equals("WearMotion")|| choice.equals("WearPosition")  ||
-                choice.equals("WearEnvironmental")))
-                menu.findItem(R.id.menu_refresh).setVisible(false);
+                choice.equals("WearEnvironmental"))) {
+            menu.findItem(R.id.menu_phone_image).setVisible(true);
+            menu.findItem(R.id.menu_refresh).setVisible(false);
+        }
+        else
+            menu.findItem(R.id.menu_watch_image).setVisible(true);
 
 
 

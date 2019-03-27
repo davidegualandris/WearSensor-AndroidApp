@@ -32,10 +32,6 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.example.lapuile.wearsensor.HomeActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.example.lapuile.wearsensor.SelectActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
@@ -50,7 +46,8 @@
         <activity
             android:name="com.example.lapuile.wearsensor.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,10 +85,6 @@
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-        <meta-data
-            android:name="android.support.VERSION"
-            android:value="26.1.0" />
     </application>
 
 </manifest>

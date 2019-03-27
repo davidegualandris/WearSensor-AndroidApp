@@ -125,8 +125,9 @@
     <string name="query_sensors">query watch sensors</string>
 
 
-    <string name="accelerometer_description">Measures the acceleration force in m/s² that
-        is applied to a device on all three physical axes (x, y, and z),
+    <string name="accelerometer_description">Measures the acceleration force in m/s² \n
+        that
+        is applied to a device on all three physical axes (x, y, z), \n
         including the force of gravity.</string>
 
     <string name="magnetometer_description">Measures the ambient geomagnetic field
@@ -262,5 +263,8 @@
 
     <string name="Battery_level">The current charge level of a battery.
         100% represents fully charged while 0% represents fully discharged</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 

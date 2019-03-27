@@ -51,13 +51,12 @@ public class ExcelSheet {
         sensorValue = value;
         dataSensorList = dataSensorPass;
         description = descr;
-
         maxRange = range;
         power = battery;
         resolution = res;
         version = vers;
         vendor = vend;
-        Log.i(TAG, dataSensorPass.get(0));
+
 
     }
 

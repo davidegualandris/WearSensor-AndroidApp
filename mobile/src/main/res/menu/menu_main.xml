@@ -12,6 +12,20 @@
         app:showAsAction="always"
         />
 
+    <item android:id="@+id/menu_watch_image"
+
+        android:icon="@drawable/watch_icon"
+        android:visible="false"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/menu_phone_image"
+
+        android:icon="@drawable/ic_phone_android_black_24dp"
+        android:visible="false"
+
+        app:showAsAction="always"
+        />
+
     <item
         android:id="@+id/info_action"
         android:orderInCategory="100"
