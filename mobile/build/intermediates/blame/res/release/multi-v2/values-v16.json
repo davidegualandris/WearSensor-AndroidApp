@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "D:\\GitRep\\laurea-magistrale\\wearsensor v1 1\\wearsensor\\mobile\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/bd02c7b5dd46f33126c5626eb1accac4/res/values-v16/values-v16.xml",
+                    "source": "C:\\Users\\uni\\.gradle\\caches\\transforms-2\\files-2.1\\c561a71027ba74af9eaa38b7c8a174bb\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/res/values-v16/values-v16.xml",
+                    "source": "C:\\Users\\uni\\.gradle\\caches\\transforms-2\\files-2.1\\1f6f89158011d431478f81202dfe0753\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

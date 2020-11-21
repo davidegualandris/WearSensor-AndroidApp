@@ -1,17 +1,12 @@
 package com.example.lapuile.wearsensor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-
-import android.support.annotation.WorkerThread;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,9 +15,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-
 import com.google.android.gms.wearable.DataClient;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
@@ -87,21 +86,18 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
     private Button heartRate;
     private Button heartBeat;
 
-
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
         choice = getIntent().getStringExtra("Type");
 
-
-
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setTitle(getIntent().getStringExtra("Type"));
-
 
         accelerometer = (Button) findViewById(R.id.accelerometer_button);
         accelerometer.setOnClickListener(new View.OnClickListener() {
@@ -546,14 +542,117 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
             }
         });
 
+        // De-comment the following code to create dynamically the button to know about the sensors that can be interrogated
+        /*// Define the buttons for the questionable sensors of the esp
+        if(choice.equals("First Remote Endpoint") || choice.equals("Second Remote Endpoint") || choice.equals("All Remote Endpoints")){
 
-//        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
+            // Get the ViewModel.
+            KaaApplicationViewModel model = new ViewModelProvider(this).get(KaaApplicationViewModel.class);
+
+            Context context = this;
+
+            // Create the observer which updates the UI.
+            final Observer<List<String>> observer = new Observer<List<String>>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onChanged(@Nullable final List<String> kaaDataNames) {
+
+                    String dataNames = String.join(",", kaaDataNames);
+
+                    LinearLayout linearLayout = (LinearLayout)findViewById(R.id.scrollView_linearLayout);
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,100);
+                    params.setMargins(8,8,8,8);
+                    params.setMarginEnd(8);
+                    params.setMarginStart(8);
+
+                    Button btn=new Button(context);
+                    btn.setLayoutParams(params);
+                    btn.setBackgroundResource(R.drawable.button_custom);
+                    btn.setTextColor(R.color.colorPrimary);
+                    btn.setTag("@+id/all-data");
+                    btn.setText("All data");
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Intent intent;
+
+                            if (choice.equals("First Remote Endpoint")) {
+                                intent = new Intent(SelectActivity.this, EspData.class);
+                                intent.putExtra("Data", dataNames);
+                                intent.putExtra("Endpoint", Constants.KAA_ESP_FIRST_ENDPOINT_ID);
+                                startActivity(intent);
+                            } else if (choice.equals("Second Remote Endpoint")) {
+                                intent = new Intent(SelectActivity.this, EspData.class);
+                                intent.putExtra("Data", dataNames);
+                                intent.putExtra("Endpoint", Constants.KAA_ESP_SECOND_ENDPOINT_ID);
+                                startActivity(intent);
+                            } else if (choice.equals("All Remote Endpoints")) {
+                                intent = new Intent(SelectActivity.this, EspData.class);
+                                intent.putExtra("Data", dataNames);
+                                intent.putExtra("Endpoint", Constants.KAA_ESP_ALL_ENDPOINT_IDs);
+                                startActivity(intent);
+                            }
+                        }});
+                    linearLayout.addView(btn);
+
+                    // For each value gotten from the api create a button
+                    for (int i = 0; i < kaaDataNames.size(); i++) {
+
+                        btn=new Button(context);
+                        // I got this values from the "activity_select.xml"
+                        btn.setLayoutParams(params);
+                        btn.setBackgroundResource(R.drawable.button_custom);
+                        btn.setTextColor(R.color.colorPrimary);
+
+                        String dataName = kaaDataNames.get(i);
+                        btn.setTag("@+id/"+dataName);
+                        btn.setText(dataName);
+
+                        btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Intent intent;
+
+                                if (choice.equals("First Remote Endpoint")) {
+                                    intent = new Intent(SelectActivity.this, EspData.class);
+                                    intent.putExtra("Data", dataName);
+                                    intent.putExtra("Endpoint", Constants.KAA_ESP_FIRST_ENDPOINT_ID);
+                                    startActivity(intent);
+                                } else if (choice.equals("Second Remote Endpoint")) {
+                                    intent = new Intent(SelectActivity.this, EspData.class);
+                                    intent.putExtra("Data", dataName);
+                                    intent.putExtra("Endpoint", Constants.KAA_ESP_SECOND_ENDPOINT_ID);
+                                    startActivity(intent);
+                                } else if (choice.equals("All Remote Endpoints")) {
+                                    intent = new Intent(SelectActivity.this, EspData.class);
+                                    intent.putExtra("Data", dataName);
+                                    intent.putExtra("Endpoint", Constants.KAA_ESP_ALL_ENDPOINT_IDs);
+                                    startActivity(intent);
+                                }
+                            }});
+
+                        try {
+                            linearLayout.addView(btn);
+                        }catch (Exception e){
+                            e.getStackTrace();
+                        }
+                    }
+                }
+            };
+
+            // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+            model.getKaaDataNames().observe(this, observer);
+        }*/
+
+        //List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
 
         switch (choice) {
-
 
             case "Motion":
                 if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
@@ -610,7 +709,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
 
                 break;
 
-
             default:
                 break;
         }
@@ -619,7 +717,6 @@ public class SelectActivity extends AppCompatActivity implements DataClient.OnDa
 
             new StartWearableActivityTask().execute();
         }
-
 
     }
 

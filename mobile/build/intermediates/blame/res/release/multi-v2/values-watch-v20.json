@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "D:\\GitRep\\laurea-magistrale\\wearsensor v1 1\\wearsensor\\mobile\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
             "map": [
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/da51a2d7f46b8b555955feb68c3b515a/res/values-watch-v20/values.xml",
+                    "source": "C:\\Users\\uni\\.gradle\\caches\\transforms-2\\files-2.1\\41b0581a9c235320e356ca2fdbe98625\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/res/values-watch-v20/values-watch-v20.xml",
+                    "source": "C:\\Users\\uni\\.gradle\\caches\\transforms-2\\files-2.1\\1f6f89158011d431478f81202dfe0753\\res\\values-watch-v20\\values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",

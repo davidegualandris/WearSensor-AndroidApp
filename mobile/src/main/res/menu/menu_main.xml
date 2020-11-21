@@ -6,10 +6,10 @@
 
     <item
         android:id="@+id/save_action"
-        android:orderInCategory="100"
-        android:title="save"
+        android:orderInCategory="103"
+        android:title="@string/save"
         android:icon="@drawable/save"
-        app:showAsAction="always"
+        app:showAsAction="never"
         />
 
     <item android:id="@+id/menu_watch_image"
@@ -28,10 +28,16 @@
 
     <item
         android:id="@+id/info_action"
-        android:orderInCategory="100"
-        android:title="info"
+        android:orderInCategory="101"
+        android:title="@string/info"
         android:icon="@drawable/ic_info_black_24dp"
-        app:showAsAction="always"
+        app:showAsAction="never"
         />
 
+    <item
+        android:id="@+id/settings_action"
+        android:orderInCategory="102"
+        android:title="@string/settings"
+        app:showAsAction="never"
+        />
 </menu>

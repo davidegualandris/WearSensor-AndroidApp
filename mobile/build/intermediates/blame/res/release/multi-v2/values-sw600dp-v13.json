@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "D:\\GitRep\\laurea-magistrale\\wearsensor v1 1\\wearsensor\\mobile\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffb7410c25a75edbc4e40e29815bd57a/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\uni\\.gradle\\caches\\transforms-2\\files-2.1\\0c5824e419c0343f69acfcc98f854b66\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\uni\\.gradle\\caches\\transforms-2\\files-2.1\\1f6f89158011d431478f81202dfe0753\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

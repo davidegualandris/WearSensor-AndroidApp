@@ -1,14 +1,16 @@
 package com.example.lapuile.wearsensor;
 
-import android.app.ActionBar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +28,11 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
 
     }
     private void setupViewPager(ViewPager viewPager) {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new PhoneFragment(), "Phone");
         adapter.addFragment(new WearFragment(), "Wear Device");
         adapter.addFragment(new BluetoothFragment(), "Bluetooth Device");
+        adapter.addFragment(new EspFragment(), "Remote Devices");
         viewPager.setAdapter(adapter);
     }
 

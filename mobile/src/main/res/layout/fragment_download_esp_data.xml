@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".QueryRemoteDevicesActivity">
+
+    <LinearLayout
+        android:id="@+id/mainLayoutDownloadDataFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:focusable="true" android:focusableInTouchMode="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseEndpointToQuery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewEndpoint"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/textViewChooseDataToRetrieveLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="start"
+                    android:foregroundGravity="center_vertical"
+                    android:text="@string/wait_please_loading"
+                    android:textColor="@color/black_text"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutEndpointSensorsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical" >
+
+                    <!-- Here a new CardView will be added for every endpoint -->
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!--<TextView
+            android:id="@+id/textViewQueryRemoteEndpoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_custom"
+            android:gravity="center"
+            android:text="@string/stringTextViewQueryRemoteEndpoint"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/chooseTextViewChooseEndpointToQuery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseEndpointToQuery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewEndpoint"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <CheckBox
+                    android:id="@+id/checkBoxChooseEndpointToQueryOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/stringCheckBoxChooseEndpointToQueryOne" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxChooseEndpointToQueryTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/stringCheckBoxChooseEndpointToQueryTwo" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <LinearLayout
+                android:id="@+id/layoutChooseDataToRetrieve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseDataToRetrieve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDataToRetrieve"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/textViewChooseDataToRetrieveLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="start"
+                    android:foregroundGravity="center_vertical"
+                    android:text="@string/wait_please_loading"
+                    android:textColor="@color/black_text"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>-->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseFrequency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTestViewChoosePeriod"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/editTextDownloadSamplingPeriod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:inputType="number"
+                    android:text="@string/defaultSampleTimeEspKaa"
+                    android:autofillHints=""
+                    tools:ignore="LabelFor" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/textViewChooseDownloadFromDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDownloadFromDate"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:id="@+id/textViewChooseDownloadFromDate1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDownloadTimeZone"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/editTextChooseDownloadFromDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="date"
+                        android:autofillHints=""
+                        tools:ignore="LabelFor" />
+                    <EditText
+                        android:id="@+id/editTextChooseDownloadFromTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:autofillHints=""
+                        tools:ignore="LabelFor" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseDownloadToDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDownloadToDate"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/textViewChooseDownloadToDate1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDownloadTimeZone"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/editTextChooseDownloadToDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="date"
+                        android:autofillHints=""
+                        tools:ignore="LabelFor" />
+                    <EditText
+                        android:id="@+id/editTextChooseDownloadToTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:autofillHints=""
+                        tools:ignore="LabelFor" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/include-time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDowloadIncludeTime"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/radioGroupIncludeTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:checkedButton="@+id/radioButtonIncludeTimeBothDate">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonIncludeTimeNoneDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringChooseDowloadIncludeTimeNone" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonIncludeTimeFromDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringChooseDowloadIncludeTimeFrom" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonIncludeTimeToDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringChooseDowloadIncludeTimeTo" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonIncludeTimeBothDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringChooseDowloadIncludeTimeBoth" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseDowloadSort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDowloadSort"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/radioGroupOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:checkedButton="@+id/radioButtonChooseDowloadSortASC">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonChooseDowloadSortASC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringRadioButtonChooseDowloadSortASC" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonChooseDowloadSortDESC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringRadioButtonChooseDowloadSortDESC" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseDownloadFolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDownloadFolder"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/textViewChooseDownloadFolder1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDownloadFolder1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"/>
+
+                <Button
+                    android:id="@+id/buttonChooseDownloadFolder"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:background="@null"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/stringButtonChooseDownloadFolder"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black_text"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewDownloadFolderChosen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_text"
+                    android:visibility="gone"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textSize="13sp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewChooseDownloadFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stringTextViewChooseDownloadFileName"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/editTextDownloadFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:inputType="textPersonName"
+                    android:text="@string/stringEditTextDownloadFileName"
+                    android:autofillHints=""
+                    tools:ignore="LabelFor" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/testViewChooseDownloadFormat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_the_format"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"/>
+
+                <RadioGroup
+                    android:id="@+id/radioGroupSelectDownloadFormat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:checkedButton="@+id/radioButtonDownloadFormatJSON">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonDownloadFormatJSON"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringResourceDownloadFormatJSON" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonDownloadFormatXML"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringResourceDownloadFormatXML" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonDownloadFormatCSV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stringResourceDownloadFormatCSV" />
+
+                </RadioGroup></LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+            <Button
+                android:id="@+id/buttonDownloadDataFromWearSensorAPI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/button_custom"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/textButtonDownloadDataFromWearSensorAPI"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

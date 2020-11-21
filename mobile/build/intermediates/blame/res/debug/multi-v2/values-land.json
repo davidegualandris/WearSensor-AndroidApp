@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/lapuile/Documenti/Stage/wearsensor/mobile/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
+            "outputFile": "C:\\Users\\utente\\Desktop\\Davide\\Bicocca\\Magistrale\\Tesi\\Android-wearsensor\\wearsensor\\mobile\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/e65cb83b365f0343ec16938339145360/res/values-land/values-land.xml",
+                    "source": "C:\\Users\\utente\\.gradle\\caches\\transforms-2\\files-2.1\\99505295b83f1cf0984dbe42aaedc8f6\\appcompat-1.1.0-rc01\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/lapuile/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffb7410c25a75edbc4e40e29815bd57a/res/values-land/values-land.xml",
+                    "source": "C:\\Users\\utente\\.gradle\\caches\\transforms-2\\files-2.1\\bcaf2f38bd0e6ffe04a17e5f685cbed4\\material-1.0.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

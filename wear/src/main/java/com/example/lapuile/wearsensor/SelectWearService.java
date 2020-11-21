@@ -2,10 +2,8 @@ package com.example.lapuile.wearsensor;
 
 
 import android.content.Context;
-
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,12 +13,13 @@ import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
-import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.android.gms.wearable.Wearable.getDataClient;
 
 public class SelectWearService extends WearableListenerService {
 
@@ -109,7 +108,7 @@ public class SelectWearService extends WearableListenerService {
         putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
+        Task<DataItem> putDataTask = getDataClient(this).putDataItem(putDataReq);
         putDataTask.addOnSuccessListener(
                 new OnSuccessListener<DataItem>() {
                     @Override
@@ -146,7 +145,7 @@ public class SelectWearService extends WearableListenerService {
         putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
+        Task<DataItem> putDataTask = getDataClient(this).putDataItem(putDataReq);
         putDataTask.addOnSuccessListener(
                 new OnSuccessListener<DataItem>() {
                     @Override
@@ -180,7 +179,7 @@ public class SelectWearService extends WearableListenerService {
         putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
+        Task<DataItem> putDataTask = getDataClient(this).putDataItem(putDataReq);
         putDataTask.addOnSuccessListener(
                 new OnSuccessListener<DataItem>() {
                     @Override
@@ -210,7 +209,7 @@ public class SelectWearService extends WearableListenerService {
         putDataMapReq.getDataMap().putLong("Time", System.currentTimeMillis());
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
         putDataReq.setUrgent();
-        Task<DataItem> putDataTask = Wearable.getDataClient(this).putDataItem(putDataReq);
+        Task<DataItem> putDataTask = getDataClient(this).putDataItem(putDataReq);
         putDataTask.addOnSuccessListener(
                 new OnSuccessListener<DataItem>() {
                     @Override

@@ -266,5 +266,77 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-</resources>
+    <string name="save">Save</string>
+    <string name="settings">Settings</string>
+    <string name="info">Information</string>
+    <string name="title_activity_settings">Settings</string>
 
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Settings Preferences -->
+    <string name="use_default_configuration">Use default configuration</string>
+    <string name="sending_frequency">Sending frequency (ms):</string>
+    <string name="sending_period">Sending period (ms):</string>
+    <string name="save_changes">Save changes</string>
+    <string name="current_frequency_text">Current frequency (ms): </string>
+    <string name="current_period_text">Current period (ms): </string>
+    <string name="sensor_name_settings">Sensor name:</string>
+
+    <!-- Data Sending Preferences -->
+    <string name="defaultKaa">com.example.lapuile.wearsensor.defaultKaa_</string>
+    <string name="frequencyKaa">com.example.lapuile.wearsensor.frequency_</string>
+    <string name="periodKaa">com.example.lapuile.wearsensor.period_</string>
+
+    <string name="sent_data_text">Data sent to Kaa:</string>>
+    <string name="received_data_text">Data received from Kaa:</string>
+    <string name="choose_the_format">Choose the format</string>
+    <string name="stringResourceDownloadFormatXML">XML</string>
+    <string name="stringResourceDownloadFormatJSON">JSON</string>
+    <string name="stringResourceDownloadFormatCSV">CSV</string>
+    <string name="stringTextViewChooseDowloadIncludeTime">Which date is inclusive?</string>
+    <string name="stringChooseDowloadIncludeTimeNone">None</string>
+    <string name="stringChooseDowloadIncludeTimeFrom">"From" date</string>
+    <string name="stringChooseDowloadIncludeTimeTo">"To" date</string>
+    <string name="stringChooseDowloadIncludeTimeBoth">Both</string>
+    <string name="stringTextViewChooseDowloadSort">Sorting</string>
+    <string name="stringRadioButtonChooseDowloadSortASC">ASC</string>
+    <string name="stringRadioButtonChooseDowloadSortDESC">DESC</string>
+    <string name="textButtonDownloadDataFromWearSensorAPI">Download Data</string>
+    <string name="stringTextViewChooseDownloadFromDate">From date and time</string>
+    <string name="stringTextViewChooseDownloadToDate">To date and time</string>
+    <string name="stringButtonChooseDownloadFromDate">Click to pick FROM which Date and Time</string>
+    <string name="stringButtonChooseDownloadToDate">Click to pick TO which Date and Time</string>
+    <string name="first_endpoint">First EndPoint</string>
+    <string name="second_endpoint">Second EndPoint</string>
+    <string name="all_endpoints">All EndPoints</string>
+    <string name="stringTestViewChoosePeriod">Sample period (ms)</string>
+    <string name="defaultSampleTimeEspKaa">1000</string>
+    <string name="stringTextViewChooseDownloadTimeZone">Set your local time</string>
+    <string name="stringTextViewChooseDownloadFolder">Choose the destination folder</string>
+    <string name="stringButtonChooseDownloadFolder">Click to choose the folder</string>
+    <string name="stringTextViewChooseDownloadFileName">Choose the file name (omitting the format)</string>
+    <string name="stringEditTextDownloadFileName">endpoints-data</string>
+    <string name="stringTextViewChooseDownloadFolder1">Leave empty for default download folder</string>
+    <string name="stringTextViewEndpoint">Choose the endpoints and the sensors you want to query</string>
+    <string name="stringTextViewChooseDataToRetrieve">Choose the data you want to retrieve</string>
+    <string name="stringCheckBoxChooseEndpointToQueryOne">First endpoint</string>
+    <string name="stringCheckBoxChooseEndpointToQueryTwo">Second endpoint</string>
+    <string name="wait_please_loading">Wait please, loading…</string>
+    <string name="error_while_retrieving_the_data">Error while retrieving the data</string>
+    <string name="stringTextViewQueryRemoteEndpoint">Query the remote endpoints</string>
+    <string name="query_remote_endpoints">Query remote endpoints</string>
+    >
+</resources>

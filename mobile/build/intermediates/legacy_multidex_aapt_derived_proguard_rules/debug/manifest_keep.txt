@@ -1,0 +1,2 @@
+-keep class androidx.multidex.MultiDexApplication { <init>(); }
+-keep class com.example.lapuile.wearsensor.whateverString { <init>(); }

@@ -1,0 +1,4 @@
+# Referenced at D:\GitRep\laurea-magistrale\wearsensor v1 1\wearsensor\mobile\build\intermediates\merged_manifests\debug\AndroidManifest.xml:21
+-keep class androidx.multidex.MultiDexApplication { <init>(); }
+# Referenced at D:\GitRep\laurea-magistrale\wearsensor v1 1\wearsensor\mobile\build\intermediates\merged_manifests\debug\AndroidManifest.xml:21
+-keep class com.example.lapuile.wearsensor.whateverString { <init>(); }

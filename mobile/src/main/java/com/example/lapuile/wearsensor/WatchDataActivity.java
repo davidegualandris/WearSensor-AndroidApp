@@ -1,29 +1,16 @@
 package com.example.lapuile.wearsensor;
 
-
 import android.Manifest;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
-
-import android.support.annotation.NonNull;
-
-import android.support.annotation.WorkerThread
-
-
-        ;
-import android.support.v4.app.ActivityCompat;
-
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,14 +18,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.preference.PreferenceManager;
 
+import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.android.gms.wearable.CapabilityClient;
 import com.google.android.gms.wearable.CapabilityInfo;
@@ -54,14 +46,14 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
 
 import java.util.ArrayList;
-
 import java.util.Collection;
-
 import java.util.HashSet;
 import java.util.List;
-
 import java.util.concurrent.ExecutionException;
-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class WatchDataActivity extends AppCompatActivity implements DataClient.OnDataChangedListener,
         MessageClient.OnMessageReceivedListener,
@@ -89,6 +81,7 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
     private String intentChoice;
 
+    private List<String> dataNames;
     private float[] copyValue;
 
     private float maxRange;
@@ -96,9 +89,6 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
     private float resolution;
     private String vendor;
     private int version;
-
-
-
 
     private String sensorName;
     private int sensorType;
@@ -109,10 +99,40 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
     ArrayList<String> listGlobal;
 
-
     ListView sensor_list;
     private static final int PERMISSION_REQUEST_CODE = 200;
 
+	private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+	private ScheduledFuture scheduledFuture;
+    private static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+    private KaaHandler kaaHandler;
+    
+	private int frequency;
+	private int period;
+    
+	private Runnable sendToKaa = new Runnable() {
+        @Override
+        public void run() {
+            Log.i("COLLECTION_DATA", "ENTER");
+            String preKey = getString(R.string.defaultKaa) + getStringIntent();
+            List<Float> sensor_data = new ArrayList<>(copyValue.length);
+			
+            for (float f : copyValue) {
+                sensor_data.add(Float.valueOf(f));
+            }
+            
+			//KaaHandler.collectData("watch", sensorName, sensor_data);
+            KaaHandler.collectData("watch", sensorName, dataNames, sensor_data);
+			//CSVHandler.writeData("Test", sensor_data);
+			
+			if(kaaHandler.getFrequency() != frequency && mPreferences.getBoolean(preKey, true)) {
+                Log.i("FREQUENCY_CHANGED", String.valueOf(kaaHandler.getFrequency()));
+                sendLogToKaaHandler();
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,12 +144,27 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setTitle(getIntent().getStringExtra("Type"));
 
+        dataNames = new ArrayList<>();
+
         decision = "";
 
         sensor_list = findViewById(R.id.sensor_list_wear);
 
-
-        intentChoice = getIntent().getStringExtra("Type");
+		Context context = this;
+        //kaaHandler = new KaaHandler(context);
+        kaaHandler = new KaaHandler();
+		
+		if(getStringIntent().equals("SensorList")){
+            kaaHandler.pause();
+        }
+		
+		frequency = kaaHandler.getFrequency();
+        period = kaaHandler.getPeriod();
+		
+		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPreferences.edit();
+		
+        intentChoice = getStringIntent();
 
         if (intentChoice.equals("WearSensorList")) {
             LinearLayout mLinearLayout = findViewById(R.id.linearLayout2);
@@ -152,12 +187,16 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
     }
 
+	private String getStringIntent() {
+
+        Intent choice = getIntent();
+        String type = choice.getStringExtra("Type");
+        return type;
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
 
     @Override
@@ -169,7 +208,10 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         Wearable.getDataClient(this).removeListener(this);
         Wearable.getMessageClient(this).removeListener(this);
         Wearable.getCapabilityClient(this).removeListener(this);
-
+		
+		kaaHandler.pause();
+        if (scheduledFuture != null)
+            scheduledFuture.cancel(false);
     }
 
 
@@ -179,6 +221,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         Wearable.getDataClient(this).removeListener(this);
         Wearable.getMessageClient(this).removeListener(this);
         Wearable.getCapabilityClient(this).removeListener(this);
+		
+		kaaHandler.stop();
     }
 
     @Override
@@ -255,12 +299,14 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 else
                     description = getString(R.string.gravity_description);
 
-
-
-
                 listp.add(getString(R.string.acc_grav_x_text, sensorData[0]));
                 listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[1]));
                 listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[2]));
+
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
+
                 break;
 
 
@@ -269,6 +315,11 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getString(R.string.magnetic_field_y_text, sensorData[1]));
                 listp.add(getString(R.string.magnetic_field_z_text, sensorData[2]));
                 description = getString(R.string.magnetometer_description);
+
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
+
                 break;
 
             case Sensor.TYPE_GYROSCOPE:
@@ -276,6 +327,10 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getString(R.string.gyroscope_y_text, sensorData[1]));
                 listp.add(getString(R.string.gyroscope_z_text, sensorData[2]));
                 description = getString(R.string.gyroscope_description);
+
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
                 break;
 
             case Sensor.TYPE_ROTATION_VECTOR:
@@ -295,6 +350,11 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getResources().getString(R.string.rotation_vector_text_z, sensorData[2]));
                 listp.add(getResources().getString(R.string.rotation_vector_cos, sensorData[3]));
 
+                dataNames.add("xTimesSinHalfTeta");
+                dataNames.add("yTimesSinHalfTeta");
+                dataNames.add("zTimesSinHalfTeta");
+                dataNames.add("CosHalfTeta");
+
 
                 if (Sensor.TYPE_GAME_ROTATION_VECTOR != sensorType)
                     listp.add(getResources().getString(R.string.rotation_vector_estimated, sensorData[4]));
@@ -306,28 +366,47 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getString(R.string.orientation_z_text, sensorData[2]));
                 description = getString(R.string.orientation_description);
 
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
+
                 break;
 
             case Sensor.TYPE_LIGHT:
                 listp.add(getString(R.string.light_text, sensorData[0]));
                 description = getString(R.string.light_description);
+
+                dataNames.add("light");
+
                 break;
             case Sensor.TYPE_PROXIMITY:
                 listp.add(getString(R.string.proximity, sensorData[0]));
                 description = getString(R.string.proximity_description);
+
+                dataNames.add("proximity");
+
                 break;
 
             case Sensor.TYPE_PRESSURE:
                 listp.add(getString(R.string.pressure_text, sensorData[0]));
                 description = getString(R.string.pressure_description);
+
+                dataNames.add("pressure");
+
                 break;
             case Sensor.TYPE_RELATIVE_HUMIDITY:
                 listp.add(getString(R.string.humidity_text, sensorData[0]) + "%");
                 description = getString(R.string.humidity_description);
+
+                dataNames.add("humidity");
+
                 break;
             case Sensor.TYPE_STEP_COUNTER:
                 listp.add(getString(R.string.step_counter_text, sensorData[0]));
                 description = getString(R.string.step_counter_description);
+
+                dataNames.add("steps");
+
                 break;
             case Sensor.TYPE_TEMPERATURE:
             case Sensor.TYPE_AMBIENT_TEMPERATURE:
@@ -336,14 +415,23 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 else
                     description = getString(R.string.ambient_t_description);
                 listp.add(getString(R.string.ambient_temperature, sensorData[0]));
+
+                dataNames.add("temperature");
+
                 break;
             case Sensor.TYPE_HEART_RATE:
                 description = getString(R.string.heart_rate_description);
                 listp.add(getString(R.string.heart_rate_text, sensorData[0]));
+
+                dataNames.add("bpm");
+
                 break;
             case Sensor.TYPE_HEART_BEAT:
                 description = getString(R.string.heart_beat_description);
                 listp.add(getString(R.string.onedimension_text, sensorData[0]));
+
+                dataNames.add("values");
+
                 break;
 
             case Sensor.TYPE_ACCELEROMETER_UNCALIBRATED:
@@ -357,6 +445,14 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getResources().getString(R.string.acc_unc_y_2, sensorData[4]));
                 listp.add(getResources().getString(R.string.acc_unc_z_2, sensorData[5]));
 
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
+                dataNames.add("estimatedBiasCompensationOnX");
+                dataNames.add("estimatedBiasCompensationOnY");
+                dataNames.add("estimatedBiasCompensationOnZ");
+
+
                 break;
 
             case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
@@ -369,6 +465,13 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getResources().getString(R.string.gyrosc_unc_x_2, sensorData[3]));
                 listp.add(getResources().getString(R.string.gyrosc_unc_y_2, sensorData[4]));
                 listp.add(getResources().getString(R.string.gyrosc_unc_z_2, sensorData[5]));
+
+                dataNames.add("angularSpeedAroundX");
+                dataNames.add("angularSpeedAroundY");
+                dataNames.add("angularSpeedAroundZ");
+                dataNames.add("estimatedDriftAroundX");
+                dataNames.add("estimatedDriftAroundY");
+                dataNames.add("estimatedDriftAroundZ");
                 break;
 
             case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
@@ -381,6 +484,12 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getResources().getString(R.string.magnet_unc_y_2, sensorData[4]));
                 listp.add(getResources().getString(R.string.magnet_unc_z_2, sensorData[5]));
 
+                dataNames.add("alongX");
+                dataNames.add("alongY");
+                dataNames.add("alongZ");
+                dataNames.add("ironBiasAlongX");
+                dataNames.add("ironBiasAlongY");
+                dataNames.add("ironBiasAlongZ");
 
                 break;
 
@@ -401,6 +510,22 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 listp.add(getResources().getString(R.string.delta_transl_y, sensorData[12]));
                 listp.add(getResources().getString(R.string.delta_transl_z, sensorData[13]));
                 listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
+
+                dataNames.add("yGravitationalAcceleration");
+                dataNames.add("zGravitationalAcceleration");
+                dataNames.add("xGravitationalAcceleration");
+                dataNames.add("CosHalfTeta");
+                dataNames.add("translationAlongX");
+                dataNames.add("translationAlongY");
+                dataNames.add("translationAlongZ");
+                dataNames.add("deltaQuaternionRotationXTimesSinHalfTeta");
+                dataNames.add("deltaQuaternionRotationYTimesSinHalfTeta");
+                dataNames.add("deltaQuaternionRotationZTimesSinHalfTeta");
+                dataNames.add("deltaQuaternionRotationCosHalfTeta");
+                dataNames.add("deltaTranslationAlongX");
+                dataNames.add("deltaTranslationAlongY");
+                dataNames.add("deltaTranslationAlongZ");
+                dataNames.add("sequenceNumber");
 
                 break;
 
@@ -437,7 +562,11 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         Wearable.getCapabilityClient(this)
                 .addListener(this, Uri.parse("wear://"), CapabilityClient.FILTER_REACHABLE);
         new StartWearableActivityTask().execute();
-
+		
+        if(kaaHandler.getSTATUS() != "START"){
+			kaaHandler.resume();
+		}
+		sendLogToKaaHandler();
     }
 
     public void pauseSensorDataWear(View view) {
@@ -448,7 +577,9 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         Wearable.getMessageClient(this).removeListener(this);
         Wearable.getCapabilityClient(this).removeListener(this);
 
-
+		kaaHandler.pause();
+        if (scheduledFuture != null)
+            scheduledFuture.cancel(false);
     }
 
 
@@ -595,6 +726,8 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
         menu.findItem(R.id.menu_watch_image).setVisible(true);
         if(intentChoice.equals("WearSensorList"))
             menu.findItem(R.id.info_action).setVisible(false);
+			menu.findItem(R.id.settings_action).setVisible(false);
+			menu.findItem(R.id.save_action).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         return true;
     }
 
@@ -621,6 +754,13 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
 
                 startActivity(intent);
 
+                return true;
+			case R.id.settings_action:
+                intent = new Intent(this, SettingsActivity.class);
+                intent.putExtra("sensor_type", getStringIntent());
+                intent.putExtra("frequency", kaaHandler.getFrequency());
+                intent.putExtra("period", kaaHandler.getPeriod());
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -690,6 +830,30 @@ public class WatchDataActivity extends AppCompatActivity implements DataClient.O
                 Toast.makeText(this, "External Storage isn't writable",
                         Toast.LENGTH_LONG).show();
 
+        }
+    }
+	
+	public void sendLogToKaaHandler() {
+        //Log.i("ENTER_METHOD","collectData()");
+		String preKey = getString(R.string.defaultKaa) + getStringIntent();
+        String freKey = getString(R.string.frequencyKaa) + getStringIntent();
+        String perKey = getString(R.string.periodKaa) + getStringIntent();
+        frequency = kaaHandler.getFrequency();
+        period = kaaHandler.getPeriod();
+		int fr = frequency;
+        int pr = period;
+        if (!mPreferences.getBoolean(preKey, true)){
+            fr = mPreferences.getInt(freKey, frequency);
+            pr = mPreferences.getInt(perKey, period);
+            kaaHandler.setPeriod(pr);
+        }
+		
+        if(frequency > 0 && period >= frequency) {
+            if (scheduledFuture != null) {
+                scheduledFuture.cancel(false);
+            }
+            scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(
+                    sendToKaa, kaaHandler.getDefaultStartDelay(), fr, TimeUnit.MILLISECONDS);
         }
     }
 }

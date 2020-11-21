@@ -19,6 +19,8 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
+import static com.google.android.gms.wearable.Wearable.*;
+
 
 public class WearDataService extends Service implements SensorEventListener {
 
@@ -317,7 +319,7 @@ public class WearDataService extends Service implements SensorEventListener {
 
                         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
                         putDataReq.setUrgent();
-                        Task<DataItem> putDataTask = Wearable.getDataClient(getApplicationContext()).putDataItem(putDataReq);
+                        Task<DataItem> putDataTask = getDataClient(getApplicationContext()).putDataItem(putDataReq);
                         putDataTask.addOnSuccessListener(
                                 new OnSuccessListener<DataItem>() {
                                     @Override

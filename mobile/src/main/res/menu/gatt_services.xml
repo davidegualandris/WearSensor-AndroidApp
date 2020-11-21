@@ -6,7 +6,7 @@
         <item android:id="@+id/menu_refresh"
             android:checkable="false"
             android:orderInCategory="1"
-            android:showAsAction="ifRoom"
+            app:showAsAction="ifRoom"
             android:title="Refresh" />
 
     <item android:id="@+id/menu_watch_image"
@@ -26,14 +26,14 @@
         <item android:id="@+id/menu_connect"
             android:title="@string/menu_connect"
             android:orderInCategory="100"
-            android:showAsAction="ifRoom|withText" />
+            app:showAsAction="ifRoom|withText" />
         <item android:id="@+id/menu_disconnect"
             android:title="@string/menu_disconnect"
             android:orderInCategory="101"
-            android:showAsAction="ifRoom|withText"/>
+            app:showAsAction="ifRoom|withText"/>
         <item android:id="@+id/menu_save"
             android:title="Save Data"
             android:orderInCategory="110"
-            android:showAsAction="ifRoom|withText"/>
+            app:showAsAction="ifRoom|withText"/>
     </menu>
 

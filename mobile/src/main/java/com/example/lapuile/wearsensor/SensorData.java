@@ -3,20 +3,15 @@ package com.example.lapuile.wearsensor;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,14 +19,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 
 public class SensorData extends AppCompatActivity implements SensorEventListener {
@@ -47,23 +50,55 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     private String vendor;
     private int version;
 
+    private List<String> dataNames;
     private float[] copyValue;
     private String description;
 
     ListView sensor_list;
 
-
     private static final int PERMISSION_REQUEST_CODE = 200;
-
 
     ArrayList<String> exceList = new ArrayList<String>();
 
-
     public static final String TAG = "SENSORDATA";
+
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+    private ScheduledFuture scheduledFuture;
+    private static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+    private KaaHandler kaaHandler;
+
+    private int frequency;
+    private int period;
+
+    private Runnable sendToKaa = new Runnable() {
+        @Override
+        public void run() {
+
+            Log.i("COLLECTION_DATA", "ENTER");
+            String preKey = getString(R.string.defaultKaa) + getStringIntent();
+            List<Float> sensor_data = new ArrayList<>(copyValue.length);
+
+            for (float f : copyValue) {
+                sensor_data.add(Float.valueOf(f));
+            }
+
+            KaaHandler.collectData("mobile", mSensorName, dataNames, sensor_data);
+            //KaaHandler.collectData(mSensorName, sensor_data);
+            //CSVHandler.writeData("Test", sensor_data);
+
+            if(kaaHandler.getFrequency() != frequency && mPreferences.getBoolean(preKey, true)) {
+                Log.i("FREQUENCY_CHANGED", String.valueOf(kaaHandler.getFrequency()));
+                sendLogToKaaHandler();
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Change current look of an Activity. If the Activity change it must have a design to show.
         setContentView(R.layout.activity_sensor_data);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -75,9 +110,20 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setTitle(getIntent().getStringExtra("Type"));
 
+        //Context context = this;
+        kaaHandler = new KaaHandler();
 
+        if(getStringIntent().equals("SensorList")){
+            kaaHandler.pause();
+        }
 
-        switch (getStringIntent()) {
+        frequency = kaaHandler.getFrequency();
+        period = kaaHandler.getPeriod();
+
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mPreferences.edit();
+
+        switch (getStringIntent()) { // TODO: Risucire ad inviare Intent anche dalle attività di setting e info
 
             case "Accelerometer":
 
@@ -342,16 +388,12 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         return type;
     }
 
-
-
-
-
-
-
-
     private void printData(float[] sensorData, final ArrayList<String> listp) {
 
         listp.add(mSensorName);
+        listp.add(getResources().getString(R.string.sent_data_text) + " " + kaaHandler.getSent_data());
+        listp.add(getResources().getString(R.string.received_data_text) + " " + kaaHandler.getSrec_data());
+        listp.add("");
 
         switch (getStringIntent()) {
             case "Pose6Dof":
@@ -359,19 +401,39 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[0]));
                 listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[1]));
                 listp.add(getResources().getString(R.string.acc_grav_x_text, sensorData[2]));
+
+                dataNames.add("yGravitationalAcceleration");
+                dataNames.add("zGravitationalAcceleration");
+                dataNames.add("xGravitationalAcceleration");
+
                 listp.add(getResources().getString(R.string.pose_6_dof_cos, sensorData[3]));
+                dataNames.add("CosHalfTeta");
+
                 listp.add(getResources().getString(R.string.translation_along_x, sensorData[4]));
                 listp.add(getResources().getString(R.string.translation_along_y, sensorData[5]));
                 listp.add(getResources().getString(R.string.translation_along_z, sensorData[6]));
+                dataNames.add("translationAlongX");
+                dataNames.add("translationAlongY");
+                dataNames.add("translationAlongZ");
+
                 listp.add(getResources().getString(R.string.delta_quat_x, sensorData[7]));
                 listp.add(getResources().getString(R.string.delta_quat_y, sensorData[8]));
                 listp.add(getResources().getString(R.string.delta_quat_z, sensorData[9]));
                 listp.add(getResources().getString(R.string.delta_quat_rot_cos, sensorData[10]));
+                dataNames.add("deltaQuaternionRotationXTimesSinHalfTeta");
+                dataNames.add("deltaQuaternionRotationYTimesSinHalfTeta");
+                dataNames.add("deltaQuaternionRotationZTimesSinHalfTeta");
+                dataNames.add("deltaQuaternionRotationCosHalfTeta");
+
                 listp.add(getResources().getString(R.string.delta_transl_x, sensorData[11]));
                 listp.add(getResources().getString(R.string.delta_transl_y, sensorData[12]));
                 listp.add(getResources().getString(R.string.delta_transl_z, sensorData[13]));
-                listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
+                dataNames.add("deltaTranslationAlongX");
+                dataNames.add("deltaTranslationAlongY");
+                dataNames.add("deltaTranslationAlongZ");
 
+                listp.add(getResources().getString(R.string.sequence_number, sensorData[14]));
+                dataNames.add("sequenceNumber");
 
                 break;
             case "Accelerometer":
@@ -383,6 +445,9 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getResources().getString(R.string.acc_grav_y_text, sensorData[1]));
                 listp.add(getResources().getString(R.string.acc_grav_z_text, sensorData[2]));
 
+                dataNames.add("xGravitationalAcceleration");
+                dataNames.add("yGravitationalAcceleration");
+                dataNames.add("zGravitationalAcceleration");
 
                 break;
             case "RotationVector":
@@ -394,21 +459,26 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getResources().getString(R.string.rotation_vector_text_z, sensorData[2]));
                 listp.add(getResources().getString(R.string.rotation_vector_cos, sensorData[3]));
 
+                dataNames.add("xTimesSinHalfTeta");
+                dataNames.add("yTimesSinHalfTeta");
+                dataNames.add("zTimesSinHalfTeta");
+                dataNames.add("CosHalfTeta");
 
                 if (!getStringIntent().equals("Game")) {
                     listp.add(getResources().getString(R.string.rotation_vector_estimated, sensorData[4]));
-
-
+                    dataNames.add("estimatedAccuracy");
                 }
 
-
                 break;
-
 
             case "Gyroscope":
                 listp.add(getString(R.string.gyroscope_x_text, sensorData[0]));
                 listp.add(getString(R.string.gyroscope_y_text, sensorData[1]));
                 listp.add(getString(R.string.gyroscope_z_text, sensorData[2]));
+
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
 
                 break;
             case "Magnetometer":
@@ -416,13 +486,21 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getString(R.string.magnetic_field_y_text, sensorData[1]));
                 listp.add(getString(R.string.magnetic_field_z_text, sensorData[2]));
 
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
+
                 break;
             case "Pressure":
                 listp.add(getString(R.string.pressure_text, sensorData[0]));
 
+                dataNames.add("pressure");
+
                 break;
             case "Humidity":
                 listp.add(getString(R.string.humidity_text, sensorData[0]) + "%");
+
+                dataNames.add("humidity");
 
                 break;
 
@@ -431,30 +509,46 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 listp.add(getString(R.string.orientation_y_text, sensorData[1]));
                 listp.add(getString(R.string.orientation_z_text, sensorData[2]));
 
+                dataNames.add("x");
+                dataNames.add("y");
+                dataNames.add("z");
+
                 break;
             case "Proximity":
                 listp.add(getString(R.string.proximity, sensorData[0]));
 
+                dataNames.add("proximity");
+
                 break;
             case "StepCounter":
                 listp.add(getString(R.string.step_counter_text, sensorData[0]));
+
+                dataNames.add("steps");
 
                 break;
             case "AmbientTemperature":
             case "Temperature":
                 listp.add(getString(R.string.ambient_temperature, sensorData[0]));
 
+                dataNames.add("celsiusDegrees");
+
                 break;
             case "Light":
                 listp.add(getString(R.string.light_text, sensorData[0]));
+
+                dataNames.add("lx");
 
                 break;
             case "HeartRate":
                 listp.add(getString(R.string.heart_rate_text, sensorData[0]));
 
+                dataNames.add("bpm");
+
                 break;
             case "HeartBeat":
                 listp.add(getString(R.string.onedimension_text, sensorData[0]));
+
+                dataNames.add("value");
 
                 break;
             default:
@@ -463,16 +557,16 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
         }
 
-
-
-        exceList = listp;
-
+        exceList.addAll(listp.subList(4, listp.size() - 1));
 
     }
 
 
     private void printDataUncalibrated(float[] sensorData, final ArrayList<String> listp) {
 
+        listp.add(getResources().getString(R.string.sent_data_text) + " " + kaaHandler.getSent_data());
+        listp.add(getResources().getString(R.string.received_data_text) + " " + kaaHandler.getSrec_data());
+        listp.add("");
 
         if (getStringIntent().equals("AccelerometerUncalibrated")) {
 
@@ -480,19 +574,34 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             listp.add(getResources().getString(R.string.acc_unc_y, sensorData[1]));
             listp.add(getResources().getString(R.string.acc_unc_z, sensorData[2]));
 
+            dataNames.add("x");
+            dataNames.add("y");
+            dataNames.add("z");
+
             listp.add(getResources().getString(R.string.acc_unc_x_2, sensorData[3]));
             listp.add(getResources().getString(R.string.acc_unc_y_2, sensorData[4]));
             listp.add(getResources().getString(R.string.acc_unc_z_2, sensorData[5]));
+
+            dataNames.add("estimatedBiasCompensationOnX");
+            dataNames.add("estimatedBiasCompensationOnY");
+            dataNames.add("estimatedBiasCompensationOnZ");
 
         } else if (getStringIntent().equals("GyroscopeUncalibrated")) {
             listp.add(getResources().getString(R.string.gyrosc_unc_x, sensorData[0]));
             listp.add(getResources().getString(R.string.gyrosc_unc_y, sensorData[1]));
             listp.add(getResources().getString(R.string.gyrosc_unc_z, sensorData[2]));
 
+            dataNames.add("angularSpeedAroundX");
+            dataNames.add("angularSpeedAroundY");
+            dataNames.add("angularSpeedAroundZ");
 
             listp.add(getResources().getString(R.string.gyrosc_unc_x_2, sensorData[3]));
             listp.add(getResources().getString(R.string.gyrosc_unc_y_2, sensorData[4]));
             listp.add(getResources().getString(R.string.gyrosc_unc_z_2, sensorData[5]));
+
+            dataNames.add("estimatedDriftAroundX");
+            dataNames.add("estimatedDriftAroundY");
+            dataNames.add("estimatedDriftAroundZ");
 
 
         } else {
@@ -500,16 +609,24 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
             listp.add(getResources().getString(R.string.magnet_unc_y, sensorData[1]));
             listp.add(getResources().getString(R.string.magnet_unc_z, sensorData[2]));
 
+            dataNames.add("alongX");
+            dataNames.add("alongY");
+            dataNames.add("alongZ");
+
+
             listp.add(getResources().getString(R.string.magnet_unc_x_2, sensorData[3]));
             listp.add(getResources().getString(R.string.magnet_unc_y_2, sensorData[4]));
             listp.add(getResources().getString(R.string.magnet_unc_z_2, sensorData[5]));
 
+            dataNames.add("ironBiasAlongX");
+            dataNames.add("ironBiasAlongY");
+            dataNames.add("ironBiasAlongZ");
 
         }
 
 
         listp.add(description);
-        exceList = listp;
+        exceList.addAll(listp.subList(4, listp.size() - 1));
 
 
     }
@@ -517,7 +634,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     protected void onResume() {
         super.onResume();
-
+        //kaaHandler.resume();
     }
 
     @Override
@@ -528,20 +645,24 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     @Override
     protected void onStop() {
         super.onStop();
+        kaaHandler.stop();
+        //CSVHandler.stop();
     }
 
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
+        kaaHandler.pause();
+        if (scheduledFuture != null)
+            scheduledFuture.cancel(false);
     }
 
 
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-
-
         final ArrayList<String> listp = new ArrayList<String>();
+        dataNames = new ArrayList<>();
 
         switch (getStringIntent()) {
 
@@ -604,18 +725,25 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
         }
 
-
     }
 
 
     public void playSensorData(View view) {
         mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
-
+        Log.i("ADD_LOG_RECORD","sendLogToKaaHandler()");
+        Log.i("KAA_STATUS", KaaHandler.getSTATUS());
+        if(kaaHandler.getSTATUS() != "START"){
+            kaaHandler.resume();
+        }
+        sendLogToKaaHandler();
     }
 
 
     public void pauseSensorData(View view) {
         mSensorManager.unregisterListener(this);
+        kaaHandler.pause();
+        if (scheduledFuture != null)
+            scheduledFuture.cancel(false);
     }
 
     public boolean isExternalStorageWritable() {
@@ -626,14 +754,17 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
         return false;
     }
 
-
+    // You use onCreateOptionsMenu() to specify the options menu for an activity.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         menu.findItem(R.id.menu_phone_image).setVisible(true);
-        if(getStringIntent().equals("SensorList"))
+        if(getStringIntent().equals("SensorList")) {
             menu.findItem(R.id.info_action).setVisible(false);
+            menu.findItem(R.id.settings_action).setVisible(false);
+            menu.findItem(R.id.save_action).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        }
         return true;
     }
 
@@ -641,12 +772,15 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+
+        Intent intent;
+
         switch (item.getItemId()) {
             case R.id.save_action:
                 saveSensorData();
                 return true;
             case R.id.info_action:
-                Intent intent = new Intent(this, InfoActivity.class);
+                intent = new Intent(this, InfoActivity.class);
 
                 intent.putExtra("MaxRange", maxRange);
 
@@ -657,9 +791,16 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
                 intent.putExtra("Description", description);
                 startActivity(intent);
                 return true;
-            case android.R.id.home:
-                finish();
+            case R.id.settings_action:
+                intent = new Intent(this, SettingsActivity.class);
+                intent.putExtra("sensor_type", getStringIntent());
+                intent.putExtra("frequency", kaaHandler.getFrequency());
+                intent.putExtra("period", kaaHandler.getPeriod());
+                startActivity(intent);
                 return true;
+            case android.R.id.home:
+            finish();
+            return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -701,6 +842,7 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
                 } else {
                     if (copyValue != null) {
+                        //Log.i("exceList", exceList.toString());
                         ExcelSheet Sheet = new ExcelSheet(mSensor.getName(), copyValue, exceList,
                                 description, maxRange, power, resolution, version, vendor);
                         Sheet.exportToExcel();
@@ -719,5 +861,27 @@ public class SensorData extends AppCompatActivity implements SensorEventListener
 
     }
 
+    public void sendLogToKaaHandler() {
+        //Log.i("ENTER_METHOD","collectData()");
+        String preKey = getString(R.string.defaultKaa) + getStringIntent();
+        String freKey = getString(R.string.frequencyKaa) + getStringIntent();
+        String perKey = getString(R.string.periodKaa) + getStringIntent();
+        frequency = kaaHandler.getFrequency();
+        period = kaaHandler.getPeriod();
+        int fr = frequency;
+        int pr = period;
+        if (!mPreferences.getBoolean(preKey, true)){
+            fr = mPreferences.getInt(freKey, frequency);
+            pr = mPreferences.getInt(perKey, period);
+            kaaHandler.setPeriod(pr);
+        }
 
+        if(fr > 0 && pr >= fr) {
+            if (scheduledFuture != null) {
+                scheduledFuture.cancel(false);
+            }
+            scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(
+                    sendToKaa, kaaHandler.getDefaultStartDelay(), fr, TimeUnit.MILLISECONDS);
+        }
+    }
 }

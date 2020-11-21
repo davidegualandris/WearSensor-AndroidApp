@@ -6,22 +6,20 @@ import android.widget.EditText;
 
 import java.util.Calendar;
 
-public class DateInputMask implements TextWatcher {
+public class TimeInputMask implements TextWatcher {
 
     private String current = "";
-    private String ddmmyyyy = "DDMMYYYY";
+    private String hhmmss = "HHMMSS";
     private Calendar cal = Calendar.getInstance();
     private EditText input;
 
-    public DateInputMask(EditText input) {
+    public TimeInputMask(EditText input) {
         this.input = input;
         this.input.addTextChangedListener(this);
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -37,33 +35,27 @@ public class DateInputMask implements TextWatcher {
         for (int i = 2; i <= cl && i < 6; i += 2) {
             sel++;
         }
-        //Fix for pressing delete next to a forward slash
+        //Fix for pressing delete next to a forward column
         if (clean.equals(cleanC)) sel--;
 
-        if (clean.length() < 8){
-            clean = clean + ddmmyyyy.substring(clean.length());
+        if (clean.length() < 6){
+            clean = clean + hhmmss.substring(clean.length());
         }else{
             //This part makes sure that when we finish entering numbers
             //the date is correct, fixing it otherwise
-            int day  = Integer.parseInt(clean.substring(0,2));
-            int mon  = Integer.parseInt(clean.substring(2,4));
-            int year = Integer.parseInt(clean.substring(4,8));
+            int hour  = Integer.parseInt(clean.substring(0,2));
+            int minute  = Integer.parseInt(clean.substring(2,4));
+            int seconds = Integer.parseInt(clean.substring(4,6));
 
-            mon = mon < 1 ? 1 : Math.min(mon, 12);
-            cal.set(Calendar.MONTH, mon-1);
-            year = (year<1900)?1900: Math.min(year, 2100);
-            cal.set(Calendar.YEAR, year);
-            // ^ first set year for the line below to work correctly
-            //with leap years - otherwise, date e.g. 29/02/2012
-            //would be automatically corrected to 28/02/2012
-
-            day = Math.min(day, cal.getActualMaximum(Calendar.DATE));
-            clean = String.format("%02d%02d%02d",day, mon, year);
+            hour = hour < 0 ? 0 : Math.min(hour, 23);
+            minute = minute < 0 ? 0 : Math.min(minute, 59);
+            seconds = (seconds<0)?0: Math.min(seconds, 59);
+            clean = String.format("%d%02d%02d",hour, minute, seconds);
         }
 
-        clean = String.format("%s/%s/%s", clean.substring(0, 2),
+        clean = String.format("%s:%s:%s", clean.substring(0, 2),
                 clean.substring(2, 4),
-                clean.substring(4, 8));
+                clean.substring(4, 6));
 
         sel = Math.max(sel, 0);
         current = clean;
@@ -72,7 +64,5 @@ public class DateInputMask implements TextWatcher {
     }
 
     @Override
-    public void afterTextChanged(Editable s) {
-
-    }
+    public void afterTextChanged(Editable s) {}
 }

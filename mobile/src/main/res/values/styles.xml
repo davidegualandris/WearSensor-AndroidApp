@@ -28,7 +28,7 @@
         <item name="titleTextStyle">@style/MyActionBarTitle</item>
         <item name ="android:textColor"> @color/white</item>
         <item name="colorControlNormal">@color/white</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
         <item name="actionOverflowButtonStyle">@style/DotsDarkTheme</item>
 
 
@@ -37,7 +37,7 @@
 
     <!-- Styles -->
 <style name="DotsDarkTheme" parent="@style/Widget.AppCompat.Light.ActionButton.Overflow" >
-    <item name="android:tint">@color/white</item>
+    <item name="tint">@color/white</item>
 </style>
 
 <style name="CMOptionsMenu">
@@ -67,7 +67,7 @@
     </style>
 
     <style name="Widget.SampleMessageTile">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="background">@color/colorPrimary</item>
         <item name="android:shadowColor">#ffff</item>
         <item name="android:shadowDy">-3.5</item>
         <item name="android:shadowRadius">2</item>
@@ -76,7 +76,7 @@
 
 
     <style name="ContentBox">
-        <item name="android:background">@color/box_bg</item>
+        <item name="background">@color/box_bg</item>
         <item name="android:layout_margin">4dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingRight">8dp</item>

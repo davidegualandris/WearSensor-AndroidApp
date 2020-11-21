@@ -1,0 +1,208 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.lapuile.wearsensor"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="18"
+8-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.WAKE_LOCK" />
+11-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:6:5-68
+11-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:6:22-65
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:7:5-79
+12-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:7:22-76
+13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+13-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:8:5-81
+13-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:8:22-78
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:9:5-80
+14-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:9:22-77
+15    <uses-permission android:name="android.permission.BODY_SENSORS" />
+15-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:10:5-71
+15-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:10:22-68
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:11:5-67
+16-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:11:22-64
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+17-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:12:5-79
+17-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:12:22-76
+18    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+18-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:13:5-74
+18-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:13:22-71
+19    <uses-permission android:name="android.permission.BLUETOOTH" />
+19-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:14:5-68
+19-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:14:22-65
+20    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+20-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:15:5-81
+20-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:15:22-78
+21
+22    <application
+22-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:17:5-79:19
+23        android:name="androidx.multidex.MultiDexApplication"
+24        android:allowBackup="true"
+24-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:18:9-35
+25        android:appComponentFactory="whateverString"
+25-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:19:9-53
+26        android:debuggable="true"
+27        android:icon="@mipmap/ic_launcher"
+27-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:20:9-43
+28        android:label="@string/app_name"
+28-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:21:9-41
+29        android:roundIcon="@mipmap/ic_launcher_round"
+29-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:22:9-54
+30        android:supportsRtl="true"
+30-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:23:9-35
+31        android:testOnly="true"
+32        android:theme="@style/AppTheme" >
+32-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:24:9-40
+33        <activity
+33-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:26:9-33:20
+34            android:name="com.example.lapuile.wearsensor.SettingsActivity"
+34-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:27:13-45
+35            android:label="@string/title_activity_settings"
+35-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:28:13-60
+36            android:parentActivityName="com.example.lapuile.wearsensor.SensorData" >
+36-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:29:13-53
+37            <meta-data
+37-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:30:13-32:77
+38                android:name="android.support.PARENT_ACTIVITY"
+38-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:31:17-63
+39                android:value="com.example.lapuile.wearsensor.SensorData" />
+39-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:32:17-74
+40        </activity>
+41
+42        <meta-data
+42-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:35:9-37:69
+43            android:name="com.google.android.gms.version"
+43-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:36:13-58
+44            android:value="@integer/google_play_services_version" />
+44-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:37:13-66
+45
+46        <activity
+46-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:39:9-42:52
+47            android:name="com.example.lapuile.wearsensor.SelectActivity"
+47-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:40:13-43
+48            android:configChanges="orientation"
+48-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:41:13-48
+49            android:screenOrientation="portrait" />
+49-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:42:13-49
+50        <activity
+50-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:43:9-46:52
+51            android:name="com.example.lapuile.wearsensor.QueryRemoteDevicesActivity"
+51-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:44:13-55
+52            android:configChanges="orientation"
+52-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:45:13-48
+53            android:screenOrientation="portrait" />
+53-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:46:13-49
+54        <activity
+54-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:47:9-50:52
+55            android:name="com.example.lapuile.wearsensor.SensorData"
+55-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:48:13-39
+56            android:configChanges="orientation"
+56-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:49:13-48
+57            android:screenOrientation="portrait" />
+57-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:50:13-49
+58        <activity
+58-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:51:9-54:52
+59            android:name="com.example.lapuile.wearsensor.WatchDataActivity"
+59-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:52:13-46
+60            android:configChanges="orientation"
+60-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:53:13-48
+61            android:screenOrientation="portrait" />
+61-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:54:13-49
+62        <activity
+62-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:55:9-65:20
+63            android:name="com.example.lapuile.wearsensor.MainActivity"
+63-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:56:13-41
+64            android:configChanges="orientation"
+64-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:57:13-48
+65            android:screenOrientation="portrait"
+65-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:58:13-49
+66            android:theme="@style/MyMaterialTheme" >
+66-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:59:13-51
+67            <intent-filter>
+67-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:60:13-64:29
+68                <action android:name="android.intent.action.MAIN" />
+68-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:61:17-69
+68-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:61:25-66
+69
+70                <category android:name="android.intent.category.LAUNCHER" />
+70-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:63:17-77
+70-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:63:27-74
+71            </intent-filter>
+72        </activity>
+73        <activity android:name="com.example.lapuile.wearsensor.WatchBluetoothActivity" />
+73-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:66:9-60
+73-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:66:19-57
+74        <activity
+74-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:67:9-71:47
+75            android:name="com.example.lapuile.wearsensor.DeviceScanActivity"
+75-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:68:13-47
+76            android:configChanges="orientation"
+76-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:69:13-48
+77            android:screenOrientation="portrait"
+77-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:70:13-49
+78            android:theme="@style/AppTheme" />
+78-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:71:13-44
+79
+80        <service
+80-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:73:9-76:39
+81            android:name="com.example.lapuile.wearsensor.BluetoothLeService"
+81-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:74:13-47
+82            android:enabled="true"
+82-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:75:13-35
+83            android:exported="true" />
+83-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:76:13-36
+84
+85        <activity android:name="com.example.lapuile.wearsensor.InfoActivity" />
+85-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:78:9-50
+85-->C:\Users\utente\Desktop\Davide\Bicocca\Magistrale\Tesi\Android-wearsensor\wearsensor\mobile\src\main\AndroidManifest.xml:78:19-47
+86
+87        <meta-data
+87-->[com.google.android.gms:play-services-fitness:20.0.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\4c43ae3eaa7d2024fda5976e5247214a\jetified-play-services-fitness-20.0.0\AndroidManifest.xml:23:9-25:38
+88            android:name="com.google.gms.fitness.sdk.version"
+88-->[com.google.android.gms:play-services-fitness:20.0.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\4c43ae3eaa7d2024fda5976e5247214a\jetified-play-services-fitness-20.0.0\AndroidManifest.xml:24:13-62
+89            android:value="20.0.0" />
+89-->[com.google.android.gms:play-services-fitness:20.0.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\4c43ae3eaa7d2024fda5976e5247214a\jetified-play-services-fitness-20.0.0\AndroidManifest.xml:25:13-35
+90
+91        <activity
+91-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:23:9-27:75
+92            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+92-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:24:13-93
+93            android:excludeFromRecents="true"
+93-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:25:13-46
+94            android:exported="false"
+94-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:26:13-37
+95            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+95-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:27:13-72
+96        <!--
+97            Service handling Google Sign-In user revocation. For apps that do not integrate with
+98            Google Sign-In, this service will never be started.
+99        -->
+100        <service
+100-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:33:9-37:51
+101            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+101-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:34:13-89
+102            android:exported="true"
+102-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:35:13-36
+103            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+103-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:36:13-107
+104            android:visibleToInstantApps="true" />
+104-->[com.google.android.gms:play-services-auth:18.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\dc6f4066fdb9dcd3b50ba045f065cd35\jetified-play-services-auth-18.1.0\AndroidManifest.xml:37:13-48
+105
+106        <activity
+106-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\71e2c593e06ac7b66917d7ce206c24ac\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+107            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+107-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\71e2c593e06ac7b66917d7ce206c24ac\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+108            android:exported="false"
+108-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\71e2c593e06ac7b66917d7ce206c24ac\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+109            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+109-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\utente\.gradle\caches\transforms-2\files-2.1\71e2c593e06ac7b66917d7ce206c24ac\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+110    </application>
+111
+112</manifest>
