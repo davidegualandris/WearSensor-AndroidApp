@@ -41,13 +41,11 @@ public class KaaHandler {
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
                 out = new BufferedOutputStream(urlConnection.getOutputStream());
-
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF_8"));
                 writer.write(data);
                 writer.flush();
                 writer.close();
                 out.close();
-
                 urlConnection.connect();
                 return urlConnection.getResponseCode();
             } catch (Exception e) {
@@ -193,7 +191,7 @@ public class KaaHandler {
 
             // Send data to WearSensorAPI
             new KaaHandler.SandDataToKaa().execute(data);
-            valuesMap.remove(endpointId);
+            valuesMap.remove(sensor_name);
         }
     }
 
