@@ -33,7 +33,7 @@ public class KaaHandler {
             OutputStream out = null;
 
             try {
-                URL url = new URL(Constants.WEAR_SENSOR_API_BASE_URL + "kaa/time-series/data");
+                URL url = new URL(Constants.WEAR_SENSOR_API_BASE_URL + "store");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");

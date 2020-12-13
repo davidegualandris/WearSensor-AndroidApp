@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface KaaApplicationsService {
-    @GET("kaa/time-series/config")
+    @GET("sensors")
     Call<KaaApplication> getTimeSeriesConfig(@Query("endpointId") String endpointId);
 }

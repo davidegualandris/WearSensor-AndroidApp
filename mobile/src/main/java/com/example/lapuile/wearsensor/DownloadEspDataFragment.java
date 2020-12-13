@@ -79,7 +79,7 @@ public class DownloadEspDataFragment extends Fragment {
         protected String doInBackground(String... params){
             try {
 
-                String APIRequest = Constants.WEAR_SENSOR_API_BASE_URL +"kaa/time-series/data?kaaEndpointConfigurations="
+                String APIRequest = Constants.WEAR_SENSOR_API_BASE_URL +"play?kaaEndpointConfigurations="
                         +params[0]+"&fromDate="+params[1]+"&toDate="+params[2]+"&includeTime="+params[3]+
                         "&sort="+params[4]+"&format="+params[5]+"&samplePeriod="+params[6];
 
